@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Roemichs</string>
+    <string name="write_a_message">Write a message...</string>
+    <string name="student_comment">Students\' comments</string>
 </resources>

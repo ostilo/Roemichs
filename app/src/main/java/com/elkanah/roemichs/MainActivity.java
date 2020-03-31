@@ -4,12 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.elkanah.roemichs.classroom_and_chats.ChatListFragment;
+import com.elkanah.roemichs.classroom_and_chats.ClassroomFragment;
+import com.google.firebase.FirebaseApp;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseApp.initializeApp(this);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new ChatListFragment()).commit();
+
     }
 
 
