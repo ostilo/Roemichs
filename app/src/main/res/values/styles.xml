@@ -15,4 +15,8 @@
         <item name="elevation">4dp</item>
     </style>
 
+    <style name="toolbarStyle" parent="android:Theme.Holo.Light">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
 </resources>

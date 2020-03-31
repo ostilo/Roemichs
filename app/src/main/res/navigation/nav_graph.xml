@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.elkanah.roemichs.LoginFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_parentFragment"
+            app:destination="@id/parentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parentFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.ParentFragment"
+        android:label="fragment_parent"
+        tools:layout="@layout/fragment_parent" />
 </navigation>
