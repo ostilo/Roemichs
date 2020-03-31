@@ -166,7 +166,7 @@ public class ChatListFragment extends Fragment implements View.OnClickListener{
 
     private void loadFragment(Fragment fragment, String tag) {
         FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment, tag);
+        transaction.replace(R.id.nav_host_fragment, fragment, tag);
         transaction.addToBackStack(tag);
         transaction.commit();
     }

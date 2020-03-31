@@ -17,10 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new ChatListFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment, new ChatListFragment()).commit();
 
     }
-
-
-
 }
