@@ -7,7 +7,12 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.elkanah.roemichs.LoginFragment"
+        android:name="com.elkanah.roemichs.ui.fragment.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/student_Dashboard"
+        android:name="com.elkanah.roemichs.ui.fragment.student_dashboard.Student_Dashboard"
+        android:label="fragment_student_dashboard"
+        tools:layout="@layout/fragment_student_dashboard" />
 </navigation>
