@@ -5,17 +5,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_bg_gradient"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        >
+        tools:context=".ui.fragments.LoginFragment">
+
         <View
             android:id="@+id/view"
             android:layout_width="0dp"
-            android:layout_height="400dp"
-            android:background="@drawable/portriatimg"
+            android:layout_height="600dp"
+            android:background="@drawable/landscapeimg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="400dp"
+            android:layout_marginTop="550dp"
             android:layout_marginEnd="30dp"
             android:text="Welcome to"
             android:textColor="@color/white"
@@ -45,7 +47,6 @@
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -56,7 +57,7 @@
             android:background="@color/white"
             android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintHorizontal_bias="0.58"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -101,6 +102,7 @@
             app:passwordToggleTint="@color/colorPrimaryDark"
             app:startIconDrawable="@drawable/ic_lock_white_24dp"
             app:startIconTint="@android:color/black">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -119,19 +121,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:text="SIGN IN"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
-
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"  />
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
-            android:text="Having trouble logging in? Contact Admin"
+            android:text="Having issues logging in? Contact Admin"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -142,3 +144,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
+
