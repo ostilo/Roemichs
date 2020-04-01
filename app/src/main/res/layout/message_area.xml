@@ -7,26 +7,26 @@
     android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/messageArea"
+            style="@style/my_edit_text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:ems="10"
             android:hint="@string/write_a_message"
-            android:id="@+id/messageArea"
             android:inputType="textMultiLine"
-            android:maxHeight="80dp"
-            style="@style/my_edit_text2"
-            android:ems="10" />
+            android:maxHeight="80dp" />
 
 
         <ImageView
+            android:id="@+id/sendButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:paddingStart="4dp"
             android:paddingEnd="0dp"
-            android:src="@android:drawable/ic_menu_send"
-            android:id="@+id/sendButton"/>
+            android:src="@drawable/send" />
 
 
 </LinearLayout>
