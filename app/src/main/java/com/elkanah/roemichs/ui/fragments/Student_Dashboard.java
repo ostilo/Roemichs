@@ -96,13 +96,13 @@ public class Student_Dashboard extends Fragment {
 
     private List<ContentModel> getContents() {
         List<ContentModel> list = new ArrayList<>();
-        ContentModel test   = new ContentModel("Test", R.drawable.notes, "this id the assign Lorem ipsum dolor sit amet, Quisque nisi arcu, ullamcorper sed");
+        ContentModel test   = new ContentModel("Test", R.drawable.exam, "this id the assign Lorem ipsum dolor sit amet, Quisque nisi arcu, ullamcorper sed");
         list.add(test);
-        ContentModel subject = new ContentModel("Subject", R.drawable.homework, "Lorem ipsum dolor sit amet, Quisque nisi arcu, ullamcorper sed");
+        ContentModel subject = new ContentModel("Subject", R.drawable.blackboard, "Lorem ipsum dolor sit amet, Quisque nisi arcu, ullamcorper sed");
         list.add(subject);
         ContentModel profile = new ContentModel("Profile", R.drawable.exam, "Lorem ipsum dolor sit amet, consectetur ullamcorper sed");
         list.add(profile);
-        ContentModel messages = new ContentModel("Classroom", R.drawable.exam, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisi ");
+        ContentModel messages = new ContentModel("Classroom", R.drawable.blackboard, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisi ");
         list.add(messages);
         return list;
     }
