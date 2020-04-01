@@ -1,4 +1,4 @@
-package com.elkanah.roemichs.ui.fragment;
+package com.elkanah.roemichs.ui.fragments;
 
 import android.os.Bundle;
 
@@ -16,7 +16,7 @@ import com.elkanah.roemichs.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment implements View.OnClickListener{
 
     public LoginFragment() {
         // Required empty public constructor
@@ -35,6 +35,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        NavHostFragment.findNavController(this).navigate(R.id.parentFragment);
+        NavHostFragment.findNavController(this).navigate(R.id.student_Dashboard);
     }
 }

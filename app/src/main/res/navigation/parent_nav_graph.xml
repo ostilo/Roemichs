@@ -3,16 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent_nav_graph"
-    app:startDestination="@id/student_Dashboard">
+    app:startDestination="@id/subjectFragment2">
 
     <fragment
         android:id="@+id/subjectFragment2"
-        android:name="com.elkanah.roemichs.ui.fragment.SubjectFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.SubjectFragment"
         android:label="fragment_subject"
         tools:layout="@layout/fragment_subject" />
-    <fragment
-        android:id="@+id/student_Dashboard"
-        android:name="com.elkanah.roemichs.ui.fragment.Student_Dashboard"
-        android:label="fragment_student_dashboard"
-        tools:layout="@layout/fragment_student_dashboard" />
 </navigation>

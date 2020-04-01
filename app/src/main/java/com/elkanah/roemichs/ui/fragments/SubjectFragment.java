@@ -1,4 +1,4 @@
-package com.elkanah.roemichs.ui.fragment;
+package com.elkanah.roemichs.ui.fragments;
 
 import android.os.Bundle;
 
