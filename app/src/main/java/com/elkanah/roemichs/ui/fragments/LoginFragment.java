@@ -35,6 +35,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-//        NavHostFragment.findNavController(this).navigate(R.id.student_Dashboard);
+        NavHostFragment.findNavController(this).navigate(R.id.student_Dashboard);
     }
 }
