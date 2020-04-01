@@ -11,17 +11,14 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_student_Dashboard"
-            app:destination="@id/student_Dashboard" />
+            android:id="@+id/action_loginFragment_to_parentFragment"
+            app:destination="@id/parentFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_in_right" />
     </fragment>
     <fragment
         android:id="@+id/parentFragment"
         android:name="com.elkanah.roemichs.ui.fragments.ParentFragment"
         android:label="fragment_parent"
         tools:layout="@layout/fragment_parent" />
-    <fragment
-        android:id="@+id/student_Dashboard"
-        android:name="com.elkanah.roemichs.ui.fragments.Student_Dashboard"
-        android:label="fragment_student_dashboard"
-        tools:layout="@layout/fragment_student_dashboard" />
 </navigation>
