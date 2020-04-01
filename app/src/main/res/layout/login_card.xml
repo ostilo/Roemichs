@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvNT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Roemichs International"
@@ -36,10 +36,10 @@
         android:layout_height="2dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/tvNT"
         app:layout_constraintHorizontal_bias="0.593"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="@+id/tvNT"
+        app:layout_constraintTop_toBottomOf="@+id/tvNT" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
@@ -49,9 +49,9 @@
         android:layout_marginTop="20dp"
         app:hintEnabled="false"
         app:hintTextColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintEnd_toEndOf="@+id/tvNT"
+        app:layout_constraintStart_toStartOf="@+id/tvNT"
+        app:layout_constraintTop_toBottomOf="@+id/tvNT">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

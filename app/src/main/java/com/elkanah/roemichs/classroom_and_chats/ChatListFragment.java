@@ -85,7 +85,11 @@ public class ChatListFragment extends Fragment implements View.OnClickListener{
                     }else if(editText.getText().toString().trim().toLowerCase().equals("student")){
                         loadFragment(ClassroomFragment.newInstance("student", "teacher"), "class");
                     }
+                    else {
+                        Toast.makeText(context, "Enter student or teacher", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
 
