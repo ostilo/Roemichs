@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent_nav_graph"
-    app:startDestination="@id/subjectFragment2">
+    app:startDestination="@id/student_Dashboard">
 
     <fragment
         android:id="@+id/subjectFragment2"
@@ -62,4 +62,45 @@
         android:name="com.elkanah.roemichs.ui.fragments.StudentAssignmentDetailsFragment"
         android:label="fragment_student_assignment_details"
         tools:layout="@layout/fragment_student_assignment_details" />
+    <fragment
+        android:id="@+id/student_Dashboard"
+        android:name="com.elkanah.roemichs.ui.fragments.Student_Dashboard"
+        android:label="fragment_student_dashboard"
+        tools:layout="@layout/fragment_student_dashboard" >
+        <action
+            android:id="@+id/action_student_Dashboard_to_subjectFragment2"
+            app:destination="@id/subjectFragment2"
+            app:enterAnim="@anim/up_to_down"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_student_Dashboard_to_chatListFragment"
+            app:destination="@id/chatListFragment"
+            app:enterAnim="@anim/bottom_to_up"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_student_Dashboard_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatListFragment"
+        android:name="com.elkanah.roemichs.classroom_and_chats.ChatListFragment"
+        android:label="chat_list_fragment"
+        tools:layout="@layout/chat_list_fragment" >
+        <action
+            android:id="@+id/action_chatListFragment_to_classroomFragment"
+            app:destination="@id/classroomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/classroomFragment"
+        android:name="com.elkanah.roemichs.classroom_and_chats.ClassroomFragment"
+        android:label="classroom_fragment"
+        tools:layout="@layout/classroom_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

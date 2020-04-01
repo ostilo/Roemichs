@@ -15,10 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         FirebaseApp.initializeApp(this);
-
-        getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment, new ChatListFragment()).commit();
+        //getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment, new ChatListFragment()).commit();
 
     }
 }

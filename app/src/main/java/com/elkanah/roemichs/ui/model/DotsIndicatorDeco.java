@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.NotNull;
 
 public class DotsIndicatorDeco extends RecyclerView.ItemDecoration{
     private final int indicatorHeight;
@@ -35,7 +34,6 @@ public class DotsIndicatorDeco extends RecyclerView.ItemDecoration{
         activePaint.setStyle(Paint.Style.FILL);
         activePaint.setAntiAlias(true);
         activePaint.setColor(colorActive);
-
         this.indicatorItemPadding = padding;
         this.indicatorHeight = indicatorHeight;
     }
