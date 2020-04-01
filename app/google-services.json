@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1054296599071",
+    "firebase_url": "https://roemichs-e7450.firebaseio.com",
+    "project_id": "roemichs-e7450",
+    "storage_bucket": "roemichs-e7450.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054296599071:android:4c24319ec7b54ed9cfc32a",
+        "android_client_info": {
+          "package_name": "com.elkanah.roemichs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054296599071-03o0hcdirmgii6qojupj6vh6q3mu08ik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrBg4C9NfuiRBn7jTdInkmeHm3wW96y2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054296599071-03o0hcdirmgii6qojupj6vh6q3mu08ik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

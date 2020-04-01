@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item android:id="@+id/action_video_class"
+        android:icon="@drawable/video_class"
+        android:title="Video Class"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_audio_class"
+        android:icon="@drawable/audio_class"
+        android:title="Audio Class"
+        app:showAsAction="always" />
+
+</menu>
