@@ -93,8 +93,10 @@ public class ClassroomFragment extends Fragment {
         });
 
         if(getArguments() !=null){
-            UserDetails.username=getArguments().getString("user");
-            UserDetails.chatWith=getArguments().getString("chatwith");
+            UserDetails.username=getArguments().getString("one");
+            UserDetails.chatWith=getArguments().getString("two");
+           /* UserDetails.username=getArguments().getString("user");
+            UserDetails.chatWith=getArguments().getString("chatwith");*/
         }
 
         context=getContext();
