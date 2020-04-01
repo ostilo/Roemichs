@@ -7,12 +7,16 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.elkanah.roemichs.ui.fragment.login.LoginFragment"
+        android:name="com.elkanah.roemichs.ui.fragment.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_parentFragment"
+            app:destination="@id/parentFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/student_Dashboard"
-        android:name="com.elkanah.roemichs.ui.fragment.student_dashboard.Student_Dashboard"
-        android:label="fragment_student_dashboard"
-        tools:layout="@layout/fragment_student_dashboard" />
+        android:id="@+id/parentFragment"
+        android:name="com.elkanah.roemichs.ui.fragment.ParentFragment"
+        android:label="fragment_parent"
+        tools:layout="@layout/fragment_parent" />
 </navigation>
