@@ -5,16 +5,19 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.ui.model.DotsIndicatorDeco;
@@ -34,7 +37,7 @@ import java.util.Objects;
  * Use the {@link Student_Dashboard#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Student_Dashboard extends Fragment {
+public class Student_Dashboard extends Fragment implements View.OnClickListener {
     private RecyclerView actionRecycle;
     private RecyclerView contentRecycle;
     private ContentAdapter adapter;
@@ -65,6 +68,8 @@ public class Student_Dashboard extends Fragment {
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
         actionRecycle = view.findViewById(R.id.action_recycler);
         contentRecycle = view.findViewById(R.id.contentRecycler);
+        ImageView menu = view.findViewById(R.id.menu_select);
+        menu.setOnClickListener(this);
         noteCard = view.findViewById(R.id.notice_card);
         noteCard.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -117,5 +122,22 @@ public class Student_Dashboard extends Fragment {
         ActionModel exam = new ActionModel("Exam", R.drawable.exam);
         list.add(exam);
         return list;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.menu_select){
+            PopupMenu popupMenu = new PopupMenu(getContext(), v);
+            MenuInflater inflater = popupMenu.getMenuInflater();
+            inflater.inflate(R.menu.dashboard_menu, popupMenu.getMenu());
+            popupMenu.show();
+            popupMenu.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.menu_logout) {
+                    NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
+                    return true;
+                }
+                return false;
+            });
+        }
     }
 }
