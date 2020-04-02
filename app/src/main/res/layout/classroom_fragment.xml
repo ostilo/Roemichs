@@ -47,11 +47,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="20"
-            android:background="@drawable/blackboard_class"
-            android:paddingStart="14dp"
-            android:paddingTop="23dp"
+            android:background="@drawable/board"
+            android:paddingStart="20dp"
+            android:paddingTop="15dp"
             android:paddingEnd="15dp"
-            android:paddingBottom="33dp">
+            android:paddingBottom="35dp">
 
             <ScrollView
                 android:id="@+id/scrollViewTeacher"

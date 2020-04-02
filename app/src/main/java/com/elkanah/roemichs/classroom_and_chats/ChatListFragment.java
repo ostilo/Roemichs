@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -77,13 +78,22 @@ public class ChatListFragment extends Fragment implements View.OnClickListener{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
                 if(TextUtils.isEmpty(editText.getText().toString().trim())){
                     Toast.makeText(context, "Enter student or teacher", Toast.LENGTH_SHORT).show();
                 }else {
                     if(editText.getText().toString().trim().toLowerCase().equals("teacher")){
-                        loadFragment(ClassroomFragment.newInstance("teacher", "student"), "class");
+                        //
+
+                        bundle.putString("one", "teacher");
+                        bundle.putString("two", "student");
+                        Navigation.findNavController(v).navigate(R.id.action_chatListFragment_to_classroomFragment, bundle);
+                       // loadFragment(ClassroomFragment.newInstance("teacher", "student"), "class");
                     }else if(editText.getText().toString().trim().toLowerCase().equals("student")){
-                        loadFragment(ClassroomFragment.newInstance("student", "teacher"), "class");
+                        bundle.putString("one", "student");
+                        bundle.putString("two", "teacher");
+                        Navigation.findNavController(v).navigate(R.id.action_chatListFragment_to_classroomFragment, bundle);
+                        //loadFragment(ClassroomFragment.newInstance("student", "teacher"), "class");
                     }
                     else {
                         Toast.makeText(context, "Enter student or teacher", Toast.LENGTH_SHORT).show();
