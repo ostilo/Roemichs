@@ -1,4 +1,4 @@
-package com.elkanah.roemichs.db;
+package com.elkanah.roemichs.db.models;
 
 public class StudentAssignmentImageData {
     public String imageID;

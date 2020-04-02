@@ -14,8 +14,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.NoteModel;
-import com.elkanah.roemichs.db.SubjectModel;
+import com.elkanah.roemichs.db.models.NoteModel;
+import com.elkanah.roemichs.db.models.SubjectModel;
 
 import java.util.List;
 import java.util.Random;

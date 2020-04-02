@@ -13,7 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.classroom_and_chats.Constants;
+import com.elkanah.roemichs.db.repository.Constants;
 import com.elkanah.roemichs.ui.model.ContentModel;
 import com.elkanah.roemichs.ui.model.StudentProfileModel;
 
@@ -73,15 +73,15 @@ import java.util.List;
                          Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_chatListFragment);
                         }
                         else if(modelList.get(getAdapterPosition()).text.equals("Profile")){
-//                            Bundle bundle=new Bundle();
-//                            StudentProfileModel profileModel=new StudentProfileModel();
-//                            profileModel.setFirst_name("Ayodele");
-//                            profileModel.setSurname("Afolabi");
-//                            profileModel.setProfile_pic_url("url");
-//                            profileModel.setStudent_class("Year XX");
-//                            profileModel.setStudent_id("Ayodele123");
-                          //  bundle.putParcelable(Constants.PROFILE_MODEL, profileModel);
-                            Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_profileFragment);
+                            Bundle bundle=new Bundle();
+                            StudentProfileModel profileModel=new StudentProfileModel();
+                            profileModel.setFirst_name("Ayodele");
+                            profileModel.setSurname("Afolabi");
+                            profileModel.setProfile_pic_url("url");
+                            profileModel.setStudent_class("Year XX");
+                            profileModel.setStudent_id("Ayodele123");
+                            bundle.putParcelable(Constants.PROFILE_MODEL, profileModel);
+                            Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_profileFragment, bundle);
                         }
                     }
                 });

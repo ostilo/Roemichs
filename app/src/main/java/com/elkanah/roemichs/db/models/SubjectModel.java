@@ -1,4 +1,4 @@
-package com.elkanah.roemichs.db;
+package com.elkanah.roemichs.db.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
