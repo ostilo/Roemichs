@@ -40,6 +40,7 @@ public class StudentAssignmentAdapter extends RecyclerView.Adapter<StudentAssign
             holder.tvSubDate.setText(assignmentModels.get(position).getSubmissionDate());
             holder.tvAssgnTitle.setText(assignmentModels.get(position).getAssgnTitle());
             holder.tvAssgnTeacher.setText(assignmentModels.get(position).getTeachersName());
+
     }
 
     @Override
