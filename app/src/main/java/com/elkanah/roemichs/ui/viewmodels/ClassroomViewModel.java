@@ -1,4 +1,4 @@
-package com.elkanah.roemichs.classroom_and_chats;
+package com.elkanah.roemichs.ui.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 

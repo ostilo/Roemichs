@@ -1,13 +1,11 @@
-package com.elkanah.roemichs.classroom_and_chats;
+package com.elkanah.roemichs.ui.fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,26 +22,28 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elkanah.roemichs.R;
+import com.elkanah.roemichs.db.repository.ChatDetails;
+import com.elkanah.roemichs.ui.viewmodels.ClassroomViewModel;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.elkanah.roemichs.classroom_and_chats.CommonUtils.getCurrentDate;
-import static com.elkanah.roemichs.classroom_and_chats.CommonUtils.getCurrentTime;
-import static com.elkanah.roemichs.classroom_and_chats.Constants.FIREBASE_URL;
+import static com.elkanah.roemichs.db.repository.Constants.CHAT_USER_KEY;
+import static com.elkanah.roemichs.db.repository.Constants.CHAT_WITH_KEY;
+import static com.elkanah.roemichs.utils.CommonUtils.getCurrentDate;
+import static com.elkanah.roemichs.utils.CommonUtils.getCurrentTime;
+import static com.elkanah.roemichs.db.repository.Constants.FIREBASE_URL;
 
 public class ClassroomFragment extends Fragment {
 
@@ -57,15 +57,26 @@ public class ClassroomFragment extends Fragment {
     Firebase reference1, reference2;
     Context context;
     private String userName;
+/*
 
-    public static ClassroomFragment newInstance(String user, String chatwith) {
-        Bundle args = new Bundle();
-        args.putString("user", user);
-        args.putString("chatwith", chatwith);
-        ClassroomFragment fragment = new ClassroomFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    Create Classroom
+
+    session
+    class
+    classtype
+term
+        week
+
+        subject
+        topic
+        duration
+
+        current_time
+        status
+	return classroom_id, status, topic.
+
+*/
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -93,10 +104,8 @@ public class ClassroomFragment extends Fragment {
         });
 
         if(getArguments() !=null){
-            UserDetails.username=getArguments().getString("one");
-            UserDetails.chatWith=getArguments().getString("two");
-           /* UserDetails.username=getArguments().getString("user");
-            UserDetails.chatWith=getArguments().getString("chatwith");*/
+            ChatDetails.username=getArguments().getString(CHAT_USER_KEY);
+            ChatDetails.chatWith=getArguments().getString(CHAT_WITH_KEY);
         }
 
         context=getContext();
@@ -111,8 +120,8 @@ public class ClassroomFragment extends Fragment {
         scrollView2 = view.findViewById(R.id.scrollViewStudents);
 
         Firebase.setAndroidContext(context);
-        reference1 = new Firebase(mDatabaseReference + UserDetails.username + "_" + UserDetails.chatWith);
-        reference2 = new Firebase(mDatabaseReference + UserDetails.chatWith + "_" + UserDetails.username);
+        reference1 = new Firebase(mDatabaseReference + ChatDetails.username + "_" + ChatDetails.chatWith);
+        reference2 = new Firebase(mDatabaseReference + ChatDetails.chatWith + "_" + ChatDetails.username);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +131,7 @@ public class ClassroomFragment extends Fragment {
                 if(!messageText.equals("")){
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
-                    map.put("user", UserDetails.username);
+                    map.put("user", ChatDetails.username);
                     map.put("date", getCurrentDate());
                     map.put("time", getCurrentTime());
 
@@ -142,10 +151,10 @@ public class ClassroomFragment extends Fragment {
                 String date = map.get("date").toString();
                 String time = map.get("time").toString();
 
-                if(userName.equals(UserDetails.username) && userName.equals("teacher")){
+                if(userName.equals(ChatDetails.username) && userName.equals("teacher")){
                     addMessageBox( message, date, time, 1);
                 }
-                else if(userName.equals("teacher") && !userName.equals(UserDetails.username)){
+                else if(userName.equals("teacher") && !userName.equals(ChatDetails.username)){
                     addMessageBox( message, date, time,1);
                 }
                 else{
@@ -191,11 +200,11 @@ public class ClassroomFragment extends Fragment {
         textView.setTextColor(Color.WHITE);
 
         TextView txtDateTime = new TextView(context);
-        txtDateTime.setTextColor(getActivity().getResources().getColor(R.color.colorPrimaryDark));
+        txtDateTime.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
         txtDateTime.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
 
         TextView txtStudentName = new TextView(context);
-        txtStudentName.setTextColor(getActivity().getResources().getColor(R.color.colorPrimaryDark));
+        txtStudentName.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
         txtStudentName.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
 
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -205,19 +214,19 @@ public class ClassroomFragment extends Fragment {
         if(type == 1 ) {
             textView.setBackgroundResource(R.drawable.note_line);
             textView.setText(message);
-            lp2.gravity = Gravity.LEFT;
+            lp2.gravity = Gravity.START;
             textView.setLayoutParams(lp2);
             layout.addView(textView);
             scrollView.fullScroll(View.FOCUS_DOWN);
         }
         else{
             textView.setBackgroundResource(R.drawable.chat_msg_bg);
-            if(date.equals(UserDetails.date)) {
+            if(date.equals(ChatDetails.date)) {
                 txtDateTime.setText( "Today " + time );
             }else {
                 txtDateTime.setText(date + " " + time);
             }
-            lp2.gravity = Gravity.RIGHT;
+            lp2.gravity = Gravity.END;
             txtStudentName.setText(userName);
             txtStudentName.setTextSize(14);
             txtStudentName.setLayoutParams(lp2);

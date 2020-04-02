@@ -36,4 +36,18 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+    <style name="MyStyle.InputLayout2" parent="Widget.Design.TextInputLayout">
+        <item name="errorTextAppearance">@style/ErrorTextAppearance</item>
+        <item name="hintTextAppearance">@style/HintTextAppearance</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+    </style>
+
+    <style name="ErrorTextAppearance" parent="TextAppearance.Design.Error">
+        <item name="android:textColor">@color/error</item>
+    </style>
+    <style name="HintTextAppearance" parent="TextAppearance.Design.Hint">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>
