@@ -26,6 +26,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     boolean flag;
     int counterer = 0;
     public LoginFragment() {
+        //todo
         // Required empty public constructor
     }
 
