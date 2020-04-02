@@ -8,4 +8,10 @@
     <string name="login_msg"><ul>ational</ul></string>
     <string name="welcome">Welcome</string>
     <string name="logout">Logout</string>
+    <string name="questions">QUESTIONS</string>
+    <string name="minutes">MINUTES</string>
+    <string name="instructions">Instructions</string>
+    <string name="instruction">Attempt all questions</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 </resources>
