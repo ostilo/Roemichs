@@ -54,7 +54,7 @@ public class SubjectFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position ==0){
-                    spinnerAccType.setBackgroundColor(Color.parseColor("#6c2067"));
+                   // spinnerAccType.setBackgroundColor(Color.parseColor("#6c2067"));
                 }
                 else {
 
