@@ -10,7 +10,7 @@ import com.elkanah.roemichs.classroom_and_chats.ClassroomFragment;
 import com.elkanah.roemichs.db.view.Callbacks;
 import com.google.firebase.FirebaseApp;
 
-public class MainActivity extends AppCompatActivity implements Callbacks {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
