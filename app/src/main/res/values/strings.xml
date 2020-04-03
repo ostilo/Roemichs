@@ -8,4 +8,7 @@
     <string name="login_msg"><ul>ational</ul></string>
     <string name="welcome">Welcome</string>
     <string name="logout">Logout</string>
+    <string name="audio_class">Audio Class</string>
+    <string name="video_class">Video Class</string>
+    <string name="stop_class">Stop Class</string>
 </resources>

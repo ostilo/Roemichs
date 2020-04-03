@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".classroom_and_chats.ClassroomFragment">
+    tools:context=".ui.fragments.ClassroomFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarClassroom"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarClassroom"
             android:layout_width="match_parent"
             android:background="@color/colorPrimaryDark"
             android:layout_height="?attr/actionBarSize"
