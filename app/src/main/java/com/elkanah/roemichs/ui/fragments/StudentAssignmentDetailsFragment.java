@@ -19,12 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.AssignmentModel;
-import com.elkanah.roemichs.db.NoteModel;
+import com.elkanah.roemichs.db.models.AssignmentModel;
 import com.elkanah.roemichs.db.view.AssignmentResponseImageData;
 import com.elkanah.roemichs.ui.adapters.AssignmentImagesAdapter;
-import com.elkanah.roemichs.ui.adapters.CustomViewPager;
-import com.elkanah.roemichs.ui.adapters.SubjectAdapter;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 

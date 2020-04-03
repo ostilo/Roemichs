@@ -5,12 +5,11 @@ import androidx.fragment.app.ListFragment;
 
 import android.os.Bundle;
 
-import com.elkanah.roemichs.classroom_and_chats.ChatListFragment;
-import com.elkanah.roemichs.classroom_and_chats.ClassroomFragment;
+
 import com.elkanah.roemichs.db.view.Callbacks;
 import com.google.firebase.FirebaseApp;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Callbacks {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

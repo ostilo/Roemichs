@@ -13,6 +13,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.elkanah.roemichs.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 
@@ -69,7 +70,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
          switch (v.getId()){
              case R.id.button:
-                  NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_parentFragment);
+                 String userInput = edtStudentParentID.getText().toString().trim();
+                 if(userInput.equals("p")){
+                     NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_parentDashboardFragment);
+                 }else if(userInput.equals("s")){
+                     NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_parentFragment);
+             }
+                 else {
+                     Snackbar.make(v,"PRIVILEGE NOT ASSIGNED YET, CONTACT ADMIN",Snackbar.LENGTH_SHORT).show();
+                 }
+
                  break;
 
              case R.id.textView31:
@@ -79,8 +89,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     tvDecision.setText("Sign in Student");
                     count = count+1;
                     flag = false;
-
-
                  break;
          }
 

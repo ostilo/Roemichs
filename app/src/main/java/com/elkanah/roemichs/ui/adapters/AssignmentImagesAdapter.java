@@ -15,11 +15,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.AssignmentModel;
-import com.elkanah.roemichs.db.SubjectModel;
+import com.elkanah.roemichs.db.models.SubjectModel;
 import com.elkanah.roemichs.db.view.AssignmentResponseImageData;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
