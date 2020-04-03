@@ -96,9 +96,7 @@ public class JoinClassroomFragment extends Fragment implements View.OnClickListe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), Dashboard.class);
-//                startActivity(intent);
-                Toast.makeText(context, "Go back", Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(v).navigateUp();
             }
         });
     }

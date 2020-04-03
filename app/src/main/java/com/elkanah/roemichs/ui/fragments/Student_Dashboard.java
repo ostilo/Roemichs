@@ -136,6 +136,10 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
                     NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
                     return true;
                 }
+                if (item.getItemId() == R.id.create_assignment) {
+                    NavHostFragment.findNavController(this).navigate(R.id.action_studDashboard_toCreateAssignment);
+                    return true;
+                }
                 return false;
             });
         }
