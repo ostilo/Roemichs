@@ -1,5 +1,6 @@
 package com.elkanah.roemichs.ui.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +40,7 @@ public class StudentAssignmentFragment extends Fragment {
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
         toolbar.setTitle("Assignments");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         RecyclerView recyclerView = v.findViewById(R.id.student_assignment_recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

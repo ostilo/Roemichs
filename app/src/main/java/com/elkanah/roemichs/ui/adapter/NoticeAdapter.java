@@ -39,7 +39,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewModel>
         holder.date.setText(model.date);
         holder.announcer.setText(model.announcer);
         holder.description.setText(model.description);
-        ReadMoreOrLess.ReadMoreOrLess(holder.description, 2, "View More", true);
+//        ReadMoreOrLess.ReadMoreOrLess(holder.description, 1, "View More", true);
     }
 
     @Override

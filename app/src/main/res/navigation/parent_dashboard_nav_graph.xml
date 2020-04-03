@@ -3,11 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent_dashboard_nav_graph"
-    app:startDestination="@id/parentHomeFragment">
+    app:startDestination="@id/parentPaymentFragment">
 
     <fragment
         android:id="@+id/parentHomeFragment"
         android:name="com.elkanah.roemichs.ui.fragments.ParentHomeFragment"
         android:label="fragment_parent_home"
         tools:layout="@layout/fragment_parent_home" />
+    <fragment
+        android:id="@+id/parentChildrenFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.ParentChildrenFragment"
+        android:label="fragment_parent_children"
+        tools:layout="@layout/fragment_parent_children" >
+        <action
+            android:id="@+id/action_parentChildrenFragment_to_parentChildrenDetailsFragment"
+            app:destination="@id/parentChildrenDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parentChildrenDetailsFragment"
+        android:name="com.elkanah.roemichs.ui.adapters.ParentChildrenDetailsFragment"
+        android:label="fragment_parent_children_details"
+        tools:layout="@layout/fragment_parent_children_details" />
+    <fragment
+        android:id="@+id/parentPaymentFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.ParentPaymentFragment"
+        android:label="fragment_parent_payment"
+        tools:layout="@layout/fragment_parent_payment" />
 </navigation>

@@ -9,8 +9,18 @@ public class StudentProfileModel implements Parcelable {
     private String first_name;
     private String student_class;
     private String profile_pic_url;
+    private String studentAccount;
 
     public StudentProfileModel() {
+    }
+
+
+
+    public StudentProfileModel(String student_id, String surname, String first_name, String student_class) {
+        this.student_id = student_id;
+        this.surname = surname;
+        this.first_name = first_name;
+        this.student_class = student_class;
     }
 
     protected StudentProfileModel(Parcel in) {
@@ -19,6 +29,39 @@ public class StudentProfileModel implements Parcelable {
         first_name = in.readString();
         student_class = in.readString();
         profile_pic_url = in.readString();
+        studentAccount = in.readString();
+    }
+
+    public StudentProfileModel(String student_id, String surname, String first_name, String student_class, String profile_pic_url, String studentAccount) {
+        this.student_id = student_id;
+        this.surname = surname;
+        this.first_name = first_name;
+        this.student_class = student_class;
+        this.profile_pic_url = profile_pic_url;
+        this.studentAccount = studentAccount;
+    }
+
+    public StudentProfileModel(String student_id, String surname, String first_name, String student_class, String studentAccount) {
+        this.student_id = student_id;
+        this.surname = surname;
+        this.first_name = first_name;
+        this.student_class = student_class;
+        this.studentAccount = studentAccount;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(student_id);
+        dest.writeString(surname);
+        dest.writeString(first_name);
+        dest.writeString(student_class);
+        dest.writeString(profile_pic_url);
+        dest.writeString(studentAccount);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<StudentProfileModel> CREATOR = new Creator<StudentProfileModel>() {
@@ -73,17 +116,14 @@ public class StudentProfileModel implements Parcelable {
         this.profile_pic_url = profile_pic_url;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+
+
+
+    public String getStudentAccount() {
+        return studentAccount;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(student_id);
-        dest.writeString(surname);
-        dest.writeString(first_name);
-        dest.writeString(student_class);
-        dest.writeString(profile_pic_url);
+    public void setStudentAccount(String studentAccount) {
+        this.studentAccount = studentAccount;
     }
 }

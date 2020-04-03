@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.ui.model.DotsIndicatorDeco;
@@ -25,6 +26,7 @@ import com.elkanah.roemichs.ui.adapter.ActionAdapter;
 import com.elkanah.roemichs.ui.adapter.ContentAdapter;
 import com.elkanah.roemichs.ui.model.ActionModel;
 import com.elkanah.roemichs.ui.model.ContentModel;
+import com.elkanah.roemichs.ui.model.ScreenUtil;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
     private MaterialCardView noteCard1;
     private CardView noteCard;
     private List<ImageView> dotsLinearLayout;
+    private boolean mTablet;
 
     public Student_Dashboard() {
         // Required empty public constructor
@@ -93,7 +96,15 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
         actionRecycle.addItemDecoration(new DotsIndicatorDeco(radius, radius * 4, dotsHeight, color, color));
         new PagerSnapHelper().attachToRecyclerView(actionRecycle);
 
-        contentRecycle.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+                ScreenUtil util = new ScreenUtil(getActivity());
+                mTablet = (util.getDpWidth() >= 600);
+                if (mTablet ==true) {
+                    contentRecycle.setLayoutManager(new GridLayoutManager(getContext(), 4));
+
+                }else {
+                    contentRecycle.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                }
         adapter = new ContentAdapter(getContext(), getContents());
         contentRecycle.setAdapter(adapter);
     }

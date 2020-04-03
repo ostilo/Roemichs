@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/parentChildrenFragment"
+        android:title="Ward"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_school"
+        android:iconTint="@color/colorSecondaryDark"
+        />
+    <item
+        android:id="@+id/parentPaymentFragment"
+        android:title="Home"
+        android:orderInCategory="2"
+        android:iconTint="@color/colorSecondaryDark"
+        android:icon="@drawable/ic_home"/>
+
     <item
         android:id="@+id/parentHomeFragment"
-        android:title="One"
-        android:orderInCategory="1"
-        android:iconTint="@color/colorPrimaryDark"
-        android:icon="@drawable/ic_keyboard_arrow"/>
-<!--    <item android:id="@+id/homeFragment"-->
-<!--        android:title="Home"-->
-<!--        android:orderInCategory="2"-->
-<!--        android:icon="@drawable/ic_person_black"-->
-<!--        android:iconTint="@color/colorPrimaryDark"-->
-<!--        />-->
-<!--    <item-->
-<!--        android:id="@+id/soaringHighFragment"-->
-<!--        android:title="Three"-->
-<!--        android:orderInCategory="3"-->
-<!--        android:iconTint="@color/colorPrimaryDark"-->
-<!--        android:icon="@drawable/ic_keyboard_arrow"/>-->
+        android:title="Notice Board"
+        android:orderInCategory="3"
+        android:iconTint="@color/colorSecondaryDark"
+        android:icon="@drawable/ic_account_balance_wallet"/>
 </menu>

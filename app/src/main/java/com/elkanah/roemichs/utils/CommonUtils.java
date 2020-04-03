@@ -1,8 +1,13 @@
 package com.elkanah.roemichs.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.text.TextUtils;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +20,18 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CommonUtils {
+    public static Context context;
+    public static Activity acti;
+    public static CommonUtils mInsatnce;
+
+    public static CommonUtils getInstance(Activity activity){
+        if(mInsatnce == null){
+            mInsatnce = new CommonUtils();
+            acti= activity;
+        }
+        return mInsatnce;
+    }
+
     public static boolean textIsEmpty(EditText edt) {
         if (TextUtils.isEmpty(edt.getText()))
             return true;
@@ -27,6 +44,33 @@ public class CommonUtils {
             return true;
         else
             return false;
+    }
+
+    public void setupUI(View view){
+        if(!(view instanceof EditText)){
+            view.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard();
+                    return false;
+                }
+            });
+        }
+
+        if(view instanceof ViewGroup){
+            for(int i = 0; i < ((ViewGroup) view).getChildCount(); i++){
+                View innerview = ((ViewGroup)view).getChildAt(i);
+                setupUI(innerview);
+            }
+        }
+    }
+
+    private void hideSoftKeyboard() {
+        View view = acti.getCurrentFocus();
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager)acti.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
 
