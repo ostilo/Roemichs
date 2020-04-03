@@ -426,20 +426,20 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         DecimalFormat formatter = new DecimalFormat("00");
 
         if(hrs > 0){
-            new CountDownTimer(hrs*100000, 1000) {
+            new CountDownTimer(hrs*600000, 1000) {
                 public void onTick(long millisUntilFinished) {
-                    txtTimerSecs.setText(formatter.format(millisUntilFinished / 1000));
-                    txtTimerMin.setText(formatter.format(millisUntilFinished / 10000));
-                    txtTimerHrs.setText(formatter.format(millisUntilFinished / 100000));
+                    txtTimerSecs.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
+                    txtTimerMin.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
+                    txtTimerHrs.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
                 }
                 public void onFinish() {
                     if(mins > 0 ){
                         new CountDownTimer(mins * 10000, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
-                                txtTimerSecs.setText(formatter.format(millisUntilFinished / 1000));
-                                txtTimerMin.setText(formatter.format(millisUntilFinished / 10000));
-                                txtTimerHrs.setText(formatter.format(millisUntilFinished / 100000));
+                                txtTimerSecs.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
+                                txtTimerMin.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
+                                txtTimerHrs.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
                             }
                             @Override
                             public void onFinish() {
@@ -457,9 +457,9 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
             new CountDownTimer(mins * 10000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    txtTimerSecs.setText(formatter.format(millisUntilFinished / 1000));
-                    txtTimerMin.setText(formatter.format(millisUntilFinished / 10000));
-                    txtTimerHrs.setText(formatter.format(millisUntilFinished / 100000));
+                    txtTimerSecs.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
+                    txtTimerMin.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
+                    txtTimerHrs.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
                 }
                 @Override
                 public void onFinish() {
