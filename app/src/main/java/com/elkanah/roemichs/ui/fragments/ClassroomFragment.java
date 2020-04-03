@@ -179,7 +179,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                         String date = map.get("date").toString();
                         String time = map.get("time").toString();
 
-                        if (userName.equals(ChatDetails.username) && userName.equals("teacher") && !message.equals(" start the class")) {
+                        if (userName.equals(ChatDetails.username) && userName.equals("teacher") && !message.equals(" class started at")) {
                             addMessageBox(message, date, time, 1);
                         } else if (userName.equals("teacher") && !userName.equals(ChatDetails.username)) {
                             addMessageBox(message, date, time, 1);
@@ -187,7 +187,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                             addMessageBox(message, getCurrentDate(), getCurrentTime(), 3);
                         } else if (userName.equals("student") && message.equals(" left the class")) {
                             addMessageBox(message, getCurrentDate(), getCurrentTime(), 4);
-                        } else if (userName.equals("teacher") && message.equals(" start the class")) {
+                        } else if (userName.equals("teacher") && message.equals(" class started at")) {
                             addMessageBox(message, getCurrentDate(), getCurrentTime(), 5);
                         } else if (userName.equals("student") && !message.equals(" join the class") && !message.equals(" left the class")) {
                             addMessageBox(message, date, time, 2);
@@ -239,7 +239,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                 txtCountStudent.setText(String.valueOf(intStudentCount));
             }
         }else if(ChatDetails.username.equals("teacher") && joinLeft.equals("create")){
-                map.put("message", " start the class");
+                map.put("message", " class started at");
             }
             map.put("user", ChatDetails.username);
             map.put("date", getCurrentDate());
@@ -380,11 +380,11 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
             scrollView2.fullScroll(View.FOCUS_DOWN);
         }else if(type==5){
             if (date.equals(ChatDetails.date)) {
-                txtDateTime.setText(userName + " start the class : Today " + time);
+                txtDateTime.setText("class started at : Today " + time);
             } else if (date.equals(CommonUtils.getYesterdayDate())) {
-                txtDateTime.setText(userName + " start the class : Yesterday " + time);
+                txtDateTime.setText("class started at : Yesterday " + time);
             } else {
-                txtDateTime.setText(userName + " start the class : " + date + " " + time);
+                txtDateTime.setText("class started at : " + date + " " + time);
             }
             lp2.gravity = Gravity.CENTER;
             lp2.topMargin = 0;
@@ -394,7 +394,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
             txtDateTime.setLayoutParams(lp2);
             layout.addView(txtDateTime);
             scrollView.fullScroll(View.FOCUS_DOWN);
-            startTimer(01, 01);
+            startTimer(01, 02);
         }
     }
 
@@ -426,7 +426,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         DecimalFormat formatter = new DecimalFormat("00");
 
         if(hrs > 0){
-            new CountDownTimer(hrs*600000, 1000) {
+            new CountDownTimer(hrs * 60 * 60 *1000, 1000) {
                 public void onTick(long millisUntilFinished) {
                     txtTimerSecs.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
                     txtTimerMin.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
@@ -454,7 +454,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                 }
             }.start();
         }else if(mins>0){
-            new CountDownTimer(mins * 10000, 1000) {
+            new CountDownTimer(mins * 60 * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     txtTimerSecs.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));

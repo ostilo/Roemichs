@@ -101,26 +101,6 @@
                     android:paddingEnd="0dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/frame_Session_crtCls"
-                        style="@style/MyStyle.InputLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Session"
-                        android:padding="5dp">
-
-                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                            android:id="@+id/tv_spSession_crtClass"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="0dp"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            android:singleLine="true"
-                            android:textSize="16sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/frame_Class_crtClass"
                         style="@style/MyStyle.InputLayout2"
                         android:layout_width="match_parent"
@@ -130,45 +110,6 @@
 
                         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                             android:id="@+id/tv_spClass_crtClass"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="0dp"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/frame_Classtype_crtCls"
-                        style="@style/MyStyle.InputLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="Class Type"
-                        android:padding="5dp">
-
-                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                            android:id="@+id/tv_spClasstype_crtCls"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="0dp"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/frame_term_crtCls"
-                        style="@style/MyStyle.InputLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Term"
-                        android:padding="5dp">
-
-                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                            android:id="@+id/spTerm_CrtClass"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:padding="0dp"
@@ -203,22 +144,18 @@
                         style="@style/MyStyle.InputLayout2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="7dp"
-                        android:padding="5dp"
-                        app:startIconDrawable="@drawable/ic_person_black"
-                        app:startIconTint="#c9c9c9">
+                        android:layout_marginTop="12dp"
+                        android:hint="Subject"
+                        android:padding="5dp">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                             android:id="@+id/txtSubjectCrtCls"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:background="@android:drawable/editbox_background_normal"
-                            android:hint="Subject"
-                            android:maxLength="50"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:textColorHint="@android:color/darker_gray"
-                            android:textSize="15sp" />
+                            android:padding="0dp"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

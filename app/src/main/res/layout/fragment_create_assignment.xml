@@ -38,7 +38,7 @@
 
         <Button
             android:id="@+id/btnCreateAssgmt"
-            style="@style/loginButtonCustom"
+            style="@style/myButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -83,25 +83,6 @@
 
                     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                         android:id="@+id/tv_spClass_crtAsgmt"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:padding="0dp"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
-                        android:singleLine="true" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/frame_term_crtAsgmt"
-                    style="@style/MyStyle.InputLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Term"
-                    android:padding="5dp">
-
-                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                        android:id="@+id/spTerm_CrtAsgmt"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:padding="0dp"
@@ -202,6 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:layout_marginBottom="15dp"
                     app:startIconDrawable="@drawable/ic_person_black"
                     app:startIconTint="#c9c9c9">
 
@@ -220,22 +202,33 @@
                         android:textSize="15sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                    <HorizontalScrollView
-                        android:id="@+id/addImageScrollViewCrtAsgmt"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="4dp"
-                        android:orientation="horizontal">
+                 <androidx.constraintlayout.widget.ConstraintLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:id="@+id/addImageLinearLayoutCrtAsgmt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layoutDirection="rtl"
-                            android:orientation="horizontal" />
+                     <androidx.recyclerview.widget.RecyclerView
+                         android:id="@+id/addImageRecyclerCrtAsgmt"
+                         android:layout_width="0dp"
+                         android:layout_height="160dp"
+                         android:orientation="horizontal"
+                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         tools:listitem="@layout/student_selected_item_image"/>
 
-                    </HorizontalScrollView>
+                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/linLayImgDescriCrtAsgmt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -249,7 +242,6 @@
             android:layout_marginBottom="100dp"
             android:padding="5dp"
             android:src="@android:drawable/ic_input_add"
-            app:backgroundTint="@color/colorPrimary"
             app:borderWidth="0.1dp"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
