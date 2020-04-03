@@ -1,13 +1,17 @@
 package com.elkanah.roemichs.ui.fragments;
 
+import android.opengl.Matrix;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,10 +19,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.AssignmentModel;
-import com.elkanah.roemichs.ui.adapters.SubjectAdapter;
+import com.elkanah.roemichs.db.models.AssignmentModel;
+import com.elkanah.roemichs.db.view.AssignmentResponseImageData;
+import com.elkanah.roemichs.ui.adapters.AssignmentImagesAdapter;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,7 +43,9 @@ public class StudentAssignmentDetailsFragment extends Fragment implements View.O
     private TextView tvAssgnBody;
     private Button button;
     private RecyclerView recyclerView;
-
+    List<AssignmentResponseImageData> data = AssignmentResponseImageData.getAssignmentImages();
+    ScaleGestureDetector scaleGestureDetector;
+    Matrix matrix;
     public StudentAssignmentDetailsFragment() {
         // Required empty public constructor
     }
@@ -51,17 +61,24 @@ public class StudentAssignmentDetailsFragment extends Fragment implements View.O
         tvAssgnTitle = v.findViewById(R.id.textView25);
         tvAssgnTeacher = v.findViewById(R.id.textView21);
         tvAssgnBody = v.findViewById(R.id.textView26);
-        carouselView = (CarouselView) v.findViewById(R.id.carouselView);
-        button = v.findViewById(R.id.btn_start);
+        carouselView =  v.findViewById(R.id.carouselView);
+        button = v.findViewById(R.id.button2);
         recyclerView = v.findViewById(R.id.recyclerView);
 
+
         recyclerView.setHasFixedSize(true);
-        SubjectAdapter adapter = new SubjectAdapter(getContext());
+        AssignmentImagesAdapter adapter = new AssignmentImagesAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+//        matrix = new Matrix();
+//        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleGestureDetector());
+
+//        ViewPager viewPager = (ViewPager)v.findViewById(R.id.cvViewPager);
+//        CustomViewPager cusAdapter = new CustomViewPager(getContext());
+//        viewPager.setAdapter(cusAdapter);
 
         button.setOnClickListener(this);
             inflateCarousel();

@@ -5,14 +5,11 @@ import androidx.fragment.app.ListFragment;
 
 import android.os.Bundle;
 
-import com.elkanah.roemichs.classroom_and_chats.ChatListFragment;
-import com.elkanah.roemichs.classroom_and_chats.ClassroomFragment;
-import com.elkanah.roemichs.ui.OptionSelect;
-import com.elkanah.roemichs.ui.fragments.TestPage;
-import com.elkanah.roemichs.ui.model.OptiontModel;
+
+import com.elkanah.roemichs.db.view.Callbacks;
 import com.google.firebase.FirebaseApp;
 
-public class MainActivity extends AppCompatActivity implements OptionSelect {
+public class MainActivity extends AppCompatActivity implements Callbacks {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +20,16 @@ public class MainActivity extends AppCompatActivity implements OptionSelect {
 
     }
 
+
+
+
+    public static boolean realData(boolean value){
+        return value;
+    }
+
     @Override
-    public void onSelect(OptiontModel selectedAnswer) {
-        TestPage.answers.add(selectedAnswer);
+    public void deleteImageAtPosition(Boolean value) {
+        realData(value);
+
     }
 }

@@ -9,11 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.AssignmentModel;
+import com.elkanah.roemichs.db.models.AssignmentModel;
 
 import java.util.List;
 
@@ -40,6 +39,7 @@ public class StudentAssignmentAdapter extends RecyclerView.Adapter<StudentAssign
             holder.tvSubDate.setText(assignmentModels.get(position).getSubmissionDate());
             holder.tvAssgnTitle.setText(assignmentModels.get(position).getAssgnTitle());
             holder.tvAssgnTeacher.setText(assignmentModels.get(position).getTeachersName());
+
     }
 
     @Override

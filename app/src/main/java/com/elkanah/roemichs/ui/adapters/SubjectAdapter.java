@@ -3,7 +3,6 @@ package com.elkanah.roemichs.ui.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.SubjectModel;
+import com.elkanah.roemichs.db.models.SubjectModel;
 
 import java.util.List;
 import java.util.Random;

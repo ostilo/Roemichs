@@ -18,10 +18,22 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popUpToInclusive="true"
             app:popUpTo="@id/loginFragment"/>
+        <action
+            android:id="@+id/action_loginFragment_to_parentDashboardFragment"
+            app:destination="@id/parentDashboardFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/parentFragment"
         android:name="com.elkanah.roemichs.ui.fragments.ParentFragment"
         android:label="fragment_parent"
         tools:layout="@layout/fragment_parent" />
+    <fragment
+        android:id="@+id/parentDashboardFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.ParentDashboardFragment"
+        android:label="fragment_parent_dashboard"
+        tools:layout="@layout/fragment_parent_dashboard" />
 </navigation>

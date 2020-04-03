@@ -140,6 +140,20 @@
             app:layout_constraintStart_toStartOf="@+id/button"
             app:layout_constraintTop_toBottomOf="@+id/button" />
 
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="50dp"
+            android:text="Sign In? Parent"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView6"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

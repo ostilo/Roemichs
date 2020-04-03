@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.NoteModel;
+import com.elkanah.roemichs.db.models.NoteModel;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.Objects;
