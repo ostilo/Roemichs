@@ -10,9 +10,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -43,18 +46,22 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
     public static List<SessionModel> sessionModelsList;
     public static String spSessionText;
     private ProgressBar loading;
+    private Toolbar toolbar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.create_classroom_fragment, container, false);
         context = getContext();
+        createClassroomViewModel = ViewModelProviders.of(this).get(CreateClassroomViewModel.class);
+
         if (getArguments() != null) {
             CHAT_USER = getArguments().getString(CHAT_USER_KEY);
             CHAT_WITH = getArguments().getString(Constants.CHAT_WITH_KEY);
         }
 
         setViewById(view);
+        setToolBar();
         setSpinners();
         checkSpinnerForEmpty();
         setListeners();
@@ -63,6 +70,7 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
     }
 
     private void setViewById(View view) {
+        toolbar=view.findViewById(R.id.toolbarCrtClass);
         btnCreateCls = view.findViewById(R.id.btnCreateClass);
         spSession = view.findViewById(R.id.tv_spSession_crtClass);
         spClass = view.findViewById(R.id.tv_spClass_crtClass);
@@ -74,6 +82,22 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
         edtTopic = view.findViewById(R.id.txtTopic_crtCls);
         edtDuration = view.findViewById(R.id.txtDuration_crtCls);
         loading = view.findViewById(R.id.loading_crtCls);
+    }
+
+    private void setToolBar() {
+        if(getActivity() != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.go_back);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Create New Classroom");
+            setHasOptionsMenu(true);
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();            }
+        });
     }
 
     private void setListeners() {
@@ -96,7 +120,7 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
             }
             if (sessionAdapter.getCount() != 0 /*&& accountAdapter.getCount() != 0 */) {
                 loading.setVisibility(View.INVISIBLE);
-                constraintLayout.setEnabled(true);
+                enableControls(true);
             }
         });
     }
@@ -112,8 +136,20 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
 
     private void disableControlForLoadingSpinner() {
         loading.setVisibility(View.VISIBLE);
-        constraintLayout.setEnabled(false);
+        enableControls(false);
         setSpinners();
+    }
+
+    private void enableControls(boolean value){
+        constraintLayout.setEnabled(value);
+        spSession.setEnabled(value);
+        spClass.setEnabled(value);
+        spClassType.setEnabled(value);
+        spTerm.setEnabled(value);
+        spWeek.setEnabled(value);
+        edtSubject.setEnabled(value);
+        edtTopic.setEnabled(value);
+        edtDuration.setEnabled(value);
     }
 
     private void setSpinners() {
@@ -141,13 +177,6 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        createClassroomViewModel = ViewModelProviders.of(this).get(CreateClassroomViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     @Override

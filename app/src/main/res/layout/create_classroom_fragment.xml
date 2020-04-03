@@ -18,6 +18,26 @@
         android:focusable="true"
         tools:context=".schoolapp.CreateClassroomFragment">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarCrtClass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarCrtClass"
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
         <Button
             android:id="@+id/btnCreateClass"
             style="@style/loginButtonCustom"
@@ -48,7 +68,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbarCrtClass"
             app:srcCompat="@drawable/landscapeimg" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -232,6 +252,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
+                        android:layout_marginBottom="15dp"
                         app:startIconDrawable="@drawable/ic_person_black"
                         app:startIconTint="#c9c9c9">
 

@@ -96,8 +96,15 @@
         <action
             android:id="@+id/action_student_Dashboard_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_studDashboard_toCreateAssignment"
+            app:destination="@+id/CreateAssignment"/>
     </fragment>
 
+    <fragment android:id="@+id/CreateAssignment"
+        android:name="com.elkanah.roemichs.ui.fragments.CreateAssignmentFragment"
+        android:label="Create_Assignment_fragment"
+        tools:layout="@layout/fragment_create_assignment"/>
 
     <fragment
         android:id="@+id/chatListFragment"
@@ -135,7 +142,11 @@
         android:id="@+id/classroomFragment"
         android:name="com.elkanah.roemichs.ui.fragments.ClassroomFragment"
         android:label="classroom_fragment"
-        tools:layout="@layout/classroom_fragment" />
+        tools:layout="@layout/classroom_fragment">
+        <action
+            android:id="@+id/action_classroom_to_student_dashboard"
+            app:destination="@id/student_Dashboard" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"

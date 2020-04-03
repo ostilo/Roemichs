@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item android:id="@+id/action_time_counter"
+        android:title="Class CountDown Timer"
+        app:actionLayout="@layout/class_timedown"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_student_counter"
+        android:title="Student Counter"
+        app:actionLayout="@layout/student_count"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/action_menu_more_class"
+        android:icon="@drawable/menu_dot"
+        android:title="more"
+        app:showAsAction="always" />
+</menu>
