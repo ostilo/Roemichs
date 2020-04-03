@@ -28,6 +28,7 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/withdraw_toolbar_d"
                     android:layout_width="match_parent"
+                    app:titleTextColor="@color/white"
                     android:layout_height="?attr/actionBarSize"
                     android:theme="@style/toolbarStyle"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

@@ -3,6 +3,8 @@ package com.elkanah.roemichs.db.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.elkanah.roemichs.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +117,11 @@ public class SubjectModel implements Parcelable {
         colors.add("#D85B15");
         colors.add("#D34718");
         return colors;
+    }
+
+    public static int [] getCarouselArray(){
+        int[] sampleImages = {R.drawable.portriatimg, R.drawable.portriatimg, R.drawable.landscapeimg, R.drawable.portriatimg, R.drawable.portriatimg};
+           return sampleImages;
     }
 
 }

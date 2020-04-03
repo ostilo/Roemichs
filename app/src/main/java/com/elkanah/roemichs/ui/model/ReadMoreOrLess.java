@@ -61,7 +61,7 @@ public class ReadMoreOrLess {
                     if (viewMore) {
                         ReadMoreOrLess(tv, -1, "View Less", false);
                     } else {
-                        ReadMoreOrLess(tv, 2, "View More", true);
+                        ReadMoreOrLess(tv, 1, "View More", true);
                     }
 
                 }

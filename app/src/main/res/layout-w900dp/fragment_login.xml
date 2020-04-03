@@ -16,8 +16,8 @@
         <View
             android:id="@+id/view"
             android:layout_width="0dp"
-            android:layout_height="360dp"
-            android:background="@drawable/portriatimg"
+            android:layout_height="600dp"
+            android:background="@drawable/landscapeimg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="550dp"
             android:layout_marginEnd="30dp"
             android:text="Welcome to"
             android:textColor="@color/white"
@@ -57,7 +57,7 @@
             android:background="@color/white"
             android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/tvNT"
-            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintHorizontal_bias="0.12"
             app:layout_constraintStart_toStartOf="@+id/tvNT"
             app:layout_constraintTop_toBottomOf="@+id/tvNT" />
 
@@ -134,6 +134,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
             android:text="Having issues logging in? Contact Admin"
             android:textColor="@color/white"
@@ -148,13 +149,14 @@
             android:id="@+id/textView31"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="50dp"
             android:text="Sign In? Parent"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textView6"
             app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 
