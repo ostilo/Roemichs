@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.NotNull;
+import com.firebase.client.annotations.NotNull;
 
 
 public class DotsIndicatorDeco extends RecyclerView.ItemDecoration{
