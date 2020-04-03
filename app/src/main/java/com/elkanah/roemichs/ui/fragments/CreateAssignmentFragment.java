@@ -159,7 +159,7 @@ public class CreateAssignmentFragment extends Fragment implements View.OnClickLi
             List<EditText> edtList = new ArrayList<EditText>(size);
             for (int i = 0; i < size; i++) {
             EditText edt = new EditText(context);
-            edt.setHint("Image "+ i + " Description");
+            edt.setHint("Image "+ (i+1) + " Description");
             LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lp2.weight = 1.0f;
             lp2.bottomMargin = 15;
