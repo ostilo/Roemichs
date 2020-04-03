@@ -1,8 +1,13 @@
 package com.elkanah.roemichs.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.text.TextUtils;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,8 +21,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CommonUtils {
-
-    public static boolean edtTextIsEmpty(EditText edt) {
+    public static boolean textIsEmpty(EditText edt) {
         if (TextUtils.isEmpty(edt.getText()))
             return true;
         else

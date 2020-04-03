@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:background="@color/colorPrimaryDark"
             android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white"
             android:theme="@style/toolbarStyle"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

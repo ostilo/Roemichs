@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/carouselView_psd"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:fillColor="#FFFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pageColor="#00000000"
+        app:radius="6dp"
+        app:slideInterval="7000"
+        app:strokeColor="#FF777777"
+        app:strokeWidth="1dp">
+
+    </com.synnapps.carouselview.CarouselView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carouselView_psd" >
+        <include layout="@layout/parent_children_details_list_card"/>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
