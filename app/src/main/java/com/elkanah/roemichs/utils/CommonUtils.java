@@ -14,24 +14,13 @@ import android.widget.Toast;
 
 import com.elkanah.roemichs.R;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class CommonUtils {
-    public static Context context;
-    public static Activity acti;
-    public static CommonUtils mInsatnce;
-
-    public static CommonUtils getInstance(Activity activity){
-        if(mInsatnce == null){
-            mInsatnce = new CommonUtils();
-            acti= activity;
-        }
-        return mInsatnce;
-    }
-
     public static boolean textIsEmpty(EditText edt) {
         if (TextUtils.isEmpty(edt.getText()))
             return true;
@@ -39,38 +28,11 @@ public class CommonUtils {
             return false;
     }
 
-    public static boolean textIsEmpty(TextView txt) {
+    public static boolean textViewTextIsEmpty(TextView txt) {
         if (TextUtils.isEmpty(txt.getText()))
             return true;
         else
             return false;
-    }
-
-    public void setupUI(View view){
-        if(!(view instanceof EditText)){
-            view.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    hideSoftKeyboard();
-                    return false;
-                }
-            });
-        }
-
-        if(view instanceof ViewGroup){
-            for(int i = 0; i < ((ViewGroup) view).getChildCount(); i++){
-                View innerview = ((ViewGroup)view).getChildAt(i);
-                setupUI(innerview);
-            }
-        }
-    }
-
-    private void hideSoftKeyboard() {
-        View view = acti.getCurrentFocus();
-        if(view != null){
-            InputMethodManager imm = (InputMethodManager)acti.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
     }
 
 
@@ -132,13 +94,6 @@ public class CommonUtils {
         }
     }
 
-    private Calendar getCalenderDateTime() {
-        Date date = new Date(); // of the array from api //stringToDate(tempPrevDates.get(0));
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar;
-    }
-
     public static boolean isNetworkConnected(Context context) {
         boolean flag=false;
        try {
@@ -161,6 +116,43 @@ public class CommonUtils {
     public static String getCurrentTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
         return " " + sdf.format(new Date());
+    }
+
+    public static String getYesterdayDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+        return " "+sdf.format(cal.getTime());
+    }
+
+    private static boolean isRunning = false;
+    private static int resetInTime = 500;
+    private static int counter = 0;
+    public static boolean isDoubleClick(){
+        boolean flag=false;
+        if (isRunning) {
+            if (counter == 1)
+                flag = true;
+        }
+
+        counter++;
+
+        if (!isRunning) {
+            isRunning = true;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(resetInTime);
+                        isRunning = false;
+                        counter = 0;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+            return flag;
     }
 
 }
