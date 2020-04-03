@@ -15,28 +15,28 @@
             android:id="@+id/action_subjectFragment2_to_noteFragment"
             app:destination="@id/noteFragment"
             app:enterAnim="@anim/up_to_down"
-            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/up_to_down"
+            app:exitAnim="@anim/slide_out_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
         android:name="com.elkanah.roemichs.ui.fragments.NoteFragment"
         android:label="fragment_note"
-        tools:layout="@layout/fragment_note">
+        tools:layout="@layout/fragment_note" >
         <action
             android:id="@+id/action_noteFragment_to_noteDetailsFragment"
             app:destination="@id/noteDetailsFragment"
             app:enterAnim="@anim/bottom_to_up"
+            app:popEnterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/bottom_to_up"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailsFragment"
         android:name="com.elkanah.roemichs.ui.fragments.NoteDetailsFragment"
         android:label="fragment_note_details"
-        tools:layout="@layout/fragment_note_details">
+        tools:layout="@layout/fragment_note_details" >
         <action
             android:id="@+id/action_noteDetailsFragment_to_studentAssignmentFragment"
             app:destination="@id/studentAssignmentFragment"
@@ -49,7 +49,7 @@
         android:id="@+id/studentAssignmentFragment"
         android:name="com.elkanah.roemichs.ui.fragments.StudentAssignmentFragment"
         android:label="fragment_student_assignment"
-        tools:layout="@layout/fragment_student_assignment">
+        tools:layout="@layout/fragment_student_assignment" >
         <action
             android:id="@+id/action_studentAssignmentFragment_to_studentAssignmentDetailsFragment"
             app:destination="@id/studentAssignmentDetailsFragment"
@@ -62,10 +62,17 @@
         android:id="@+id/studentAssignmentDetailsFragment"
         android:name="com.elkanah.roemichs.ui.fragments.StudentAssignmentDetailsFragment"
         android:label="fragment_student_assignment_details"
-        tools:layout="@layout/fragment_student_assignment_details">
+        tools:layout="@layout/fragment_student_assignment_details" >
         <action
             android:id="@+id/action_studentAssignmentDetailsFragment_to_studentSubmitAssignmentFragment"
             app:destination="@id/studentSubmitAssignmentFragment" />
+        <action
+            android:id="@+id/action_studentAssignmentDetailsFragment_to_assignmentImageDetailsFragment"
+            app:destination="@id/assignmentImageDetailsFragment"
+            app:enterAnim="@anim/bottom_to_up"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/up_to_down"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/student_Dashboard"
@@ -141,4 +148,9 @@
         android:name="com.elkanah.roemichs.ui.fragments.StudentSubmitAssignmentFragment"
         android:label="fragment_student_submit_assignment"
         tools:layout="@layout/fragment_student_submit_assignment" />
+    <fragment
+        android:id="@+id/assignmentImageDetailsFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.AssignmentImageDetailsFragment"
+        android:label="fragment_assignment_image_details"
+        tools:layout="@layout/fragment_assignment_image_details" />
 </navigation>

@@ -13,7 +13,7 @@
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         app:fillColor="#FFFFFFFF"
@@ -35,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp"
@@ -51,11 +52,14 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/cardView3"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/cardView3"
         app:layout_constraintStart_toStartOf="@+id/cardView3"
         app:layout_constraintTop_toBottomOf="@+id/cardView3"
-        app:layout_constraintBottom_toTopOf="@+id/button2">
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textView26"
@@ -73,23 +77,34 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="28dp"
         android:text="do assignment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/scroll"
-        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="@+id/scroll" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carouselView"
-        tools:listitem="@layout/subject_list_card" />
+        tools:listitem="@layout/assignment_images_list_card" />
+
+<!--    <com.github.chrisbanes.photoview.PhotoView-->
+<!--        android:id="@+id/cvViewPager"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_marginStart="56dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/button2"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/scroll"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/button2"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/button2" >-->
+<!--    </com.github.chrisbanes.photoview.PhotoView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

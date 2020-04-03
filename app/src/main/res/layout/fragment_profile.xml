@@ -8,6 +8,7 @@
     android:background="@color/white"
     android:clickable="true"
     android:focusable="true"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
 
@@ -38,7 +39,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_profileHead"
             android:layout_width="0dp"
-            android:layout_height="333dp"
+            android:layout_height="250dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appbarProfile">
@@ -46,7 +47,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
                 <ImageView
                     android:id="@+id/profile_image2"
                     android:layout_width="0dp"
@@ -93,119 +93,209 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/userItemDetail"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
             android:padding="10dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView_profileHead">
+            app:layout_constraintTop_toBottomOf="@+id/cardView_profileHead"
+            app:layout_constraintVertical_bias="0.37">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/linLayKey"
+                <TextView
+                    android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="15dp"
+                    android:text="First name:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="First name:"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <TextView
-                        android:id="@+id/textView933"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="Surname:"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <TextView
-                        android:id="@+id/textViewe9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="Class:"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <TextView
-                        android:id="@+id/txttttt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="Date of birth:"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linLayValue"
+                <TextView
+                    android:id="@+id/textView933"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="15dp"
+                    android:text="Surname:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView9"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-                    <TextView
-                        android:id="@+id/txtFirstNameProfile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="AYODEJI"
-                        android:textColor="@color/colorPrimaryDark" />
+                <TextView
+                    android:id="@+id/textViewe9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="Class:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView933"
+                    app:layout_constraintStart_toStartOf="@+id/textView933"
+                    app:layout_constraintTop_toBottomOf="@+id/textView933" />
 
-                    <TextView
-                        android:id="@+id/txtSurnameProfile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="OLALEKAN "
-                        android:textColor="@color/colorPrimaryDark" />
+                <TextView
+                    android:id="@+id/txttttt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="Date of birth:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewe9"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textViewe9"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewe9" />
 
-                    <TextView
-                        android:id="@+id/txtStudentClassProfile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="DEV"
-                        android:textColor="@color/colorPrimaryDark" />
+                <TextView
+                    android:id="@+id/txtFirstNameProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="AYODEJI"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="@+id/textView9" />
 
-                    <TextView
-                        android:id="@+id/txtDateOfBirthProfile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="DEC 14"
-                        android:textColor="@color/colorPrimaryDark" />
+                <TextView
+                    android:id="@+id/txtSurnameProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="OLALEKAN "
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView933"
+                    app:layout_constraintEnd_toEndOf="@+id/txtFirstNameProfile"
+                    app:layout_constraintStart_toStartOf="@+id/txtFirstNameProfile"
+                    app:layout_constraintTop_toTopOf="@+id/textView933"
+                    app:layout_constraintVertical_bias="0.0" />
 
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/txtStudentClassProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="DEV"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textViewe9"
+                    app:layout_constraintEnd_toEndOf="@+id/txtSurnameProfile"
+                    app:layout_constraintStart_toStartOf="@+id/txtSurnameProfile"
+                    app:layout_constraintTop_toTopOf="@+id/textViewe9"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/txtDateOfBirthProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="DEC 14"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txttttt"
+                    app:layout_constraintEnd_toEndOf="@+id/txtStudentClassProfile"
+                    app:layout_constraintStart_toStartOf="@+id/txtStudentClassProfile"
+                    app:layout_constraintTop_toTopOf="@+id/txttttt" />
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:padding="15dp"
+                    android:text="Class Teacher:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/txttttt"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/txttttt"
+                    app:layout_constraintTop_toBottomOf="@+id/txttttt"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="PROF. ADEWOLE"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView30"
+                    app:layout_constraintEnd_toEndOf="@+id/txtDateOfBirthProfile"
+                    app:layout_constraintStart_toStartOf="@+id/txtDateOfBirthProfile"
+                    app:layout_constraintTop_toTopOf="@+id/textView30" />
 
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:padding="10dp">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:id="@+id/linLayKey"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:orientation="vertical"-->
+            <!--                    android:padding="10dp">-->
+
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:id="@+id/linLayValue"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:orientation="vertical"-->
+            <!--                    android:padding="10dp">-->
+
+
+            <!--                </LinearLayout>-->
+
+
+            <!--            </LinearLayout>-->
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
