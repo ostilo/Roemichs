@@ -5,14 +5,14 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class SessionModel {
+public class SubjectDaoModel {
 
   @PrimaryKey
   @NonNull
   private String Value;
   private String Text;
 
-  public SessionModel(@NonNull String Value, String Text) {
+  public SubjectDaoModel(@NonNull String Value, String Text) {
     this.Value = Value;
     this.Text = Text;
   }

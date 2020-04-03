@@ -15,6 +15,13 @@
         <item name="elevation">4dp</item>
     </style>
 
+    <style name="myButton" parent="Widget.AppCompat.Button">
+        <item name="cornerRadius">8dp</item>
+        <item name="android:height">55dp</item>
+        <item name="elevation">4dp</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="toolbarStyle" parent="android:Theme.Holo.Light">
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
