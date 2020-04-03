@@ -38,6 +38,7 @@ public class StudentAssignmentDetailsFragment extends Fragment implements View.O
     private TextView tvPostDate;
     private TextView tvSubDate;
     private TextView tvAssgnTitle;
+    //todo
     private TextView tvAssgnTeacher;
     private TextView tvAssgnBody;
     private Button button;

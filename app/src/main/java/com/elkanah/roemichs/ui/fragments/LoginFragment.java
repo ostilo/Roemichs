@@ -32,7 +32,7 @@ import com.google.android.material.textfield.TextInputEditText;
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends Fragment implements View.OnClickListener {
-
+//todo
     private TextInputEditText edtStudentParentID;
     private TextView tvDecision;
     boolean flag;
@@ -69,7 +69,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     edtStudentParentID.setHint("Enter Student ID");
                     tvDecision.setText("Sign In? Parent");
                     counterer += 1;
-                    getScreen(v);
                 }
                 else {
                     if(counterer ==1){
