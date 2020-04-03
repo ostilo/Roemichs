@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.db.AssignmentModel;
-import com.elkanah.roemichs.db.NoteModel;
 import com.elkanah.roemichs.ui.adapters.SubjectAdapter;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -53,7 +52,7 @@ public class StudentAssignmentDetailsFragment extends Fragment implements View.O
         tvAssgnTeacher = v.findViewById(R.id.textView21);
         tvAssgnBody = v.findViewById(R.id.textView26);
         carouselView = (CarouselView) v.findViewById(R.id.carouselView);
-        button = v.findViewById(R.id.button2);
+        button = v.findViewById(R.id.btn_start);
         recyclerView = v.findViewById(R.id.recyclerView);
 
         recyclerView.setHasFixedSize(true);

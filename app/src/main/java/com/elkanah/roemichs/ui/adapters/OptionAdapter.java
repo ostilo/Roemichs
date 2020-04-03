@@ -1,7 +1,9 @@
 package com.elkanah.roemichs.ui.adapters;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.ui.model.OptionSelect;
+import com.elkanah.roemichs.ui.OptionSelect;
+import com.elkanah.roemichs.ui.fragments.TestPage;
 import com.elkanah.roemichs.ui.model.OptiontModel;
 
 import java.util.ArrayList;
@@ -23,14 +26,33 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
     private LayoutInflater inflater;
     private String questionID;
     private ArrayList<OptiontModel> modelList;
-    private OptionSelect optionSelect;
+    OptionSelect optionSelect;
 
-    public OptionAdapter(Context context, String questionID, ArrayList<OptiontModel> options) {
-        this.context = context;
+
+    //////////
+
+    private int selectedPos;
+
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(String viewItem, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
+
+    //////////
+
+    public OptionAdapter(Context ctx, String questionID, ArrayList<OptiontModel> options) {
+        this.context = ctx;
         this.modelList = options;
         this.questionID = questionID;
-        inflater = LayoutInflater.from(context);
-        optionSelect = (OptionSelect) context;
+        inflater = LayoutInflater.from(ctx);
+        optionSelect = (OptionSelect) ctx;
     }
 
     @NonNull
@@ -42,8 +64,9 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.changeToSelect(selectedPos == position ? R.color.colorAccent: R.color.foreColor);
         OptiontModel model = modelList.get(position);
-        holder.optionID.setText(model.id);
+        holder.optionID.setText(String.valueOf(position+1));
         if(model.type.equals("IMAGE")){
             holder.optionImage.setImageBitmap(BitmapFactory.decodeFile(model.value));
         }else if (model.type.equals("TEXT")){
@@ -70,13 +93,26 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                  itemView.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+
+//                  itemView.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
                   //re-using the optionModel to pass selected option back to UI
-                     optionSelect.onSelect(new OptiontModel(questionID, optionID.getText().toString(), ""));
+//                    optionSelect.onSelect(new OptiontModel(questionID, optionID.getText().toString()));
+
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+//                        String val = modelList.get(getAdapterPosition()).value;
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(questionID, position);
+                            notifyItemChanged(selectedPos);
+                            selectedPos =getAdapterPosition();
+                            notifyItemChanged(selectedPos);
+                        }
+                    }
                 }
             });
-
-
+        }
+        public void changeToSelect(int colorBackground) {
+            itemView.setBackgroundColor(colorBackground);
         }
     }
 }
