@@ -38,6 +38,7 @@ public class TestPage extends Fragment implements View.OnClickListener {
     private TextView previous;
     private int index = 0;
     private ArrayList<TestQuestionModel> list;
+    private OptiontModel test;
 
 
     public TestPage() {
@@ -76,17 +77,7 @@ public class TestPage extends Fragment implements View.OnClickListener {
         adapter.setOnItemClickListener(new OptionAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(String viewItem, int position) {
-                OptiontModel test = new OptiontModel(viewItem, Integer.toString(position));
-                ArrayList<OptiontModel> ans = answers;
-                for (OptiontModel item: ans) {
-                    if(item.value.equals(viewItem)){
-                        answers.remove(item);
-                        answers.add(test);
-                    } else{
-                        answers.add(test);
-                    }
-                }
-                if (answers.size()==0)answers.add(test);
+                test = new OptiontModel(viewItem, Integer.toString(position));
 
 //                if (answers.contains(test)) {
 //                    Log.i("exist", test.value);
@@ -130,9 +121,24 @@ public class TestPage extends Fragment implements View.OnClickListener {
 
         return option;
     }
+    private void updateList(){
+        if(test!=null) {
+            ArrayList<OptiontModel> ans = answers;
+            for (OptiontModel item : ans) {
+                if (item.value.equals(test)) {
+                    answers.remove(item);
+                    answers.add(test);
+                } else {
+                    answers.add(test);
+                }
+            }
+            if (answers.size() == 0) answers.add(test);
+        }
+    }
 
     @Override
     public void onClick(View v) {
+        updateList();
         if(v.getId()== R.id.tv_next) {
             if(index<list.size()){
                 index++;
