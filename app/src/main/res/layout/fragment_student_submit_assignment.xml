@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:id="@+id/parent_frame"
+        android:id="@+id/parent_frame">
 
-        >
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout_sa"
             android:layout_width="match_parent"
@@ -24,6 +23,7 @@
                 android:id="@+id/collapsing_toolbar_sa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:titleTextColor="@color/white"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:contentScrim="@color/colorPrimaryDark">
                 <ImageView
@@ -40,6 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:theme="@style/toolbarStyle"
+                    app:titleTextColor="@color/white"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:layout_collapseMode="pin" >
                 </androidx.appcompat.widget.Toolbar>

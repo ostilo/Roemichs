@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:background="@color/white"
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.fragments.CreateAssignmentFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_barCrtAsgnmt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarCrtAsgmt"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimaryDark"
+                android:theme="@style/toolbarStyle"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <Button
+            android:id="@+id/btnCreateAssgmt"
+            style="@style/myButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="4dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:text="CREATE ASSIGNMENT"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardcrtAss" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardcrtAss"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_barCrtAsgnmt">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="0dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frame_Class_crtAsgmt"
+                    style="@style/MyStyle.InputLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Class"
+                    android:padding="5dp">
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/tv_spClass_crtAsgmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frame_week_crtAsgmt"
+                    style="@style/MyStyle.InputLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Week"
+                    android:padding="5dp">
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/spWeek_crtAsgmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frame_subject_crtAsgmt"
+                    style="@style/MyStyle.InputLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Subject"
+                    android:padding="5dp" >
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/spSubjectCrtAsgmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frame_topic_crtAsgmt"
+                    style="@style/MyStyle.InputLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    app:startIconDrawable="@drawable/ic_person_black"
+                    app:startIconTint="#c9c9c9">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtTopic_crtAsgmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@android:drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:hint="Assignment Topic"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColorHint="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frame_QuestBodyCrtAsgt"
+                    style="@style/MyStyle.InputLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:padding="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtQuestBodyCrtAsgmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@android:drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:gravity="top|start"
+                        android:textAlignment="viewStart"
+                        android:hint="Question Body"
+                        android:inputType="textMultiLine"
+                        android:textColorHint="@android:color/darker_gray"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frame_submitDate_crtAsgmt"
+                    style="@style/MyStyle.InputLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_marginBottom="15dp"
+                    app:startIconDrawable="@drawable/ic_person_black"
+                    app:startIconTint="#c9c9c9">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtSubmitDate_crtAsgmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@android:drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:hint="Submission Deadline"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColorHint="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                 <androidx.constraintlayout.widget.ConstraintLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content">
+
+                     <androidx.recyclerview.widget.RecyclerView
+                         android:id="@+id/addImageRecyclerCrtAsgmt"
+                         android:layout_width="0dp"
+                         android:layout_height="160dp"
+                         android:orientation="horizontal"
+                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         tools:listitem="@layout/student_selected_item_image"/>
+
+                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/linLayImgDescriCrtAsgmt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addImagebtnCrtAsgmt"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="100dp"
+            android:padding="5dp"
+            android:src="@android:drawable/ic_input_add"
+            app:borderWidth="0.1dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.932"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

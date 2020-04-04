@@ -1,14 +1,20 @@
 package com.elkanah.roemichs.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.text.TextUtils;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elkanah.roemichs.R;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,7 +28,7 @@ public class CommonUtils {
             return false;
     }
 
-    public static boolean textIsEmpty(TextView txt) {
+    public static boolean textViewTextIsEmpty(TextView txt) {
         if (TextUtils.isEmpty(txt.getText()))
             return true;
         else
@@ -88,13 +94,6 @@ public class CommonUtils {
         }
     }
 
-    private Calendar getCalenderDateTime() {
-        Date date = new Date(); // of the array from api //stringToDate(tempPrevDates.get(0));
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar;
-    }
-
     public static boolean isNetworkConnected(Context context) {
         boolean flag=false;
        try {
@@ -117,6 +116,43 @@ public class CommonUtils {
     public static String getCurrentTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
         return " " + sdf.format(new Date());
+    }
+
+    public static String getYesterdayDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+        return " "+sdf.format(cal.getTime());
+    }
+
+    private static boolean isRunning = false;
+    private static int resetInTime = 500;
+    private static int counter = 0;
+    public static boolean isDoubleClick(){
+        boolean flag=false;
+        if (isRunning) {
+            if (counter == 1)
+                flag = true;
+        }
+
+        counter++;
+
+        if (!isRunning) {
+            isRunning = true;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(resetInTime);
+                        isRunning = false;
+                        counter = 0;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+            return flag;
     }
 
 }

@@ -9,7 +9,8 @@ import androidx.room.RoomDatabase;
 
 import com.elkanah.roemichs.db.DataCentric;
 import com.elkanah.roemichs.db.RoemichsDatabase;
-import com.elkanah.roemichs.db.models.SessionModel;
+import com.elkanah.roemichs.db.models.ClassModel;
+import com.elkanah.roemichs.db.models.SubjectDaoModel;
 import com.elkanah.roemichs.network.JsonResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,27 +38,50 @@ public class ClassroomRepository {
         return ourInstance;
     }
 
-    public LiveData<List<SessionModel>> getListOfSession() {
-        return mproxy.getSessionList();
+    public LiveData<List<ClassModel>> getRoomClassList() {
+        return mproxy.getRoomClassList();
     }
 
-    public void getSessionListOnline(MutableLiveData<JsonResponse> jsonResponse, String requestCode) {
-        mproxy.getSessionListOnline(requestCode, jsonResponse);
+    public void getClassListOnline(MutableLiveData<JsonResponse> jsonResponse, String requestCode) {
+        mproxy.getClassListOnline(requestCode, jsonResponse);
     }
 
-    public boolean validateSessionList(String jsonMessage) {
+    public boolean validateClassList(String jsonMessage) {
         boolean flag = false;
-        Type listType = new TypeToken<ArrayList<SessionModel>>(){}.getType();
-        List<SessionModel> sessionModels = gson.fromJson(jsonMessage, listType);
-        if (sessionModels != null && sessionModels.size() > 0){
+        Type listType = new TypeToken<ArrayList<ClassModel>>(){}.getType();
+        List<ClassModel> classModels = gson.fromJson(jsonMessage, listType);
+        if (classModels != null && classModels.size() > 0){
             flag = true;
-            insertSessionToDB(sessionModels);
+            insertClassToDB(classModels);
         }
         return flag;
     }
 
-    private void insertSessionToDB(List<SessionModel> sessionModels) {
-        mproxy.insertSessionToDB(sessionModels);
+    private void insertClassToDB(List<ClassModel> classModels) {
+        mproxy.insertClassToDB(classModels);
     }
 
+    public LiveData<List<SubjectDaoModel>> getRoomSubjectList() {
+        //SubjectDaoModel
+        return mproxy.getRoomSubjectList();
+    }
+
+    public void getSubjectListOnline(MutableLiveData<JsonResponse> jsonResponse, String requestCode) {
+        mproxy.getSubjectOnline(requestCode, jsonResponse);
+    }
+
+    public boolean validateSubject(String jsonMessage) {
+        boolean flag = false;
+        Type listType = new TypeToken<ArrayList<SubjectDaoModel>>(){}.getType();
+        List<SubjectDaoModel> subjectDaoModels = gson.fromJson(jsonMessage, listType);
+        if (subjectDaoModels != null && subjectDaoModels.size() > 0){
+            flag = true;
+            insertSubjectToDB(subjectDaoModels);
+        }
+        return flag;
+    }
+
+    private void insertSubjectToDB(List<SubjectDaoModel> subjectDaoModels) {
+        mproxy.insertSubjectToDB(subjectDaoModels);
+    }
 }

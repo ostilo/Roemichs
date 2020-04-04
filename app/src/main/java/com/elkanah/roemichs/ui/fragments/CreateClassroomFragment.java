@@ -13,16 +13,17 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.models.SessionModel;
+import com.elkanah.roemichs.db.models.ClassModel;
 import com.elkanah.roemichs.db.repository.Constants;
 import com.elkanah.roemichs.ui.viewmodels.CreateClassroomViewModel;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -36,25 +37,29 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
     private Button btnCreateCls;
     private String CHAT_USER, CHAT_WITH;
     private Context context;
-    private AutoCompleteTextView spSession, spClass, spClassType, spTerm, spWeek;
+    private AutoCompleteTextView spClass, spWeek;
     private ConstraintLayout constraintLayout;
     private EditText edtSubject, edtTopic, edtDuration;
-    private ArrayAdapter<SessionModel> sessionAdapter;
-    public static List<SessionModel> sessionModelsList;
-    public static String spSessionText;
+    private ArrayAdapter<ClassModel> sessionAdapter;
+    public static List<ClassModel> classModelsList;
+    public static String spClassText;
     private ProgressBar loading;
+    private Toolbar toolbar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.create_classroom_fragment, container, false);
         context = getContext();
+        createClassroomViewModel = ViewModelProviders.of(this).get(CreateClassroomViewModel.class);
+
         if (getArguments() != null) {
             CHAT_USER = getArguments().getString(CHAT_USER_KEY);
             CHAT_WITH = getArguments().getString(Constants.CHAT_WITH_KEY);
         }
 
         setViewById(view);
+        setToolBar();
         setSpinners();
         checkSpinnerForEmpty();
         setListeners();
@@ -63,17 +68,31 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
     }
 
     private void setViewById(View view) {
+        toolbar=view.findViewById(R.id.toolbarCrtClass);
         btnCreateCls = view.findViewById(R.id.btnCreateClass);
-        spSession = view.findViewById(R.id.tv_spSession_crtClass);
         spClass = view.findViewById(R.id.tv_spClass_crtClass);
-        spClassType = view.findViewById(R.id.tv_spClasstype_crtCls);
-        spTerm = view.findViewById(R.id.spTerm_CrtClass);
         spWeek = view.findViewById(R.id.spWeek_crtCls);
         constraintLayout = view.findViewById(R.id.constrCrtCls);
         edtSubject = view.findViewById(R.id.txtSubjectCrtCls);
         edtTopic = view.findViewById(R.id.txtTopic_crtCls);
         edtDuration = view.findViewById(R.id.txtDuration_crtCls);
         loading = view.findViewById(R.id.loading_crtCls);
+    }
+
+    private void setToolBar() {
+        if(getActivity() != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.go_back);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Create New Classroom");
+            setHasOptionsMenu(true);
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();            }
+        });
     }
 
     private void setListeners() {
@@ -96,7 +115,7 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
             }
             if (sessionAdapter.getCount() != 0 /*&& accountAdapter.getCount() != 0 */) {
                 loading.setVisibility(View.INVISIBLE);
-                constraintLayout.setEnabled(true);
+                enableControls(true);
             }
         });
     }
@@ -112,42 +131,44 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
 
     private void disableControlForLoadingSpinner() {
         loading.setVisibility(View.VISIBLE);
-        constraintLayout.setEnabled(false);
+        enableControls(false);
         setSpinners();
+    }
+
+    private void enableControls(boolean value){
+        constraintLayout.setEnabled(value);
+        spClass.setEnabled(value);
+        spWeek.setEnabled(value);
+        edtSubject.setEnabled(value);
+        edtTopic.setEnabled(value);
+        edtDuration.setEnabled(value);
     }
 
     private void setSpinners() {
         try {
-            createClassroomViewModel.listSession.observe(getViewLifecycleOwner(), sessionModels -> {
+            createClassroomViewModel.listClass.observe(getViewLifecycleOwner(), sessionModels -> {
                 if (sessionModels != null && sessionModels.size() == 0) {
                     createClassroomViewModel.getSessionListOnline(SESSION_LIST);
                 }
 
-                if (spSessionText != null) {
+                if (spClassText != null) {
                     for (int a = 0; a < sessionModels.size(); a++) {
-                        SessionModel session = sessionModels.get(a);
-                        if (session.getValue().equals(spSessionText)) {
-                            spSession.setText(session.getText());
+                        ClassModel session = sessionModels.get(a);
+                        if (session.getValue().equals(spClassText)) {
+                            spClass.setText(session.getText());
                         }
                     }
                 }
 
-                sessionModelsList = sessionModels;
+                classModelsList = sessionModels;
                 sessionAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, sessionModels);
-                spSession.setAdapter(sessionAdapter);
+                spClass.setAdapter(sessionAdapter);
                 sessionAdapter.notifyDataSetChanged();
             });
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        createClassroomViewModel = ViewModelProviders.of(this).get(CreateClassroomViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     @Override
