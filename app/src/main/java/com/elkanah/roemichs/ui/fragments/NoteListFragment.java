@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.ui.adapters.NoteAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
@@ -21,9 +23,11 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NoteFragment extends Fragment {
+public class NoteListFragment extends Fragment {
 
-    public NoteFragment() {
+    FloatingActionButton fabAddNote;
+
+    public NoteListFragment() {
         // Required empty public constructor
     }
 
@@ -40,6 +44,13 @@ public class NoteFragment extends Fragment {
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
         toolbar.setTitle("Notes");
 
+        fabAddNote=v.findViewById(R.id.fabAddNoteList);
+        fabAddNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_noteFragment_to_addNoteFragment);
+            }
+        });
 
         RecyclerView recyclerView = v.findViewById(R.id.note_recycler);
         recyclerView.setHasFixedSize(true);
