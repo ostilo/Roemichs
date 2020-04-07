@@ -97,6 +97,9 @@
             android:id="@+id/action_student_Dashboard_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
+            android:id="@+id/action_student_Dashboard_to_testFragment"
+            app:destination="@id/testFragment" />
+        <action
             android:id="@+id/action_studDashboard_toCreateAssignment"
             app:destination="@+id/CreateAssignment"/>
     </fragment>
@@ -164,4 +167,40 @@
         android:name="com.elkanah.roemichs.ui.fragments.AssignmentImageDetailsFragment"
         android:label="fragment_assignment_image_details"
         tools:layout="@layout/fragment_assignment_image_details" />
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.TestFragment"
+        android:label="fragment_student_test"
+        tools:layout="@layout/fragment_test" >
+        <action
+            android:id="@+id/action_testFragment_to_testPage"
+            app:destination="@id/testPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/testPage"
+        android:name="com.elkanah.roemichs.ui.fragments.TestPage"
+        android:label="fragment_test_page"
+        tools:layout="@layout/fragment_test_page" >
+        <action
+            android:id="@+id/action_testPage_to_testResult"
+            app:destination="@id/testResult" />
+        <action
+            android:id="@+id/action_testPage_to_confirmationDialog"
+            app:destination="@id/confirmationDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/testResult"
+        android:name="com.elkanah.roemichs.ui.fragments.TestScore"
+        android:label="fragment_test_result"
+        tools:layout="@layout/fragment_test_score" >
+    </fragment>
+    <dialog
+        android:id="@+id/confirmationDialog"
+        android:name="com.elkanah.roemichs.ui.fragments.ConfirmationDialog"
+        android:label="fragment_confirmation_dialog"
+        tools:layout="@layout/fragment_confirmation_dialog" >
+        <action
+            android:id="@+id/action_confirmationDialog_to_testResult"
+            app:destination="@id/testResult" />
+    </dialog>
 </navigation>
