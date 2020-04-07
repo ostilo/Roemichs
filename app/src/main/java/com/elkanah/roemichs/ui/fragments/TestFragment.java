@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,11 @@ public class TestFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Navigation.findNavController(v).navigate(R.id.testPage);
+        try {
+            Navigation.findNavController(v).navigate(R.id.testPage);
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("error", e.toString());
+        }
     }
 }

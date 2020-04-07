@@ -28,4 +28,13 @@
     <string name="instruction">Attempt all questions</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="performance_review">Performance: Review</string>
+    <string name="metrics">Metrics</string>
+    <string name="incorrect">INCORRECT</string>
+    <string name="correct">CORRECT</string>
+    <string name="unanswered">UNANSWERED</string>
+    <string name="view_solution">View Solution</string>
 </resources>
