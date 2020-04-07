@@ -22,6 +22,7 @@ import java.util.List;
         private List<ContentModel> modelList;
         private Context context;
         private LayoutInflater inflater;
+        public static int me = 0;
 //        private OnActionSelected actionSelected;
 
         public ContentAdapter(Context context, List<ContentModel> list) {
@@ -67,6 +68,7 @@ import java.util.List;
                     @Override
                     public void onClick(View v) {
                         if(modelList.get(getAdapterPosition()).text.equals("Subject")){
+                            me = 1;
                             Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
                         }
                         else if(modelList.get(getAdapterPosition()).text.equals("Classroom")){

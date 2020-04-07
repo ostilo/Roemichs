@@ -115,6 +115,7 @@
                             android:padding="0dp"
                             android:paddingStart="5dp"
                             android:paddingEnd="5dp"
+                            android:background="@drawable/student_submit_edt_bg"
                             android:singleLine="true"
                             android:textSize="16sp" />
 
@@ -133,6 +134,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:padding="0dp"
+                            android:background="@drawable/student_submit_edt_bg"
                             android:paddingStart="5dp"
                             android:paddingEnd="5dp"
                             android:singleLine="true" />
@@ -153,6 +155,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:padding="0dp"
+                            android:background="@drawable/student_submit_edt_bg"
                             android:paddingStart="5dp"
                             android:paddingEnd="5dp"
                             android:singleLine="true" />
@@ -173,6 +176,7 @@
                             android:layout_height="40dp"
                             android:padding="0dp"
                             android:paddingStart="5dp"
+                            android:background="@drawable/student_submit_edt_bg"
                             android:paddingEnd="5dp"
                             android:singleLine="true" />
 
@@ -192,6 +196,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:padding="0dp"
+                            android:background="@drawable/student_submit_edt_bg"
                             android:paddingStart="5dp"
                             android:paddingEnd="5dp"
                             android:singleLine="true" />

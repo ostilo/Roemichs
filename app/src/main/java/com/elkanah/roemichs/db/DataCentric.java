@@ -5,8 +5,11 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.elkanah.roemichs.db.dao.ClassTypeDao;
 import com.elkanah.roemichs.db.dao.SessionDao;
+import com.elkanah.roemichs.db.models.ClassType;
 import com.elkanah.roemichs.db.models.SessionModel;
+import com.elkanah.roemichs.db.models.StudentLoginEntity;
 import com.elkanah.roemichs.db.repository.Constants;
 import com.elkanah.roemichs.network.HTTPMethods;
 import com.elkanah.roemichs.network.JsonResponse;
@@ -26,6 +29,7 @@ public class DataCentric {
   private static NetworkUtils networkUtils;
   private String rawData;
   private static RoemichsDatabase roemichsDatabase;
+  private static ClassTypeDao classTypeDao;
 
 
   private DataCentric(){}
@@ -50,6 +54,7 @@ public class DataCentric {
     networkUtils.setBaseUrl(Constants.BASE_URL_LIVE);
     roemichsDatabase = RoemichsDatabase.getInstance(app);
     sessionDao = roemichsDatabase.sessionDao();
+    classTypeDao = roemichsDatabase.classTypeDao();
   }
 
   public LiveData<List<SessionModel>> getSessionList() {
@@ -67,5 +72,25 @@ public class DataCentric {
     ex.execute(() -> {
       sessionDao.insertAll(sessionModels);
     });
+  }
+
+    public void authenticateUser(StudentLoginEntity studentEntity, MutableLiveData<JsonResponse> response, String requestCode) {
+    RoemichsDatabase.databaseWriteExecutor.execute(()->{
+      String studentData = gson.toJson(studentEntity);
+      String reqData = "userDetails=" + studentData;
+      JsonResponse jsonResponse = networkUtils.makeApiCall(reqData,"ValidateUser",HTTPMethods.POST.toString(),requestCode);
+         response.postValue(jsonResponse);
+    });
+    }
+
+    public void getClassType(String requestCode, MutableLiveData<JsonResponse> response) {
+      RoemichsDatabase.databaseWriteExecutor.execute(()->{
+        JsonResponse jsonResponse  = networkUtils.makeApiCall("","custitle",HTTPMethods.POST.toString(),requestCode);
+        response.postValue(jsonResponse);
+      });
+    }
+
+  public LiveData<List<ClassType>> getClassTypeLocal() {
+    return classTypeDao.getAll();
   }
 }

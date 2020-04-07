@@ -141,17 +141,16 @@
                     app:layout_constraintStart_toEndOf="@+id/MPtextView4"
                     app:layout_constraintTop_toTopOf="@+id/MPtextView4" />
 
-                <TextView
+                <ImageButton
                     android:id="@+id/MPtextView4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/parent_payment_bg"
-                    android:gravity="center"
-                    android:text="P"
-                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_payment"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -162,6 +161,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:backgroundTint="@color/white"
+                    android:tint="@color/colorSecondary"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/MPtextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/MPtextView"

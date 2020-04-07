@@ -22,4 +22,8 @@
     <string name="audio_class">Audio Class</string>
     <string name="video_class">Video Class</string>
     <string name="stop_class">Stop Class</string>
+    <string name="ass_qu">The image below is a description of the respective questions.<b>Click to enlarge</b> </string>
+    <string name="add_image">------OR------</string>
+    <string name="username_keystore">Username</string>
 </resources>
+

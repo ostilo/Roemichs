@@ -17,11 +17,15 @@
         tools:layout="@layout/fragment_parent_children" >
         <action
             android:id="@+id/action_parentChildrenFragment_to_parentChildrenDetailsFragment"
-            app:destination="@id/parentChildrenDetailsFragment" />
+            app:destination="@id/parentChildrenDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/parentChildrenDetailsFragment"
-        android:name="com.elkanah.roemichs.ui.adapters.ParentChildrenDetailsFragment"
+        android:name="com.elkanah.roemichs.ui.fragments.ParentChildrenDetailsFragment"
         android:label="fragment_parent_children_details"
         tools:layout="@layout/fragment_parent_children_details" />
     <fragment

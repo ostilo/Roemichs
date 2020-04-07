@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.db.models.SubjectModel;
+import com.elkanah.roemichs.ui.adapter.ActionAdapter;
+import com.elkanah.roemichs.ui.adapter.ContentAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,10 +28,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
    private Context context;
    private LayoutInflater inflater;
    private List<String> newColors = SubjectModel.getColors();
+   private List<SubjectModel> subjectFull;
 
     public SubjectAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+        subjectFull = new ArrayList<>(subjectList);
     }
 
     @NonNull
@@ -50,9 +56,53 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
     }
 
     @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    @Override
     public int getItemCount() {
         return subjectList == null ? 0 : subjectList.size();
     }
+
+    public Filter getFilter() {
+        return  filterSubject;
+    }
+
+    private Filter filterSubject  = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<SubjectModel> filterList = new ArrayList<>();
+            if(constraint == null || constraint.length() == 0){
+                filterList.addAll(subjectFull);
+
+            }else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                try {if(filterPattern != null){
+                    for(SubjectModel sub : subjectFull){
+                        if(sub.getSubjectTitle().toLowerCase().contains(filterPattern)){
+                            filterList.add(sub);
+                        }
+                    }
+                }
+
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filterList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            subjectList.clear();
+            subjectList.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
@@ -66,8 +116,11 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Navigation.findNavController(itemView).navigate(R.id.action_subjectFragment2_to_noteFragment);
-
+                    if(ContentAdapter.me == 1 ||ContentAdapter.me == 4){
+                        Navigation.findNavController(itemView).navigate(R.id.action_subjectFragment2_to_noteFragment);
+                    }else if(ContentAdapter.me == 3){
+                        Navigation.findNavController(itemView).navigate(R.id.action_subjectFragment2_to_studentAssignmentFragment);
+                    }
                 }
             });
         }

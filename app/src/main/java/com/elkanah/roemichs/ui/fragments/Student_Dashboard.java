@@ -28,6 +28,7 @@ import com.elkanah.roemichs.ui.model.ActionModel;
 import com.elkanah.roemichs.ui.model.ContentModel;
 import com.elkanah.roemichs.ui.model.ScreenUtil;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,7 +145,8 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
             popupMenu.show();
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.menu_logout) {
-                    NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
+                    Snackbar.make(v,"Go back to Home", Snackbar.LENGTH_SHORT).show();
+                   // NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
                     return true;
                 }
                 if (item.getItemId() == R.id.create_assignment) {
