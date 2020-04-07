@@ -68,4 +68,24 @@
         <item name="PinHeaderStyle">@style/pinHeaderStyle</item>
         <item name="SavedCardButtonStyle">@style/svdCardsBtnStyle</item>
     </style>
+
+    <style name="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+        <item name="materialThemeOverlay">
+            @style/ThemeOverlay.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense
+        </item>
+        <item name="endIconMode">dropdown_menu</item>
+    </style>
+    <style name="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu">
+        <item name="materialThemeOverlay">
+            @style/ThemeOverlay.MaterialComponents.AutoCompleteTextView.FilledBox.Dense
+        </item>
+        <item name="endIconMode">dropdown_menu</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="materialThemeOverlay">
+            @style/ThemeOverlay.MaterialComponents.AutoCompleteTextView.FilledBox
+        </item>
+        <item name="endIconMode">dropdown_menu</item>
+    </style>
 </resources>
