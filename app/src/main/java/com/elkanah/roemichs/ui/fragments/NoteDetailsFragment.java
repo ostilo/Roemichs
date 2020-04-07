@@ -67,7 +67,6 @@ public class NoteDetailsFragment extends Fragment implements View.OnClickListene
                 tvNoteTopic.setText(model.getNoteTitle());
                 tvNoteDate.setText(model.getWeekNumber());
                 tvNoteBody.setText(model.getNoteBody());
-
             }
         }
         return v;

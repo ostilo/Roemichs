@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -15,42 +13,34 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.ui.adapters.StudentSelectedImageAssgnAdapter;
-import com.firebase.client.annotations.NotNull;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.fxn.pix.Options;
 import com.fxn.pix.Pix;
-import com.fxn.utility.ImageQuality;
 import com.fxn.utility.PermUtil;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.opensooq.supernova.gligar.GligarPicker;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.elkanah.roemichs.utils.CommonUtils.isDoubleClick;
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateAssignmentFragment extends Fragment implements View.OnClickListener{
+public class CreateNote extends Fragment implements View.OnClickListener{
 
     private static final int PICKER_REQUEST_CODE = 22;
     private static final int READ_PERMISSION = 33 ;
@@ -68,7 +58,7 @@ public class CreateAssignmentFragment extends Fragment implements View.OnClickLi
     private Context context;
     private LinearLayout layout;
 
-    public CreateAssignmentFragment() {
+    public CreateNote() {
         // Required empty public constructor
     }
 
@@ -76,21 +66,23 @@ public class CreateAssignmentFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_create_assignment, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_create_note, container, false);
         context = getContext();
 
-        fab=view.findViewById(R.id.addImagebtnCrtAsgmt);
+        fab=view.findViewById(R.id.addImagebtnCrtNote);
         fab.setOnClickListener(this);
 
         imagePaths = new ArrayList<>();
         returnValue = new ArrayList<>();
-        toolbar=view.findViewById(R.id.toolbarCrtAsgmt);
-        recyclerView=view.findViewById(R.id.addImageRecyclerCrtAsgmt);
-        layout = view.findViewById(R.id.linLayImgDescriCrtAsgmt);
+        toolbar=view.findViewById(R.id.toolbarCrtNote);
+        recyclerView=view.findViewById(R.id.addImageRecyclerCrtNote);
+        layout = view.findViewById(R.id.linLayImgDespCrtNote);
         setToolBar();
 
         return view;
     }
+
 
     private void setToolBar() {
         if (getActivity() != null) {
@@ -98,13 +90,13 @@ public class CreateAssignmentFragment extends Fragment implements View.OnClickLi
             ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.go_back);
             Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Create Assignment");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Add Note");
             setHasOptionsMenu(true);
         }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Navigation.findNavController(v).navigateUp();
+                Navigation.findNavController(v).navigateUp();
             }
         });
     }
@@ -112,9 +104,9 @@ public class CreateAssignmentFragment extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.addImagebtnCrtAsgmt:
+            case R.id.addImagebtnCrtNote:
                 if(checkTrue())
-                new GligarPicker().disableCamera(false).cameraDirect(false).requestCode(PICKER_REQUEST_CODE).withFragment(this).show();
+                    new GligarPicker().disableCamera(false).cameraDirect(false).requestCode(PICKER_REQUEST_CODE).withFragment(this).show();
                 break;
         }
     }
@@ -158,46 +150,46 @@ public class CreateAssignmentFragment extends Fragment implements View.OnClickLi
             //get it back using their index and make this list global
             List<EditText> edtList = new ArrayList<EditText>(size);
             for (int i = 0; i < size; i++) {
-            EditText edt = new EditText(context);
-            edt.setHint("Image "+ (i+1) + " Description");
-            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp2.weight = 1.0f;
-            lp2.bottomMargin = 15;
-            edt.setLayoutParams(lp2);
-            layout.addView(edt);
-            edtList.add(edt);
+                EditText edt = new EditText(context);
+                edt.setHint("Image "+ (i+1) + " Description");
+                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                lp2.weight = 1.0f;
+                lp2.bottomMargin = 15;
+                edt.setLayoutParams(lp2);
+                layout.addView(edt);
+                edtList.add(edt);
             }
         }
     }
 
     private void setAdapter(ArrayList<String> newMe) {
-            imageAdapter = new StudentSelectedImageAssgnAdapter(getContext());
-            imageAdapter.setItems(newMe);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,true));
-            recyclerView.setAdapter(imageAdapter);
-            imageAdapter.notifyDataSetChanged();
+        imageAdapter = new StudentSelectedImageAssgnAdapter(getContext());
+        imageAdapter.setItems(newMe);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,true));
+        recyclerView.setAdapter(imageAdapter);
+        imageAdapter.notifyDataSetChanged();
     }
 
-        private void requestStoragePermission() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (!(getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_PERMISSION);
-                }
-                if (!(getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
-                }
-            }else {
-                if (!(getActivity().getPackageManager().checkPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE, getContext().getPackageName()) == PackageManager.PERMISSION_GRANTED)) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_PERMISSION);
-                }
-                if (!(getContext().getPackageManager().checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, getContext().getPackageName()) == PackageManager.PERMISSION_GRANTED)) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
-                }
+    private void requestStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!(getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_PERMISSION);
+            }
+            if (!(getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
+            }
+        }else {
+            if (!(getActivity().getPackageManager().checkPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE, getContext().getPackageName()) == PackageManager.PERMISSION_GRANTED)) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_PERMISSION);
+            }
+            if (!(getContext().getPackageManager().checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, getContext().getPackageName()) == PackageManager.PERMISSION_GRANTED)) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
             }
         }
+    }
 
-        private boolean checkTrue(){
-            requestStoragePermission();
-            return  true;
-        }
+    private boolean checkTrue(){
+        requestStoragePermission();
+        return  true;
+    }
 }

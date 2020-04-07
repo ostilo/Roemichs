@@ -10,7 +10,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,10 +21,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.elkanah.roemichs.R;
-import com.elkanah.roemichs.db.models.SessionModel;
+import com.elkanah.roemichs.db.models.ClassModel;
 import com.elkanah.roemichs.db.repository.Constants;
 import com.elkanah.roemichs.ui.viewmodels.CreateClassroomViewModel;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -39,12 +37,12 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
     private Button btnCreateCls;
     private String CHAT_USER, CHAT_WITH;
     private Context context;
-    private AutoCompleteTextView spSession, spClass, spClassType, spTerm, spWeek;
+    private AutoCompleteTextView spClass, spWeek;
     private ConstraintLayout constraintLayout;
-    private EditText edtSubject, edtTopic, edtDuration;
-    private ArrayAdapter<SessionModel> sessionAdapter;
-    public static List<SessionModel> sessionModelsList;
-    public static String spSessionText;
+    private EditText edtSubject, edtTopic, edtDurHrs, edtDurMins;
+    private ArrayAdapter<ClassModel> sessionAdapter;
+    public static List<ClassModel> classModelsList;
+    public static String spClassText;
     private ProgressBar loading;
     private Toolbar toolbar;
 
@@ -72,15 +70,13 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
     private void setViewById(View view) {
         toolbar=view.findViewById(R.id.toolbarCrtClass);
         btnCreateCls = view.findViewById(R.id.btnCreateClass);
-        spSession = view.findViewById(R.id.tv_spSession_crtClass);
         spClass = view.findViewById(R.id.tv_spClass_crtClass);
-        spClassType = view.findViewById(R.id.tv_spClasstype_crtCls);
-        spTerm = view.findViewById(R.id.spTerm_CrtClass);
         spWeek = view.findViewById(R.id.spWeek_crtCls);
         constraintLayout = view.findViewById(R.id.constrCrtCls);
         edtSubject = view.findViewById(R.id.txtSubjectCrtCls);
         edtTopic = view.findViewById(R.id.txtTopic_crtCls);
-        edtDuration = view.findViewById(R.id.txtDuration_crtCls);
+        edtDurHrs = view.findViewById(R.id.txtDurHrs_crtCls);
+        edtDurMins = view.findViewById(R.id.txtDurMins_crtCls);
         loading = view.findViewById(R.id.loading_crtCls);
     }
 
@@ -142,35 +138,33 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
 
     private void enableControls(boolean value){
         constraintLayout.setEnabled(value);
-        spSession.setEnabled(value);
         spClass.setEnabled(value);
-        spClassType.setEnabled(value);
-        spTerm.setEnabled(value);
         spWeek.setEnabled(value);
         edtSubject.setEnabled(value);
         edtTopic.setEnabled(value);
-        edtDuration.setEnabled(value);
+        edtDurHrs.setEnabled(value);
+        edtDurMins.setEnabled(value);
     }
 
     private void setSpinners() {
         try {
-            createClassroomViewModel.listSession.observe(getViewLifecycleOwner(), sessionModels -> {
+            createClassroomViewModel.listClass.observe(getViewLifecycleOwner(), sessionModels -> {
                 if (sessionModels != null && sessionModels.size() == 0) {
                     createClassroomViewModel.getSessionListOnline(SESSION_LIST);
                 }
 
-                if (spSessionText != null) {
+                if (spClassText != null) {
                     for (int a = 0; a < sessionModels.size(); a++) {
-                        SessionModel session = sessionModels.get(a);
-                        if (session.getValue().equals(spSessionText)) {
-                            spSession.setText(session.getText());
+                        ClassModel session = sessionModels.get(a);
+                        if (session.getValue().equals(spClassText)) {
+                            spClass.setText(session.getText());
                         }
                     }
                 }
 
-                sessionModelsList = sessionModels;
+                classModelsList = sessionModels;
                 sessionAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, sessionModels);
-                spSession.setAdapter(sessionAdapter);
+                spClass.setAdapter(sessionAdapter);
                 sessionAdapter.notifyDataSetChanged();
             });
 

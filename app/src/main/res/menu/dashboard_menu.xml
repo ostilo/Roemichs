@@ -9,6 +9,10 @@
         android:title="Change Password" />
 
     <item
+        android:id="@+id/create_test_menu"
+        android:title="Create Test" />
+
+    <item
         android:id="@+id/menu_logout"
         android:title="@string/logout" />
 </menu>

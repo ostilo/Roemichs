@@ -175,7 +175,6 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
             case R.id.floatSelectPix:
                     if(checkTrue()){
                         new GligarPicker().disableCamera(false).cameraDirect(false).requestCode(PICKER_REQUEST_CODE).withFragment(this).show();
-
                     }
                 break;
         }

@@ -10,6 +10,10 @@ import com.elkanah.roemichs.db.dao.SessionDao;
 import com.elkanah.roemichs.db.models.ClassType;
 import com.elkanah.roemichs.db.models.SessionModel;
 import com.elkanah.roemichs.db.models.StudentLoginEntity;
+import com.elkanah.roemichs.db.dao.ClassDao;
+import com.elkanah.roemichs.db.dao.SubjectDao;
+import com.elkanah.roemichs.db.models.ClassModel;
+import com.elkanah.roemichs.db.models.SubjectDaoModel;
 import com.elkanah.roemichs.db.repository.Constants;
 import com.elkanah.roemichs.network.HTTPMethods;
 import com.elkanah.roemichs.network.JsonResponse;
@@ -24,7 +28,8 @@ public class DataCentric {
   private static Application application;
   private static Executor ex;
   private static Gson gson;
-  private static SessionDao sessionDao;
+  private static ClassDao classDao;
+  private static SubjectDao subjectDao;
   private static final Object LOCK = new Object();
   private static NetworkUtils networkUtils;
   private String rawData;
@@ -55,22 +60,41 @@ public class DataCentric {
     roemichsDatabase = RoemichsDatabase.getInstance(app);
     sessionDao = roemichsDatabase.sessionDao();
     classTypeDao = roemichsDatabase.classTypeDao();
+    classDao = roemichsDatabase.sessionDao();
+    subjectDao = roemichsDatabase.subjectDao();
   }
 
-  public LiveData<List<SessionModel>> getSessionList() {
-    return sessionDao.getAll();
+  public LiveData<List<ClassModel>> getRoomClassList() {
+    return classDao.getAll();
   }
 
-  public void getSessionListOnline(String requestCode, MutableLiveData<JsonResponse> response) {
+  public void getClassListOnline(String requestCode, MutableLiveData<JsonResponse> response) {
     ex.execute(()->{
       JsonResponse jsonResponse = networkUtils.makeApiCall("", " ", HTTPMethods.POST.toString(), requestCode );
       response.postValue(jsonResponse);
     });
   }
 
-  public void insertSessionToDB(List<SessionModel> sessionModels) {
+  public void insertClassToDB(List<ClassModel> classModels) {
     ex.execute(() -> {
-      sessionDao.insertAll(sessionModels);
+      classDao.insertAll(classModels);
+    });
+  }
+
+    public LiveData<List<SubjectDaoModel>> getRoomSubjectList() {
+      return  subjectDao.getAll();
+    }
+
+  public void getSubjectOnline(String requestCode, MutableLiveData<JsonResponse> response) {
+    ex.execute(()->{
+      JsonResponse jsonResponse = networkUtils.makeApiCall("", " ", HTTPMethods.POST.toString(), requestCode );
+      response.postValue(jsonResponse);
+    });
+  }
+
+  public void insertSubjectToDB(List<SubjectDaoModel> subjectDaoModels) {
+    ex.execute(() -> {
+      subjectDao.insertAll(subjectDaoModels);
     });
   }
 
