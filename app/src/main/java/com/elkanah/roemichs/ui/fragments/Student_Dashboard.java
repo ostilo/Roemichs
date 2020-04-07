@@ -18,16 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import com.elkanah.roemichs.R;
+import com.elkanah.roemichs.ui.adapter.TeacherActionAdapter;
+import com.elkanah.roemichs.ui.adapter.TeacherContentAdapter;
 import com.elkanah.roemichs.ui.model.DotsIndicatorDeco;
 import com.elkanah.roemichs.ui.adapter.ActionAdapter;
 import com.elkanah.roemichs.ui.adapter.ContentAdapter;
 import com.elkanah.roemichs.ui.model.ActionModel;
 import com.elkanah.roemichs.ui.model.ContentModel;
 import com.elkanah.roemichs.ui.model.ScreenUtil;
-import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +42,8 @@ import java.util.Objects;
 public class Student_Dashboard extends Fragment implements View.OnClickListener {
     private RecyclerView actionRecycle;
     private RecyclerView contentRecycle;
-    private ContentAdapter adapter;
-    private MaterialCardView noteCard1;
+    private ContentAdapter studentAdapter;
+    private TeacherContentAdapter teacherAdapter;
     private CardView noteCard;
     private List<ImageView> dotsLinearLayout;
     private boolean mTablet;
@@ -52,9 +52,10 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
         // Required empty public constructor
     }
 
-    public static Student_Dashboard newInstance() {
+    public static Student_Dashboard newInstance(String user) {
         Student_Dashboard fragment = new Student_Dashboard();
         Bundle args = new Bundle();
+        args.putString("USER", user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,19 +75,36 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
         ImageView menu = view.findViewById(R.id.menu_select);
         menu.setOnClickListener(this);
         noteCard = view.findViewById(R.id.notice_card);
+        if (getArguments()!=null){
+            String presentUser = getArguments().getString("USER");
+            if(presentUser.equals("TEACHER")){
+                inflateRecycler("TEACHER");
+            }else if(presentUser.equals("STUDENT")){
+                inflateRecycler("STUDENT");
+            }
+        }
+        inflateRecycler("STUDENT");
+
+
         noteCard.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 NotificationSlider newInstance = NotificationSlider.newInstance();
-                newInstance.show(getChildFragmentManager(), "add_photo_dialog_fragment");
+                newInstance.show(getChildFragmentManager(), "notification_dialog_fragment");
                 return false;
             }
         });
-        inflateRecycler();
+
         return view;
     }
-    private void inflateRecycler() {
-        actionRecycle.setAdapter(new ActionAdapter(getContext(),getActionList()));
+    private void inflateRecycler(String presentUSER) {
+        if(presentUSER.equals("STUDENT")){
+            actionRecycle.setAdapter(new ActionAdapter(getContext(),getActionList()));
+            studentAdapter = new ContentAdapter(getContext(), getContents());
+        }else if (presentUSER.equals("TEACHER")){
+            actionRecycle.setAdapter(new TeacherActionAdapter(getContext(),getActionList()));
+            teacherAdapter = new TeacherContentAdapter(getContext(), getContents());
+        }
         actionRecycle.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
         actionRecycle.setNestedScrollingEnabled(false);
         actionRecycle.setHasFixedSize(true);
@@ -105,8 +123,7 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
                 }else {
                     contentRecycle.setLayoutManager(new GridLayoutManager(getContext(), 2));
                 }
-        adapter = new ContentAdapter(getContext(), getContents());
-        contentRecycle.setAdapter(adapter);
+                if (presentUSER.equals("STUDENT"))contentRecycle.setAdapter(studentAdapter); else contentRecycle.setAdapter(teacherAdapter);
     }
 
 
