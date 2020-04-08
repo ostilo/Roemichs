@@ -2,6 +2,8 @@ package com.elkanah.roemichs.ui.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -74,7 +76,6 @@ public class TestPage extends Fragment implements View.OnClickListener {
         answers = new ArrayList<>();
 //        inflateOptions();
         inflateQuestions();
-        startTimer(00, 01);
         loadQuestion(index);
         enableNav();
         return view;
@@ -151,25 +152,23 @@ public class TestPage extends Fragment implements View.OnClickListener {
     private void updateList(){
             if (test != null) {
                 ArrayList<OptiontModel> ans = answers;
-                if (ans != null) {
+                if (ans.size() != 0) {
                     for (OptiontModel item : ans) {
                         if (item.value.equals(test.value)) {
                                 answers.set(ans.indexOf(item), test);
                         }
                     }
+                    answers.add(test);
                 } else {
                     answers.add(test);
                 }
                 ans = null;
-            } else {
-                //Note that type = user answer and value = questinID
-                answers.add(new OptiontModel(questionID, ""));
             }
 
             test = null;
     }
 
-    private void startTimer(int hrs, int mins) {
+    private void startTimer(int hrs, int mins, int sec) {
         DecimalFormat formatter = new DecimalFormat("00");
 
         if(hrs > 0){
@@ -223,6 +222,25 @@ public class TestPage extends Fragment implements View.OnClickListener {
 
                 }
             }.start();
+        }else if(sec>0){
+            new CountDownTimer(sec * 1000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    tv_seconds.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
+                    tv_mts.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
+                    tv_hr.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
+                }
+                @Override
+                public void onFinish() {
+//                    timeBG_view.setBackgroundColor(getContext().getResources().getColor(R.color.error));
+                    tv_seconds.setText("00");
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("test_question", list);
+                    bundle.putParcelableArrayList("answers", answers);
+                    NavHostFragment.findNavController(getParentFragment()).navigate(R.id.testResult, bundle);
+
+                }
+            }.start();
         }
     }
 
@@ -245,5 +263,34 @@ public class TestPage extends Fragment implements View.OnClickListener {
             dialog.setCancelable(false);
         }
         enableNav();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        try {
+            outState.putInt("HOURS", Integer.valueOf(tv_hr.getText().toString()));
+            outState.putDouble("MINUTES", Integer.valueOf(tv_mts.getText().toString()));
+            outState.putDouble("SECONDS", Integer.valueOf(tv_seconds.getText().toString()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        try {
+            if (savedInstanceState!=null) {
+                startTimer(savedInstanceState.getInt("HOURS"), savedInstanceState.getInt("MINUTES"), savedInstanceState.getInt("SECONDS"));
+            }else {
+                startTimer(00, 01, 00);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

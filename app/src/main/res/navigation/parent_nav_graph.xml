@@ -174,7 +174,9 @@
         tools:layout="@layout/fragment_test" >
         <action
             android:id="@+id/action_testFragment_to_testPage"
-            app:destination="@id/testPage" />
+            app:destination="@id/testPage"
+            app:popUpTo="@id/testFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/testPage"

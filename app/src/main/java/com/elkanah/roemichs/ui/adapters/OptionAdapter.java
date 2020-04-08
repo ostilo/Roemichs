@@ -98,7 +98,7 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
                         int position = getAdapterPosition();
 //                        String val = modelList.get(getAdapterPosition()).value;
                         if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick( position);
+                            listener.onItemClick( position+1);
                             notifyItemChanged(selectedPos);
                             selectedPos =getAdapterPosition();
                             notifyItemChanged(selectedPos);
