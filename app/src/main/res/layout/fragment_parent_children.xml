@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/parent_frame"
-
     >
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout_pc"
@@ -47,11 +46,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/parent_children_recycler"
             android:layout_width="match_parent"
+            android:paddingBottom="80dp"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
             tools:listitem="@layout/parent_children_list_card"
             />
-
     </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

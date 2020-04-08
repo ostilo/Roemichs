@@ -43,14 +43,6 @@ public class AssignmentImagesAdapter extends RecyclerView.Adapter<AssignmentImag
     public void onBindViewHolder(@NonNull AssignmentImagesAdapter.ViewHolder holder, int position) {
   holder.tvImageStatus.setText(imageData.get(position).getItemImageStatus());
   holder.imgAssImage.setImageResource(imageData.get(position).getImages());
-        Random r = new Random();
-        int i1 = r.nextInt(3- 0) + 0;
-        GradientDrawable draw = new GradientDrawable();
-        draw.setShape(GradientDrawable.OVAL);
-        draw.setColor(Color.parseColor(newColors.get(i1)));
-        holder.tvImageStatus.setBackground(draw);
-
-
 
     }
 

@@ -1,5 +1,6 @@
 package com.elkanah.roemichs.ui.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +38,7 @@ public class NoteDetailsFragment extends Fragment implements View.OnClickListene
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_note_details, container, false);
         CollapsingToolbarLayout collapsingToolbarLayout = v.findViewById(R.id.collapsing_toolbar_d);
-        //collapsingToolbarLayout.setTitle("The Mighty Hand of God");
+        collapsingToolbarLayout.setTitle("My Note");
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
         TextView tvTeachersName = v.findViewById(R.id.textView16);
         TextView tvNoteTopic = v.findViewById(R.id.textView17);
@@ -46,11 +47,18 @@ public class NoteDetailsFragment extends Fragment implements View.OnClickListene
 
         Toolbar toolbar = v.findViewById(R.id.withdraw_toolbar_d);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
-            toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+            toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+            toolbar.setTitle("My Note");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
 
-        CardView cardView = v.findViewById(R.id.tvGotoAssignment);
-        cardView.setOnClickListener(this);
 
         if(getArguments() != null){
             NoteModel model = getArguments().getParcelable("ade");
@@ -59,7 +67,6 @@ public class NoteDetailsFragment extends Fragment implements View.OnClickListene
                 tvNoteTopic.setText(model.getNoteTitle());
                 tvNoteDate.setText(model.getWeekNumber());
                 tvNoteBody.setText(model.getNoteBody());
-
             }
         }
         return v;
@@ -67,6 +74,6 @@ public class NoteDetailsFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        Navigation.findNavController(v).navigate(R.id.action_noteDetailsFragment_to_studentAssignmentFragment);
+        //Navigation.findNavController(v).navigate(R.id.action_noteDetailsFragment_to_studentAssignmentFragment);
     }
 }

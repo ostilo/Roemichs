@@ -39,7 +39,7 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
     private Context context;
     private AutoCompleteTextView spClass, spWeek;
     private ConstraintLayout constraintLayout;
-    private EditText edtSubject, edtTopic, edtDuration;
+    private EditText edtSubject, edtTopic, edtDurHrs, edtDurMins;
     private ArrayAdapter<ClassModel> sessionAdapter;
     public static List<ClassModel> classModelsList;
     public static String spClassText;
@@ -75,7 +75,8 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
         constraintLayout = view.findViewById(R.id.constrCrtCls);
         edtSubject = view.findViewById(R.id.txtSubjectCrtCls);
         edtTopic = view.findViewById(R.id.txtTopic_crtCls);
-        edtDuration = view.findViewById(R.id.txtDuration_crtCls);
+        edtDurHrs = view.findViewById(R.id.txtDurHrs_crtCls);
+        edtDurMins = view.findViewById(R.id.txtDurMins_crtCls);
         loading = view.findViewById(R.id.loading_crtCls);
     }
 
@@ -141,7 +142,8 @@ public class CreateClassroomFragment extends Fragment implements View.OnClickLis
         spWeek.setEnabled(value);
         edtSubject.setEnabled(value);
         edtTopic.setEnabled(value);
-        edtDuration.setEnabled(value);
+        edtDurHrs.setEnabled(value);
+        edtDurMins.setEnabled(value);
     }
 
     private void setSpinners() {

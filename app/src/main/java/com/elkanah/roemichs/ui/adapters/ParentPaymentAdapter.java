@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,20 +43,14 @@ public class ParentPaymentAdapter extends RecyclerView.Adapter<ParentPaymentAdap
     public void onBindViewHolder(@NonNull ParentPaymentAdapter.ViewHolder holder, int position) {
         holder.tvDescrip.setText(modelList.get(position).getDescription());
         holder.tvPaymentAmt.setText(modelList.get(position).getAmount());
-        holder.tvDescripShort.setText(modelList.get(position).getDescription().substring(0,1));
         if(modelList.get(position).getStatus() == 1){
-            holder.tvErrprChecker.setBackground(context.getResources().getDrawable(R.drawable.parent_payment_succes_bg));
+            holder.tvDescripShort.setImageResource(R.drawable.ic_check);
             holder.btnRetry.setVisibility(View.INVISIBLE);
-        }else if(modelList.get(position).getStatus() == 1){
-            holder.tvErrprChecker.setBackground(context.getResources().getDrawable(R.drawable.payment_error_bg));
+        }else if(modelList.get(position).getStatus() == 0){
             holder.btnRetry.setVisibility(View.VISIBLE);
+            holder.tvDescripShort.setImageResource(R.drawable.ic_error_black_24dp);
         }
-        Random r = new Random();
-        int i1 = r.nextInt(3- 0) + 0;
-        GradientDrawable draw = new GradientDrawable();
-        draw.setShape(GradientDrawable.OVAL);
-        draw.setColor(Color.parseColor(newColors.get(i1)));
-        holder.tvDescripShort.setBackground(draw);
+
 
 
 
@@ -68,21 +63,19 @@ public class ParentPaymentAdapter extends RecyclerView.Adapter<ParentPaymentAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDescripShort;
+        ImageButton tvDescripShort;
         TextView tvDescrip;
         TextView tvPaymentAmt;
-        TextView tvErrprChecker;
         Button btnRetry;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             btnRetry = itemView.findViewById(R.id.btnPaymentRetry);
             tvDescripShort = itemView.findViewById(R.id.RRtextView4);
             tvDescrip = itemView.findViewById(R.id.RRtextView);
             tvPaymentAmt = itemView.findViewById(R.id.textView38);
-            tvErrprChecker = itemView.findViewById(R.id.textView39);
+
 
         }
     }

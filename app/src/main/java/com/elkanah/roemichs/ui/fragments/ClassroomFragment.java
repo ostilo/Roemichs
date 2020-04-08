@@ -53,6 +53,7 @@ import static com.elkanah.roemichs.db.repository.Constants.CHAT_USER_KEY;
 import static com.elkanah.roemichs.db.repository.Constants.CHAT_WITH_KEY;
 import static com.elkanah.roemichs.db.repository.Constants.IS_FIRST_TEACHER_MESSAGE;
 import static com.elkanah.roemichs.db.repository.Constants.JOIN_BEFORE;
+import static com.elkanah.roemichs.utils.CommonUtils.*;
 import static com.elkanah.roemichs.utils.CommonUtils.getCurrentDate;
 import static com.elkanah.roemichs.utils.CommonUtils.getCurrentTime;
 import static com.elkanah.roemichs.db.repository.Constants.FIREBASE_URL;
@@ -325,7 +326,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
             textView.setBackgroundResource(R.drawable.chat_msg_bg);
             if (date.equals(ChatDetails.date)) {
                 txtDateTime.setText("Today " + time);
-            } else if (date.equals(CommonUtils.getYesterdayDate())) {
+            } else if (date.equals(getYesterdayDate())) {
                 txtDateTime.setText("Yesterday " + time);
             } else {
                 txtDateTime.setText(date + " " + time);
@@ -347,7 +348,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         } else if (type == 3) {
             if (date.equals(ChatDetails.date)) {
                 txtDateTime.setText(userName + " join class : Today " + time);
-            } else if (date.equals(CommonUtils.getYesterdayDate())) {
+            } else if (date.equals(getYesterdayDate())) {
                 txtDateTime.setText(userName + " join class : Yesterday " + time);
             } else {
                 txtDateTime.setText(userName + " join class : " + date + " " + time);
@@ -364,7 +365,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         } else if (type == 4) {
             if (date.equals(ChatDetails.date)) {
                 txtDateTime.setText(userName + " left the class : Today " + time);
-            } else if (date.equals(CommonUtils.getYesterdayDate())) {
+            } else if (date.equals(getYesterdayDate())) {
                 txtDateTime.setText(userName + " left the class : Yesterday " + time);
             } else {
                 txtDateTime.setText(userName + " left the class : " + date + " " + time);
@@ -381,7 +382,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         }else if(type==5){
             if (date.equals(ChatDetails.date)) {
                 txtDateTime.setText("class started at : Today " + time);
-            } else if (date.equals(CommonUtils.getYesterdayDate())) {
+            } else if (date.equals(getYesterdayDate())) {
                 txtDateTime.setText("class started at : Yesterday " + time);
             } else {
                 txtDateTime.setText("class started at : " + date + " " + time);
@@ -403,7 +404,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.sendButton:
                 String messageText = messageArea.getText().toString();
-                if (!messageText.equals("")) {
+                if (!stringIsEmpty(messageText)) {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
                     map.put("user", ChatDetails.username);

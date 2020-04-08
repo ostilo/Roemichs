@@ -70,7 +70,7 @@ public class CommonUtils {
             return true;
         }else if(str.isEmpty()) {
             return true;
-        }else if(str.trim().equals("")){
+        }else if(TextUtils.isEmpty(str)){
             return true;
         }else {
             return false;
