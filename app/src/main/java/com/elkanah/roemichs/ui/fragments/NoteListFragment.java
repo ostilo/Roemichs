@@ -1,5 +1,6 @@
 package com.elkanah.roemichs.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ public class NoteListFragment extends Fragment {
     private SearchView searchView;
     private NoteAdapter adapter;
     FloatingActionButton fabAddNote;
+    Context context;
 
     public NoteListFragment() {
         // Required empty public constructor

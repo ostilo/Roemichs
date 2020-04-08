@@ -41,17 +41,7 @@
             <include layout="@layout/student_submit_assignment_card" />
 
         </ScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatSelectPix"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            app:tint="@android:color/white"
-            android:src="@android:drawable/ic_input_add"
-            app:layout_anchor="@id/app_bar_layout_sa"
-            app:layout_anchorGravity="bottom|end" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
