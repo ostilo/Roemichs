@@ -121,6 +121,9 @@
         <action
             android:id="@+id/action_studDashboard_toCreateAssignment"
             app:destination="@+id/CreateAssignment"/>
+        <action
+            android:id="@+id/action_studDashboard_toSubmitAssignment"
+            app:destination="@+id/studentSubmitAssignmentFragment"/>
     </fragment>
 
     <fragment android:id="@+id/CreateAssignment"

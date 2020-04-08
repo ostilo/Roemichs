@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -54,6 +55,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" >
             <include layout="@layout/student_submit_assignment_card"/>
         </ScrollView>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatSelectPix"
             android:layout_width="wrap_content"

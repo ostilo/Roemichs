@@ -212,6 +212,7 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
         requestStoragePermission();
         return  true;
     }
+
     private void loadAlertDailog(String title, String positive, String negative){
         AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
         dialog.setTitle(title);
@@ -234,6 +235,7 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
         dialog.setCancelable(false);
         dialog.show();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -253,7 +255,8 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
 
         if(resultCode == Activity.RESULT_OK && requestCode == PICKFILE_RESULT_CODE && data != null) {
             //FilePath is your file as a string
-            edtDocUrl.setText(data.getData().getPath());
+            String path=data.getData().getPath();
+            edtDocUrl.setText(path);
         }
     }
 

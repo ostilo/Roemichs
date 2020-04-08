@@ -59,15 +59,15 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionView
                 iconImage = itemView.findViewById(R.id.actionImage);
                 actionText = itemView.findViewById(R.id.actionText);
 
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(actionModelList.get(position).text.equals("Note")){
-                            Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
-                        }
-                        if(actionModelList.get(position).text.equals("Assignment")){
-                            Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
-                        }
+                itemView.setOnClickListener(v -> {
+                    if(actionModelList.get(position).text.equals("Note")){
+                        Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
+                    }
+                    if(actionModelList.get(position).text.equals("Assignment")){
+                        Navigation.findNavController(itemView).navigate(R.id.action_studDashboard_toSubmitAssignment);
+                    }
+                    if(actionModelList.get(position).text.equals("Exam")){
+                        Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_testFragment);
                     }
                 });
 
