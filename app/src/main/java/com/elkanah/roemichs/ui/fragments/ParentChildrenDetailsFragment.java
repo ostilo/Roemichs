@@ -1,8 +1,9 @@
-package com.elkanah.roemichs.ui.adapters;
+package com.elkanah.roemichs.ui.fragments;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.synnapps.carouselview.ImageListener;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ParentChildrenDetailsFragment extends Fragment {
+public class ParentChildrenDetailsFragment extends Fragment implements View.OnClickListener {
 
     private CarouselView carouselView;
 
@@ -41,10 +42,12 @@ public class ParentChildrenDetailsFragment extends Fragment {
         TextView tvStdAcct = v.findViewById(R.id.txtDateOfBirth);
         TextView tvStdCT = v.findViewById(R.id.topj);
         TextView tvStdRrk = v.findViewById(R.id.textView34);
+        ImageView imageView = v.findViewById(R.id.imageView2);
+        imageView.setOnClickListener(this);
         inflateCarousel();
 
         if(getArguments() != null){
-           ParentModel model = getArguments().getParcelable("ass");
+           ParentModel model = getArguments().getParcelable("sp");
             if(model != null){
                 tvStdFName.setText(model.getModelList().getFirst_name());
                 tvStdSName.setText(model.getModelList().getSurname());
@@ -65,5 +68,10 @@ public class ParentChildrenDetailsFragment extends Fragment {
             }
         };
         carouselView.setImageListener(imageListener);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Navigation.findNavController(v).navigateUp();
     }
 }

@@ -18,9 +18,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +34,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +64,7 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
     private Button btnViewSubmitted;
     private int PICKER_REQUEST_CODE = 30;
     private Button btnSubmit;
-    CoordinatorLayout coordinatorLayout;
+    ConstraintLayout coordinatorLayout;
     public int imgCount;
 
     public RecyclerView recyclerView;
@@ -104,19 +107,24 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_student_submit_assignment, container, false);
         coordinatorLayout = v.findViewById(R.id.parent_frame);
-
-
-        CollapsingToolbarLayout collapsingToolbarLayout = v.findViewById(R.id.collapsing_toolbar_sa);
-        //collapsingToolbarLayout.setTitle("The Mighty Hand of God");
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
         Toolbar toolbar = v.findViewById(R.id.withdraw_toolbar_sa);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
+
         toolbar.setTitle("Submit Assignment");
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
+
         btnViewSubmitted = v.findViewById(R.id.button3);
         btnSubmit = v.findViewById(R.id.button4);
-        FloatingActionButton floatChooseImage = v.findViewById(R.id.floatSelectPix);
+        ImageButton floatChooseImage = v.findViewById(R.id.floatSelectPix);
         floatChooseImage.setOnClickListener(this);
         //imageView = v.findViewById(R.id.imageView3);
         setupUI(v.findViewById(R.id.parent_frame));

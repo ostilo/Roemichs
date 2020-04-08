@@ -22,6 +22,9 @@
     <string name="audio_class">Audio Class</string>
     <string name="video_class">Video Class</string>
     <string name="stop_class">Stop Class</string>
+    <string name="ass_qu">The image below is a description of the respective questions.<b>Click to enlarge</b> </string>
+    <string name="add_image">------OR------</string>
+    <string name="username_keystore">Username</string>
     <string name="questions">QUESTIONS</string>
     <string name="minutes">MINUTES</string>
     <string name="instructions">Instructions</string>
@@ -37,6 +40,7 @@
     <string name="correct">CORRECT</string>
     <string name="unanswered">UNANSWERED</string>
     <string name="view_solution">View Solution</string>
+    <string name="progress_msg"><b>Your subjects are been fetched, Thanks.</b></string>
     <string name="upload_doc">Upload</string>
     <string name="doc_demo_url">sample\\folder\\mydoc.ext</string>
 </resources>

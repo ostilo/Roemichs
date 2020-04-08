@@ -18,6 +18,9 @@
             app:popEnterAnim="@anim/up_to_down"
             app:exitAnim="@anim/slide_out_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_subjectFragment2_to_studentAssignmentFragment"
+            app:destination="@id/studentAssignmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
@@ -122,8 +125,8 @@
             android:id="@+id/action_studDashboard_toCreateAssignment"
             app:destination="@+id/CreateAssignment"/>
         <action
-            android:id="@+id/action_studDashboard_toSubmitAssignment"
-            app:destination="@+id/studentSubmitAssignmentFragment"/>
+            android:id="@+id/action_student_Dashboard_to_studentAssignmentFragment"
+            app:destination="@id/studentAssignmentFragment" />
     </fragment>
 
     <fragment android:id="@+id/CreateAssignment"
