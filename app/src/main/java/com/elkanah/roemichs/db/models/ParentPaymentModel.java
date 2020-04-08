@@ -87,9 +87,9 @@ public class ParentPaymentModel implements Parcelable {
         List<ParentPaymentModel> models = new ArrayList<>();
         models.add(new ParentPaymentModel("2/12/20","School Fee","\u20a6 300,000",1));
         models.add(new ParentPaymentModel("1/1/20","Excursion Fee","\u20a6 30,000",0));
-        models.add(new ParentPaymentModel("3/2/20","Medical Fee","\u20a6 200,000",0));
+        models.add(new ParentPaymentModel("3/2/20","Medical Fee","\u20a6 200,000",1));
 //        models.add(new ParentPaymentModel("5/2/20","School","\u20a6 100,000",1));
-//        models.add(new ParentPaymentModel("8/9/20","Charity","\u20a6 800,000",1));
+        models.add(new ParentPaymentModel("8/9/20","Charity","\u20a6 800,000",1));
         models.add(new ParentPaymentModel("4/3/20","Tax","\u20a6 100,000",0));
         return models;
     }

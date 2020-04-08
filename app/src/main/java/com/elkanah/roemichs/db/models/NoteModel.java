@@ -63,6 +63,13 @@ public class NoteModel implements Parcelable {
         noteModels.add(new NoteModel("Organic Matters","The arc of a rectangle", "Mr. Paul", "Octv","Getting the Rectangle"));
         noteModels.add(new NoteModel("Energy","The arc of a rectangle", "Mr. Paul", "Sep","Getting the Rectangle"));
         noteModels.add(new NoteModel("Polygon","The arc of a rectangle", "Mr. Paul", "Dec","Getting the Rectangle"));
+
+        noteModels.add(new NoteModel("Arc","The arc of a rectangle", "Mr. Paul", "Feb","Getting the Rectangle"));
+        noteModels.add(new NoteModel("Vowels","The arc of a rectangle", "Mr. Paul", "April","Getting the Rectangle"));
+        noteModels.add(new NoteModel("Organic Matters","The arc of a rectangle", "Mr. Paul", "Octv","Getting the Rectangle"));
+        noteModels.add(new NoteModel("Energy","The arc of a rectangle", "Mr. Paul", "Sep","Getting the Rectangle"));
+        noteModels.add(new NoteModel("Polygon","The arc of a rectangle", "Mr. Paul", "Dec","Getting the Rectangle"));
+
         return  noteModels;
 
     }

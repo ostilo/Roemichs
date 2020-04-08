@@ -130,12 +130,12 @@ public class AssignmentResponseImageData implements Parcelable {
 
     public static List<AssignmentResponseImageData> getAssignmentImages(){
         List<AssignmentResponseImageData> assignmentModels = new ArrayList<>();
-        assignmentModels.add(new AssignmentResponseImageData("Q2", R.drawable.dashboardbg));
-        assignmentModels.add(new AssignmentResponseImageData("Q1", R.drawable.dashboaard));
-        assignmentModels.add(new AssignmentResponseImageData("Q3", R.drawable.dashboardbg));
-        assignmentModels.add(new AssignmentResponseImageData("Q4", R.drawable.dashboaard));
-        assignmentModels.add(new AssignmentResponseImageData("Q1", R.drawable.dashboardbg));
-        assignmentModels.add(new AssignmentResponseImageData("Q2", R.drawable.dashboaard));
+        assignmentModels.add(new AssignmentResponseImageData("This image is for Question two.", R.drawable.dashboardbg));
+        assignmentModels.add(new AssignmentResponseImageData("This image is for Question one.", R.drawable.dashboaard));
+        assignmentModels.add(new AssignmentResponseImageData("This image is for Question two.", R.drawable.dashboardbg));
+        assignmentModels.add(new AssignmentResponseImageData("This image is for Question four.", R.drawable.dashboaard));
+        assignmentModels.add(new AssignmentResponseImageData("This image is for Question five.", R.drawable.dashboardbg));
+        assignmentModels.add(new AssignmentResponseImageData("This image is for Question six.", R.drawable.dashboaard));
         return assignmentModels;
     }
 }

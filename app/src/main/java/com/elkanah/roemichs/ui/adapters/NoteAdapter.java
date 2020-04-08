@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.db.models.NoteModel;
 import com.elkanah.roemichs.db.models.SubjectModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,9 +27,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private List<NoteModel> models = NoteModel.getNotes();
     private LayoutInflater inflater;
     private List<String> newColors = SubjectModel.getColors();
+    private List<NoteModel> subjectFull;
     public NoteAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+        subjectFull = new ArrayList<>(models);
     }
 
     @NonNull
@@ -37,6 +41,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         return new ViewHolder(v);
     }
 
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
 
     @Override
     public void onBindViewHolder(@NonNull NoteAdapter.ViewHolder holder, int position) {
@@ -53,10 +61,55 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     }
 
+
+
     @Override
     public int getItemCount() {
         return models == null ? 0 : models.size();
     }
+
+    public Filter getFilter() {
+        return  filterSubject;
+    }
+
+    private Filter filterSubject  = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<NoteModel> filterList = new ArrayList<>();
+            if(constraint == null || constraint.length() == 0){
+                filterList.addAll(subjectFull);
+
+            }else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                try {if(filterPattern != null){
+                    for(NoteModel sub : subjectFull){
+                        if(sub.getNoteTitle().toLowerCase().contains(filterPattern)){
+                            filterList.add(sub);
+                        }
+                    }
+                }
+
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filterList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            models.clear();
+            models.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
+
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNoteTitle;

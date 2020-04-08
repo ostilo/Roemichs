@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elkanah.roemichs.R;
+import com.elkanah.roemichs.ui.adapters.SubjectAdapter;
 import com.elkanah.roemichs.ui.model.ActionModel;
 
 import java.util.List;
@@ -58,14 +59,15 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionView
                 super(itemView);
                 iconImage = itemView.findViewById(R.id.actionImage);
                 actionText = itemView.findViewById(R.id.actionText);
-
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(actionModelList.get(position).text.equals("Note")){
+                            ContentAdapter.me = 4;
                             Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
                         }
                         if(actionModelList.get(position).text.equals("Assignment")){
+                            ContentAdapter.me = 3;
                             Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
                         }
                     }

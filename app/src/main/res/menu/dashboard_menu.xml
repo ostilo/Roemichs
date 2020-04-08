@@ -4,6 +4,9 @@
     <item
         android:id="@+id/create_assignment"
         android:title="Create Assignment" />
+    <item
+        android:id="@+id/change_pass"
+        android:title="Change Password" />
 
     <item
         android:id="@+id/create_test_menu"
