@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,6 @@ import com.elkanah.roemichs.ui.adapter.PagingAdapter;
 import com.elkanah.roemichs.ui.adapters.OptionAdapter;
 import com.elkanah.roemichs.ui.model.OptiontModel;
 import com.elkanah.roemichs.ui.model.TestQuestionModel;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -43,9 +40,10 @@ public class TestPage extends Fragment implements View.OnClickListener {
     private OptiontModel test;
     private String questionID;
     private RecyclerView questNumber;
-    private TextView tv_seconds;
+    private TextView tv_time;
     private TextView tv_mts;
     private TextView tv_hr;
+    private CountDownTimer countDownTimer;
 //    private View timeBG_view;
 
 
@@ -63,10 +61,7 @@ public class TestPage extends Fragment implements View.OnClickListener {
         questNumber = view.findViewById(R.id.paging_rcly);
         recyclerView = view.findViewById(R.id.rcyl_testOptions);
         testQuestion = view.findViewById(R.id.tv_testQuestion);
-        tv_hr = view.findViewById(R.id.tv_hr);
-        tv_mts = view.findViewById(R.id.tv_minutes);
-        tv_seconds = view.findViewById(R.id.tv_seconds);
-//        timeBG_view = view.findViewById(R.id.timeBG_view);
+        tv_time = view.findViewById(R.id.tv_time);
         next = view.findViewById(R.id.tv_next);
         previous = view.findViewById(R.id.tv_previous);
         finish = view.findViewById(R.id.tv_fiinish);
@@ -94,12 +89,6 @@ public class TestPage extends Fragment implements View.OnClickListener {
         adapter.setOnItemClickListener(position -> {
             //Note that type = user answer and value = questinID
             test = new OptiontModel(questionID, Integer.toString(position));
-
-//                if (answers.contains(test)) {
-//                    Log.i("exist", test.value);
-//                } else {
-//                    answers.add(test);
-//                }
         });
         PagingAdapter pageAdapter = new PagingAdapter(getContext(), 5);
         pageAdapter.setOnItemClickListener(position -> {
@@ -130,16 +119,6 @@ public class TestPage extends Fragment implements View.OnClickListener {
     }
 
 
-    private void inflateOptions() {
-        testQuestion.setText("WHat is noun? this id the assign Lorem ipsum dolor sit amet, Quisque nisi arcu, ullamcorper sedthis id the assign Lorem ipsum dolor sit amet, Quisque nisi arcu, ullamcorper sedthis id the assign Lorem ipsum dolor sit amet, Quisque nisi arcu, ullamcorper sed");
-        recyclerView.setAdapter(new OptionAdapter(getContext(), getTest()));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false));
-        if(recyclerView.getAdapter()!=null) {
-            recyclerView.getAdapter().notifyDataSetChanged();
-//            questNumber.getAdapter().notifyDataSetChanged();
-        }
-    }
-
     private ArrayList<OptiontModel> getTest() {
         ArrayList<OptiontModel> option = new ArrayList<>();
         option.add(new OptiontModel( "Name", "TEXT"));
@@ -169,76 +148,22 @@ public class TestPage extends Fragment implements View.OnClickListener {
     }
 
     private void startTimer(int hrs, int mins, int sec) {
-        DecimalFormat formatter = new DecimalFormat("00");
-
+        DecimalFormat f = new DecimalFormat("00");
+        int time = ( hrs ==0? 0 : hrs * 60 * 60 * 1000) + ( mins ==0? 0 : mins * 60 * 1000) + ( sec ==0? 0 : sec * 1000);
         if(hrs > 0){
-            new CountDownTimer(hrs * 60 * 60 *1000, 1000) {
+            new CountDownTimer(time, 1000) {
                 public void onTick(long millisUntilFinished) {
-                    tv_seconds.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
-                    tv_mts.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
-                    tv_hr.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
+                    long seconds = (millisUntilFinished / 1000) % 60;
+                    long minutes =((millisUntilFinished / 1000) / 60) % 60;
+                    long hours = ((millisUntilFinished / 1000) / 3600);
+                    tv_time.setText(f.format(hours) + ":" + f.format(minutes) + ":" + f.format(seconds));
                 }
                 public void onFinish() {
-                    if(mins > 0 ){
-                        new CountDownTimer(mins * 10000, 1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                                tv_seconds.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
-                                tv_mts.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
-                                tv_hr.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
-                            }
-                            @Override
-                            public void onFinish() {
-//                                timeBG_view.setBackgroundColor(getContext().getResources().getColor(R.color.error));
-                                tv_seconds.setText("00");
+                                tv_time.setText("00:00:00");
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelableArrayList("test_question", list);
                                 bundle.putParcelableArrayList("answers", answers);
                                 NavHostFragment.findNavController(getParentFragment()).navigate(R.id.testResult, bundle);
-                            }
-                        }.start();
-                    }else {
-//                        timeBG_view.setBackgroundColor(getContext().getResources().getColor(R.color.error));
-                        tv_seconds.setText("00");
-                    }
-                }
-            }.start();
-        }else if(mins>0){
-            new CountDownTimer(mins * 60 * 1000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    tv_seconds.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
-                    tv_mts.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
-                    tv_hr.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
-                }
-                @Override
-                public void onFinish() {
-//                    timeBG_view.setBackgroundColor(getContext().getResources().getColor(R.color.error));
-                    tv_seconds.setText("00");
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList("test_question", list);
-                    bundle.putParcelableArrayList("answers", answers);
-                    NavHostFragment.findNavController(getParentFragment()).navigate(R.id.testResult, bundle);
-
-                }
-            }.start();
-        }else if(sec>0){
-            new CountDownTimer(sec * 1000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    tv_seconds.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
-                    tv_mts.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
-                    tv_hr.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
-                }
-                @Override
-                public void onFinish() {
-//                    timeBG_view.setBackgroundColor(getContext().getResources().getColor(R.color.error));
-                    tv_seconds.setText("00");
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList("test_question", list);
-                    bundle.putParcelableArrayList("answers", answers);
-                    NavHostFragment.findNavController(getParentFragment()).navigate(R.id.testResult, bundle);
-
                 }
             }.start();
         }
@@ -269,9 +194,8 @@ public class TestPage extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         try {
-            outState.putInt("HOURS", Integer.valueOf(tv_hr.getText().toString()));
-            outState.putDouble("MINUTES", Integer.valueOf(tv_mts.getText().toString()));
-            outState.putDouble("SECONDS", Integer.valueOf(tv_seconds.getText().toString()));
+            outState.putString("TIME", tv_time.getText().toString());
+            countDownTimer.cancel();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -283,9 +207,13 @@ public class TestPage extends Fragment implements View.OnClickListener {
         super.onViewStateRestored(savedInstanceState);
         try {
             if (savedInstanceState!=null) {
-                startTimer(savedInstanceState.getInt("HOURS"), savedInstanceState.getInt("MINUTES"), savedInstanceState.getInt("SECONDS"));
+                String[] time =  savedInstanceState.getString("TIME").split(":");
+                int hr = Integer.parseInt(time[0]);
+                int mts = Integer.parseInt(time[1]);
+                int secs = Integer.parseInt(time[2]);
+                startTimer(hr, mts, secs);
             }else {
-                startTimer(00, 01, 00);
+                startTimer(01, 03, 00);
 
             }
         }catch (Exception e){

@@ -67,9 +67,9 @@ import java.util.List;
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(modelList.get(getAdapterPosition()).text.equals("Subject")){
+                        if(modelList.get(getAdapterPosition()).text.equals("Subject")) {
                             me = 1;
-                        if(modelList.get(getAdapterPosition()).text.equals("Test")){
+                        }else if(modelList.get(getAdapterPosition()).text.equals("Test")){
                             Navigation.findNavController(v).navigate(R.id.testFragment);
                         } else if(modelList.get(getAdapterPosition()).text.equals("Subject")){
                             Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
@@ -92,7 +92,6 @@ import java.util.List;
                             //Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_profileFragment, bundle);
                         }
                     }
-                }
 
                 });
         }
