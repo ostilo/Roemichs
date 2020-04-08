@@ -61,8 +61,7 @@ public class ConfirmationDialog extends DialogFragment implements View.OnClickLi
         if (getArguments()!=null){
             text.setText(getArguments().getString("message"));
 
-           // noticeIcon.setImageResource(R.drawable.conversation);
-
+            noticeIcon.setImageResource(R.drawable.conversation);
             questions = getArguments().getParcelableArrayList("test_question");
             answers = getArguments().getParcelableArrayList("answers");
         }
