@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <!-- TODO: Update blank fragment layout -->
 
         <TextView
@@ -65,37 +65,35 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="50dp"
         android:enabled="false"
         android:text="view submitted"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView28"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/edtDocUrl"
+        app:layout_constraintTop_toBottomOf="@+id/edtDocUrl" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="submit"
-            app:layout_constraintBottom_toBottomOf="@+id/button3"
-            app:layout_constraintEnd_toEndOf="@+id/textView29"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/button3"
-            app:layout_constraintTop_toTopOf="@+id/button3"
-            app:layout_constraintVertical_bias="0.0" />
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:text="submit"
+        app:layout_constraintBottom_toBottomOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="@+id/btnUploadDocSubmtAsgmt"
+        app:layout_constraintStart_toStartOf="@+id/btnUploadDocSubmtAsgmt"
+        app:layout_constraintTop_toTopOf="@+id/button3"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="Clear Selected Image"
-            android:textColor="@color/colorAccent"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@+id/addImageScrollView"
-            app:layout_constraintTop_toBottomOf="@+id/addImageScrollView" />
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Clear Selected Image"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/addImageScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/addImageScrollView" />
 
         <TextView
             android:id="@+id/tv_imagesCount"
@@ -124,6 +122,31 @@
             app:layout_constraintEnd_toEndOf="@+id/addImageScrollView"
             app:layout_constraintTop_toTopOf="@+id/tv_imagesCount" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/edtDocUrl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="3"
+        android:maxLines="1"
+        android:inputType="textUri"
+        android:enabled="false"
+        android:hint="@string/doc_demo_url"
+        app:layout_constraintEnd_toStartOf="@+id/btnUploadDocSubmtAsgmt"
+        app:layout_constraintStart_toStartOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+    <Button
+        android:id="@+id/btnUploadDocSubmtAsgmt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/upload_doc"
+        app:layout_constraintBottom_toBottomOf="@+id/edtDocUrl"
+        app:layout_constraintEnd_toEndOf="@+id/textView29"
+        app:layout_constraintTop_toTopOf="@+id/edtDocUrl" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

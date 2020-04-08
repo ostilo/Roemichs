@@ -3,6 +3,7 @@ package com.elkanah.roemichs.ui.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -56,6 +57,7 @@ import java.util.Objects;
 public class StudentSubmitAssignmentFragment extends Fragment implements View.OnClickListener {
     public static final int READ_PERMISSION=2;
     public static final int WRITE_PERMISSION=3;
+    private static final int PICKFILE_RESULT_CODE =4 ;
     private Button btnViewSubmitted;
     private int PICKER_REQUEST_CODE = 30;
     private Button btnSubmit;
@@ -67,6 +69,8 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
     private View v;
     private StudentSelectedImageAssgnAdapter imageAdapter;
     private ArrayList<String> newMe;
+    private Button btnUploadDoc;
+    private EditText edtDocUrl;
 
 
     public StudentSubmitAssignmentFragment() {
@@ -122,6 +126,11 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
         btnSubmit.setOnClickListener(this);
         btnViewSubmitted.setOnClickListener(this);
 
+        btnUploadDoc = v.findViewById(R.id.btnUploadDocSubmtAsgmt);
+        btnUploadDoc.setOnClickListener(this);
+
+        edtDocUrl = v.findViewById(R.id.edtDocUrl);
+
         return v;
     }
 
@@ -168,6 +177,15 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
                     if(checkTrue()){
                         new GligarPicker().disableCamera(false).cameraDirect(false).requestCode(PICKER_REQUEST_CODE).withFragment(this).show();
                     }
+                break;
+            case R.id.btnUploadDocSubmtAsgmt:
+                Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
+                fileintent.setType("*/*");
+                try {
+                    startActivityForResult(fileintent, PICKFILE_RESULT_CODE);
+                } catch (ActivityNotFoundException e) {
+                    Log.e("tag", "No activity can handle picking a file. Showing alternatives.");
+                }
                 break;
         }
     }
@@ -229,14 +247,15 @@ public class StudentSubmitAssignmentFragment extends Fragment implements View.On
                  }
                  setAdapter(newMe);
              }
-
                  imgCount = pathList.length;
                  checkImageCount();
-
-
-
         }
+
+        if(resultCode == Activity.RESULT_OK && requestCode == PICKFILE_RESULT_CODE && data != null) {
+            //FilePath is your file as a string
+            edtDocUrl.setText(data.getData().getPath());
         }
+    }
 
     private void setAdapter(ArrayList<String> newMe) {
         imageAdapter = new StudentSelectedImageAssgnAdapter(getContext());

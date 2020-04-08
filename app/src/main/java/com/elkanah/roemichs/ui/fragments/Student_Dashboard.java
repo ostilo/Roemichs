@@ -1,8 +1,16 @@
 package com.elkanah.roemichs.ui.fragments;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -18,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.ui.adapter.TeacherActionAdapter;
@@ -28,6 +37,7 @@ import com.elkanah.roemichs.ui.adapter.ContentAdapter;
 import com.elkanah.roemichs.ui.model.ActionModel;
 import com.elkanah.roemichs.ui.model.ContentModel;
 import com.elkanah.roemichs.ui.model.ScreenUtil;
+import com.opensooq.supernova.gligar.GligarPicker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +57,9 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
     private CardView noteCard;
     private List<ImageView> dotsLinearLayout;
     private boolean mTablet;
+
+    private Context context;
+
 
     public Student_Dashboard() {
         // Required empty public constructor
@@ -70,11 +83,14 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
+        context=getContext();
+
         actionRecycle = view.findViewById(R.id.action_recycler);
         contentRecycle = view.findViewById(R.id.contentRecycler);
         ImageView menu = view.findViewById(R.id.menu_select);
         menu.setOnClickListener(this);
         noteCard = view.findViewById(R.id.notice_card);
+
         if (getArguments()!=null){
             String presentUser = getArguments().getString("USER");
             if(presentUser.equals("TEACHER")){
@@ -176,4 +192,5 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
             });
         }
     }
+
 }

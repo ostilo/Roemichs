@@ -1,19 +1,29 @@
 package com.elkanah.roemichs.ui.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.pdf.PdfDocument;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,9 +32,14 @@ import android.widget.TextView;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.ui.model.CreateTestModel;
-import com.elkanah.roemichs.utils.CommonUtils;
-import com.flutterwave.raveandroid.uk.UkContract;
 
+import org.w3c.dom.Document;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -240,5 +255,4 @@ public class AddTestQuestions extends Fragment implements View.OnClickListener {
         lin4.setVisibility(value);
         lin5.setVisibility(value);
     }
-
 }

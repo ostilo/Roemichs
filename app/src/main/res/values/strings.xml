@@ -37,4 +37,6 @@
     <string name="correct">CORRECT</string>
     <string name="unanswered">UNANSWERED</string>
     <string name="view_solution">View Solution</string>
+    <string name="upload_doc">Upload Docs</string>
+    <string name="doc_demo_url">internal\\storage\\document\\mydoc.pdf</string>
 </resources>

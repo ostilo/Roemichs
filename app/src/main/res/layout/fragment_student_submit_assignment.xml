@@ -53,7 +53,6 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" >
             <include layout="@layout/student_submit_assignment_card"/>
-
         </ScrollView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatSelectPix"
