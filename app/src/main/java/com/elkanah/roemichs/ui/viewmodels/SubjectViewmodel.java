@@ -12,8 +12,6 @@ import com.elkanah.roemichs.db.models.ClassType;
 import com.elkanah.roemichs.db.models.SubjectModel;
 import com.elkanah.roemichs.db.repository.SubjectRepository;
 import com.elkanah.roemichs.network.JsonResponse;
-
-import java.net.PortUnreachableException;
 import java.util.List;
 
 public class SubjectViewmodel  extends AndroidViewModel {
@@ -38,5 +36,10 @@ public class SubjectViewmodel  extends AndroidViewModel {
 
     public boolean validateClassType(String jsonMessage) {
         return repository.validateClassType(jsonMessage);
+    }
+
+
+    public void fetchSubjectRecycler(String text, String requestCode) {
+        repository.fetchSubjectRecycler(text,jsonResponse, requestCode);
     }
 }

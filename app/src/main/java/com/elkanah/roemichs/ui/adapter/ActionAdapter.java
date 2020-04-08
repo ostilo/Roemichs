@@ -59,7 +59,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionView
                 super(itemView);
                 iconImage = itemView.findViewById(R.id.actionImage);
                 actionText = itemView.findViewById(R.id.actionText);
-
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

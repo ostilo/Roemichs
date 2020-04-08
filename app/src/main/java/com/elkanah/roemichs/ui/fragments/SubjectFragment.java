@@ -1,5 +1,8 @@
 package com.elkanah.roemichs.ui.fragments;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,11 +27,16 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.db.models.ClassType;
 import com.elkanah.roemichs.ui.adapters.SubjectAdapter;
 import com.elkanah.roemichs.ui.viewmodels.SubjectViewmodel;
+import com.elkanah.roemichs.utils.ProgressFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -43,6 +52,10 @@ public class SubjectFragment extends Fragment {
     private static final String CLASS_TYPE = "200";
     private static final String SUBJECT_TYPE = "300";
     private ArrayAdapter<ClassType> classAdapter;
+    private RecyclerView recyclerView;
+    private ProgressDialog dialog;
+    private View view;
+
     public SubjectFragment() {
         // Required empty public constructor
     }
@@ -80,12 +93,14 @@ public class SubjectFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_subject, container, false);
+        view = v.findViewById(android.R.id.content);
         Toolbar toolbar = v.findViewById(R.id.withdraw_toolbar);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_arrow_back);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
         toolbar.setTitle("My Subjects");
+        dialog = new ProgressDialog(getContext());
 
         subjectViewmodel = new ViewModelProvider(this).get(SubjectViewmodel.class);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -98,10 +113,12 @@ public class SubjectFragment extends Fragment {
 
             }
         });
-
-        setSpinner();
+        fetchSubjectRecycler();
+        //setSpinner();
+        //inflateSubjectRecycler();
         observeViewModel();
 
+        //todo for the classTYpe Spinner
         spinnerClassType = v.findViewById(R.id.appCompatSpinner);
         String[] acctType = {"RECEPTION", "KINDER GARTEN", "NRS 1","NRS 2", "PRM 1", "PRM 2","JSS 1", "JSS2", "SS3","SS1", "SS2", "SS3"};
         ArrayAdapter<String> acctAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, acctType);
@@ -124,7 +141,8 @@ public class SubjectFragment extends Fragment {
             }
         });
 
-        RecyclerView recyclerView = v.findViewById(R.id.subject_recycler);
+        //todo for the subject recycler
+        recyclerView = v.findViewById(R.id.subject_recycler);
         recyclerView.setHasFixedSize(true);
         adapter = new SubjectAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -134,6 +152,24 @@ public class SubjectFragment extends Fragment {
 
 
         return v;
+    }
+
+    private void inflateSubjectRecycler() {
+        subjectViewmodel.listSubjectModel.observe(getViewLifecycleOwner(),subjectModels -> {
+            if(subjectModels != null && subjectModels.size() > 0){
+                try {
+                    adapter = new SubjectAdapter(getContext());
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    recyclerView.scheduleLayoutAnimation();
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     private void observeViewModel() {
@@ -155,7 +191,6 @@ public class SubjectFragment extends Fragment {
                     subjectViewmodel.getClassType(CLASS_TYPE);
 
                 }
-
                 classAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, classType);
                 spinnerClassType.setAdapter(classAdapter);
                 classAdapter.notifyDataSetChanged();
@@ -166,4 +201,28 @@ public class SubjectFragment extends Fragment {
         }
 
     }
+
+
+    private void fetchSubjectRecycler(){
+        ProgressFragment progressFragment = new ProgressFragment();
+        progressFragment.show(getChildFragmentManager(),"Aede");
+        subjectViewmodel.fetchSubjectRecycler("text",SUBJECT_TYPE);
+    }
+
+      private CountDownTimer getCountDown(){
+        return new CountDownTimer(7000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                Toast.makeText(getContext(),"Your subject has been retrieved",Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+
+            }
+        }.start();
+      }
 }

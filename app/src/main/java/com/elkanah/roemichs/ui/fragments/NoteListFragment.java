@@ -29,11 +29,11 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NoteFragment extends Fragment {
+public class NoteListFragment extends Fragment {
     private SearchView searchView;
     private NoteAdapter adapter;
 
-    public NoteFragment() {
+    public NoteListFragment() {
         // Required empty public constructor
     }
 

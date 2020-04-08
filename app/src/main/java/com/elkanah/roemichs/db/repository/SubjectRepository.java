@@ -52,12 +52,18 @@ public class SubjectRepository {
             List<ClassType> classTypes = gson.fromJson(jsonMessage, listClassType);
             if(classTypes != null && classTypes.size() > 0){
                 flag = true;
-                //insertClassHere
+                insertClassType(classTypes);
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }
         return  flag;
+    }
+ public void insertClassType(List<ClassType> classTypes){
+        mProxy.insertClassTypeToDB(classTypes);
+ }
+
+    public void fetchSubjectRecycler(String text, MutableLiveData<JsonResponse> jsonResponse, String requestCode) {
+            mProxy.fetchSubjectRecycler(text,jsonResponse,requestCode);
     }
 }

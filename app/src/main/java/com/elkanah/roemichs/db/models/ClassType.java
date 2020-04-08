@@ -12,9 +12,14 @@ public class ClassType {
     private String Text;
 
     public ClassType(@NonNull String value, String text) {
-        Value = value;
-        Text = text;
+        this.Value = value;
+        this.Text = text;
     }
+
+
+    public ClassType() {
+    }
+
 
     @NonNull
     public String getValue() {

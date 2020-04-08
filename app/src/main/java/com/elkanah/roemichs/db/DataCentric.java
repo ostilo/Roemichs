@@ -6,9 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.elkanah.roemichs.db.dao.ClassTypeDao;
-import com.elkanah.roemichs.db.dao.SessionDao;
 import com.elkanah.roemichs.db.models.ClassType;
-import com.elkanah.roemichs.db.models.SessionModel;
 import com.elkanah.roemichs.db.models.StudentLoginEntity;
 import com.elkanah.roemichs.db.dao.ClassDao;
 import com.elkanah.roemichs.db.dao.SubjectDao;
@@ -19,6 +17,8 @@ import com.elkanah.roemichs.network.HTTPMethods;
 import com.elkanah.roemichs.network.JsonResponse;
 import com.elkanah.roemichs.network.NetworkUtils;
 import com.google.gson.Gson;
+
+import java.net.HttpCookie;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -58,9 +58,8 @@ public class DataCentric {
     networkUtils = NetworkUtils.getInstance(app);
     networkUtils.setBaseUrl(Constants.BASE_URL_LIVE);
     roemichsDatabase = RoemichsDatabase.getInstance(app);
-    sessionDao = roemichsDatabase.sessionDao();
     classTypeDao = roemichsDatabase.classTypeDao();
-    classDao = roemichsDatabase.sessionDao();
+    classDao = roemichsDatabase.classDao();
     subjectDao = roemichsDatabase.subjectDao();
   }
 
@@ -114,7 +113,19 @@ public class DataCentric {
       });
     }
 
+  public void insertClassTypeToDB(List<ClassType> classTypes) {
+    RoemichsDatabase.databaseWriteExecutor.execute(()->{
+      classTypeDao.insertAll(classTypes);
+    });
+  }
+
   public LiveData<List<ClassType>> getClassTypeLocal() {
     return classTypeDao.getAll();
+  }
+
+  public void fetchSubjectRecycler(String text, MutableLiveData<JsonResponse> jsonResponse, String requestCode) {
+
+    JsonResponse response = networkUtils.makeApiCall(text,"", HTTPMethods.GET.toString(),requestCode);
+    jsonResponse.postValue(response);
   }
 }

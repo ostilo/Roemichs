@@ -14,7 +14,6 @@ import java.util.List;
 public interface ClassTypeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<ClassType> classTypes);
-
     @Query("SELECT * FROM classtype order by Text")
     LiveData<List<ClassType>> getAll();
 }
