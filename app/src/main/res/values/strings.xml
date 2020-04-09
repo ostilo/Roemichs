@@ -6,6 +6,7 @@
   <string name="title_teachers">Teachers</string>
   <string name="title_students">Students</string>
   <string name="value">T</string>
+  <string name="hello">Hello,</string>
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -45,4 +46,15 @@
   <string name="unanswered">UNANSWERED</string>
   <string name="view_solution">View Solution</string>
   <string name="progress_msg"><b>Your subjects are been fetched, Thanks.</b></string>
+  <string name="_50">50</string>
+  <string name="_200">200</string>
+  <string name="_1000">1000</string>
+  <string name="teacher">Teachers</string>
+  <string name="teacher_icon">teacher icon</string>
+  <string name="student_icon">students icon</string>
+  <string name="students">Students</string>
+  <string name="classes">Classes</string>
+  <string name="classes_icon">Classes Icon</string>
+  <string name="assignment">Assignments</string>
+  <string name="assign_icon">Assignments Icon</string>
 </resources>
