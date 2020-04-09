@@ -1,16 +1,19 @@
 <resources>
-    <string name="app_name">Roemichs</string>
-    <string name="write_a_message">Type your message...</string>
-    <string name="student_comment">Students\' comments</string>
+  <string name="app_name">Roemichs</string>
+  <string name="write_a_message">Type your message...</string>
+  <string name="student_comment">Students\' comments</string>
+  <string name="title_home">Home</string>
+  <string name="title_teachers">Teachers</string>
+  <string name="title_students">Students</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="login_msg"><ul>ational</ul></string>
-    <string name="welcome">Welcome</string>
-    <string name="logout">Logout</string>
-    <string name="change_password">Change Password</string>
-    <string name="print_statement">Print Statement</string>
-    <string name="descp">" The First Manner Water for the month of February is set to come up on the 21st by 4:30pm prompt. \n Ministering live is Dr. D.K Olukoya. \n
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="login_msg"><ul>ational</ul></string>
+  <string name="welcome">Welcome</string>
+  <string name="logout">Logout</string>
+  <string name="change_password">Change Password</string>
+  <string name="print_statement">Print Statement</string>
+  <string name="descp">" The First Manner Water for the month of February is set to come up on the 21st by 4:30pm prompt. \n Ministering live is Dr. D.K Olukoya. \n
        Come and your life will never remain the same again. Come along with two bottles of water. One for your surrounding and one for your own personal consumption. Surely, your life will never remain the same again.
         <b>Join us at MFM S-West 3 Regional Headquater.</b> ..\n
         Minister IN-Charge: Dr. Samuel Oladejo
@@ -19,26 +22,26 @@
          Come and your life will never remain the same again. Come along with two bottles of water. One for your surrounding and one for your own personal consumption. Surely, your life will never remain the same again.
         <b>Join us at MFM S-West 3 Regional Headquater.</b> ..\n
         "</string>
-    <string name="audio_class">Audio Class</string>
-    <string name="video_class">Video Class</string>
-    <string name="stop_class">Stop Class</string>
-    <string name="ass_qu">The image below is a description of the respective questions.<b>Click to enlarge</b> </string>
-    <string name="add_image">------OR------</string>
-    <string name="username_keystore">Username</string>
-    <string name="questions">QUESTIONS</string>
-    <string name="minutes">MINUTES</string>
-    <string name="instructions">Instructions</string>
-    <string name="instruction">Attempt all questions</string>
-    <string name="previous">Previous</string>
-    <string name="next">Next</string>
-    <string name="finish">Finish</string>
-    <string name="yes">YES</string>
-    <string name="no">NO</string>
-    <string name="performance_review">Performance: Review</string>
-    <string name="metrics">Metrics</string>
-    <string name="incorrect">INCORRECT</string>
-    <string name="correct">CORRECT</string>
-    <string name="unanswered">UNANSWERED</string>
-    <string name="view_solution">View Solution</string>
-    <string name="progress_msg"><b>Your subjects are been fetched, Thanks.</b></string>
+  <string name="audio_class">Audio Class</string>
+  <string name="video_class">Video Class</string>
+  <string name="stop_class">Stop Class</string>
+  <string name="ass_qu">The image below is a description of the respective questions.<b>Click to enlarge</b> </string>
+  <string name="add_image">------OR------</string>
+  <string name="username_keystore">Username</string>
+  <string name="questions">QUESTIONS</string>
+  <string name="minutes">MINUTES</string>
+  <string name="instructions">Instructions</string>
+  <string name="instruction">Attempt all questions</string>
+  <string name="previous">Previous</string>
+  <string name="next">Next</string>
+  <string name="finish">Finish</string>
+  <string name="yes">YES</string>
+  <string name="no">NO</string>
+  <string name="performance_review">Performance: Review</string>
+  <string name="metrics">Metrics</string>
+  <string name="incorrect">INCORRECT</string>
+  <string name="correct">CORRECT</string>
+  <string name="unanswered">UNANSWERED</string>
+  <string name="view_solution">View Solution</string>
+  <string name="progress_msg"><b>Your subjects are been fetched, Thanks.</b></string>
 </resources>
