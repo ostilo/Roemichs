@@ -86,6 +86,12 @@
                         android:layout_below="@id/linLayoutTeacher"
                         android:orientation="vertical">
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerPlayAudio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:itemCount="1"
+                            tools:listitem="@layout/play_audio_layout" />
 
                     </LinearLayout>
                 </RelativeLayout>
