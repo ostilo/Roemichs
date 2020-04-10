@@ -67,8 +67,11 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionView
                             Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
                         }
                         if(actionModelList.get(position).text.equals("Assignment")){
-                            ContentAdapter.me = 3;
+                           ContentAdapter.me = 3;
                             Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
+                        }
+                        if(actionModelList.get(position).text.equals("Exam")){
+                            Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_testFragment);
                         }
                     }
                 });

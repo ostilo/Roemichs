@@ -1,11 +1,20 @@
 package com.elkanah.roemichs.ui.fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.appcompat.widget.LinearLayoutCompat.LayoutParams;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -29,6 +39,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,11 +55,16 @@ import com.firebase.client.FirebaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static android.Manifest.permission.RECORD_AUDIO;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.elkanah.roemichs.db.repository.Constants.CHAT_USER_KEY;
 import static com.elkanah.roemichs.db.repository.Constants.CHAT_WITH_KEY;
 import static com.elkanah.roemichs.db.repository.Constants.IS_FIRST_TEACHER_MESSAGE;
@@ -62,6 +78,9 @@ import static com.elkanah.roemichs.utils.CommonUtils.isNetworkConnected;
 
 public class ClassroomFragment extends Fragment implements View.OnClickListener {
 
+    private static final int RECORD_AUDIO_PERMISSION = 1;
+    private static final int WRITE_PERMISSION = 2;
+    private static final int READ_PERMISSION = 3;
     private ClassroomViewModel mViewModel;
     LinearLayout layout, layout2;
     ImageView sendButton;
@@ -78,6 +97,13 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
     private LinearLayout linLayTimer;
     private int intStudentCount = 0;
     private ProgressBar loading;
+    private MediaRecorder mediaRecorder;
+    private MediaPlayer mediaPlayer;
+    private String audioSavePathInDevice;
+    LinearLayout teacherAudioLinearLayout;
+    ImageView imgAudioRecord;
+
+    //save chat to firebase with subject_date created
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -86,13 +112,14 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         context = getContext();
         mViewModel = ViewModelProviders.of(this).get(ClassroomViewModel.class);
         JOIN_BEFORE = false;
-        IS_FIRST_TEACHER_MESSAGE=true;
+        IS_FIRST_TEACHER_MESSAGE = true;
 
         if (getArguments() != null) {
             ChatDetails.username = getArguments().getString(CHAT_USER_KEY);
             ChatDetails.chatWith = getArguments().getString(CHAT_WITH_KEY);
         }
 
+        requestPermission();
         setViewById(view);
         setToolBar();
         setFirebaseUp();
@@ -112,10 +139,13 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         scrollView = view.findViewById(R.id.scrollViewTeacher);
         scrollView2 = view.findViewById(R.id.scrollViewStudents);
         loading = view.findViewById(R.id.loading_ClsRoom);
+        teacherAudioLinearLayout = view.findViewById(R.id.linLayoutTeacherAudio);
+        imgAudioRecord = view.findViewById(R.id.microphone_chat);
     }
 
     private void setListeners() {
         sendButton.setOnClickListener(this);
+        imgAudioRecord.setOnClickListener(this);
     }
 
     private void setBackPress(View view) {
@@ -201,7 +231,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                             joined = true;
                             loading.setVisibility(View.INVISIBLE);
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -239,20 +269,23 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                 intStudentCount -= 1;
                 txtCountStudent.setText(String.valueOf(intStudentCount));
             }
-        }else if(ChatDetails.username.equals("teacher") && joinLeft.equals("create")){
-                map.put("message", " class started at");
-            }
-            map.put("user", ChatDetails.username);
-            map.put("date", getCurrentDate());
-            map.put("time", getCurrentTime());
-            reference1.push().setValue(map);
-            reference2.push().setValue(map);
+        } else if (ChatDetails.username.equals("teacher") && joinLeft.equals("create")) {
+            map.put("message", " class started at");
+        }
+        map.put("user", ChatDetails.username);
+        map.put("date", getCurrentDate());
+        map.put("time", getCurrentTime());
+        reference1.push().setValue(map);
+        reference2.push().setValue(map);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem itm) {
         switch (itm.getItemId()) {
             case R.id.action_menu_more_class:
+                //    LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                //   layoutInflater.inflate(R.layout.classroom_more_menu, toolbar);
+
                 PopupMenu popupMenu = new PopupMenu(getContext(), toolbar);
                 popupMenu.setGravity(Gravity.END);
                 MenuInflater inflater = popupMenu.getMenuInflater();
@@ -274,6 +307,71 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                 break;
         }
         return super.onOptionsItemSelected(itm);
+    }
+
+    private boolean startRecording() {
+        boolean flag = false;
+        mediaRecorder = new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);  //or THREE_GPP(3gpp)
+        mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+        File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Roemichs_Record_Audio");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        audioSavePathInDevice = dir + File.separator + getCurrentFullDateTime();
+        mediaRecorder.setOutputFile(audioSavePathInDevice);
+        try {
+            mediaRecorder.prepare();
+            mediaRecorder.start();
+            Toast.makeText(context, "Recording started", Toast.LENGTH_LONG).show();
+            flag = true;
+        } catch (IllegalStateException | IOException e) {
+            mediaRecorder.release();
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    private boolean playAudioRecorded() {
+        boolean flag = false;
+        mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.setDataSource(audioSavePathInDevice);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+            addAudioView(audioSavePathInDevice, 1);
+            flag = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    private boolean stopAudioRecorded() {
+        boolean flag = false;
+        try {
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                flag = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public void addAudioView(String audioUrl, int type) {
+        SeekBar seekbar = new SeekBar(context);
+        seekbar.setClickable(false); // try change this
+        seekbar.setMax(mediaPlayer.getDuration());
+        seekbar.setProgress(mediaPlayer.getCurrentPosition());
+        seekbar.setLayoutParams(new LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT));
+        teacherAudioLinearLayout.addView(seekbar);
     }
 
     @Override
@@ -318,9 +416,9 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
             textView.setLayoutParams(lp2);
             layout.addView(textView);
             scrollView.fullScroll(View.FOCUS_DOWN);
-            if(IS_FIRST_TEACHER_MESSAGE) {
+            if (IS_FIRST_TEACHER_MESSAGE) {
                 sendFirstMessage("create");
-                IS_FIRST_TEACHER_MESSAGE=false;
+                IS_FIRST_TEACHER_MESSAGE = false;
             }
         } else if (type == 2) {
             textView.setBackgroundResource(R.drawable.chat_msg_bg);
@@ -379,7 +477,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
             layout2.addView(txtDateTime);
 
             scrollView2.fullScroll(View.FOCUS_DOWN);
-        }else if(type==5){
+        } else if (type == 5) {
             if (date.equals(ChatDetails.date)) {
                 txtDateTime.setText("class started at : Today " + time);
             } else if (date.equals(getYesterdayDate())) {
@@ -399,6 +497,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         }
     }
 
+    boolean isRecording = false;
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -420,21 +519,35 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                 txtCountStudent.setText(String.valueOf(intStudentCount));
                 Toast.makeText(context, "Go to List of Student Online", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.microphone_chat:
+                if (!isRecording) {
+                    if (startRecording())
+                        isRecording = true;
+                    imgAudioRecord.setImageDrawable(getResources().getDrawable(R.drawable.microphone_off));
+                } else {
+                    mediaRecorder.stop();
+                    mediaRecorder.release();
+                    isRecording = false;
+                    imgAudioRecord.setImageDrawable(getResources().getDrawable(R.drawable.microphone));
+                    playAudioRecorded();
+                }
+                break;
         }
     }
 
     private void startTimer(int hrs, int mins) {
         DecimalFormat formatter = new DecimalFormat("00");
 
-        if(hrs > 0){
-            new CountDownTimer(hrs * 60 * 60 *1000, 1000) {
+        if (hrs > 0) {
+            new CountDownTimer(hrs * 60 * 60 * 1000, 1000) {
                 public void onTick(long millisUntilFinished) {
                     txtTimerSecs.setText(formatter.format((int) ((millisUntilFinished / 1000) % 60)));
                     txtTimerMin.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
                     txtTimerHrs.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
                 }
+
                 public void onFinish() {
-                    if(mins > 0 ){
+                    if (mins > 0) {
                         new CountDownTimer(mins * 10000, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
@@ -442,19 +555,20 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                                 txtTimerMin.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
                                 txtTimerHrs.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
                             }
+
                             @Override
                             public void onFinish() {
                                 linLayTimer.setBackgroundColor(context.getResources().getColor(R.color.error));
                                 txtTimerSecs.setText("00");
                             }
                         }.start();
-                    }else {
+                    } else {
                         linLayTimer.setBackgroundColor(context.getResources().getColor(R.color.error));
                         txtTimerSecs.setText("00");
                     }
                 }
             }.start();
-        }else if(mins>0){
+        } else if (mins > 0) {
             new CountDownTimer(mins * 60 * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -462,12 +576,33 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                     txtTimerMin.setText(formatter.format((int) (((millisUntilFinished / 1000) / 60) % 60)));
                     txtTimerHrs.setText(formatter.format((int) ((millisUntilFinished / 1000) / 3600)));
                 }
+
                 @Override
                 public void onFinish() {
                     linLayTimer.setBackgroundColor(context.getResources().getColor(R.color.error));
                     txtTimerSecs.setText("00");
                 }
             }.start();
+        }
+    }
+
+    private void requestPermission() {
+        if (!(context.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_PERMISSION);
+        }
+        if (!(context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
+        }
+        if (!(context.checkSelfPermission(RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)) {
+            requestPermissions(new String[]{RECORD_AUDIO}, RECORD_AUDIO_PERMISSION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == READ_PERMISSION || requestCode == WRITE_PERMISSION || requestCode == RECORD_AUDIO_PERMISSION) {
+            requestPermission();
         }
     }
 }

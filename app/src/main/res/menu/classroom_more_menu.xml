@@ -8,7 +8,7 @@
 
     <item android:id="@+id/action_audio_class"
         android:icon="@drawable/audio_class"
-        android:title="@string/audio_class" />
+        android:title="@string/startRecording" />
 
     <item
         android:id="@+id/action_stop_class"
