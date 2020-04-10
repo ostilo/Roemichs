@@ -1,6 +1,6 @@
 <resources>
   <string name="app_name">Roemichs</string>
-  <string name="write_a_message">Type your message...</string>
+  <string name="write_a_message">Write your message…</string>
   <string name="student_comment">Students\' comments</string>
   <string name="title_home">Home</string>
   <string name="title_teachers">Teachers</string>
@@ -24,28 +24,6 @@
          Come and your life will never remain the same again. Come along with two bottles of water. One for your surrounding and one for your own personal consumption. Surely, your life will never remain the same again.
         <b>Join us at MFM S-West 3 Regional Headquater.</b> ..\n
         "</string>
-  <string name="audio_class">Audio Class</string>
-  <string name="video_class">Video Class</string>
-  <string name="stop_class">Stop Class</string>
-  <string name="ass_qu">The image below is a description of the respective questions.<b>Click to enlarge</b> </string>
-  <string name="add_image">------OR------</string>
-  <string name="username_keystore">Username</string>
-  <string name="questions">QUESTIONS</string>
-  <string name="minutes">MINUTES</string>
-  <string name="instructions">Instructions</string>
-  <string name="instruction">Attempt all questions</string>
-  <string name="previous">Previous</string>
-  <string name="next">Next</string>
-  <string name="finish">Finish</string>
-  <string name="yes">YES</string>
-  <string name="no">NO</string>
-  <string name="performance_review">Performance: Review</string>
-  <string name="metrics">Metrics</string>
-  <string name="incorrect">INCORRECT</string>
-  <string name="correct">CORRECT</string>
-  <string name="unanswered">UNANSWERED</string>
-  <string name="view_solution">View Solution</string>
-  <string name="progress_msg"><b>Your subjects are been fetched, Thanks.</b></string>
   <string name="_50">50</string>
   <string name="_200">200</string>
   <string name="_1000">1000</string>
