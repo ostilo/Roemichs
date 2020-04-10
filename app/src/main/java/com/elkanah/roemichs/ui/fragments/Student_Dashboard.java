@@ -188,6 +188,10 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
                     NavHostFragment.findNavController(this).navigate(R.id.action_student_Dashboard_to_create_test);
                     return true;
                 }
+                if (item.getItemId() == R.id.create_note) {
+                    NavHostFragment.findNavController(this).navigate(R.id.action_studDashboard_toCreateNote);
+                    return true;
+                }
                 return false;
             });
         }

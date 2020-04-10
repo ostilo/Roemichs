@@ -67,19 +67,20 @@ import java.util.List;
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(modelList.get(getAdapterPosition()).text.equals("Subject")){
-                            me = 1;
+                      //  if(modelList.get(getAdapterPosition()).text.equals("Subject")){
+                     //       me = 1;
                         if(modelList.get(getAdapterPosition()).text.equals("Test")){
-                            Navigation.findNavController(v).navigate(R.id.testFragment);
+                            Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_testFragment);
                         } else if(modelList.get(getAdapterPosition()).text.equals("Subject")){
+                            me = 0;
                             Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
                         }
                         else if(modelList.get(getAdapterPosition()).text.equals("Classroom")){
-                            me = 0;
+                         //   me = 0;
                          Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_chatListFragment);
                         }
                         else if(modelList.get(getAdapterPosition()).text.equals("Profile")){
-                            me = 0;
+                          //  me = 0;
                             Bundle bundle=new Bundle();
                             StudentProfileModel profileModel=new StudentProfileModel();
                             profileModel.setFirst_name("Ayodele");
@@ -88,11 +89,11 @@ import java.util.List;
                             profileModel.setStudent_class("Year XX");
                             profileModel.setStudent_id("Ayodele123");
                             bundle.putParcelable(Constants.PROFILE_MODEL, profileModel);
-                            Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
+                            Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_profileFragment, bundle);
                             //Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_profileFragment, bundle);
                         }
                     }
-                }
+            //    }
 
                 });
         }

@@ -43,4 +43,5 @@
     <string name="progress_msg"><b>Your subjects are been fetched, Thanks.</b></string>
     <string name="upload_doc">Upload</string>
     <string name="doc_demo_url">sample\\folder\\mydoc.ext</string>
+    <string name="startRecording">Start Recording</string>
 </resources>

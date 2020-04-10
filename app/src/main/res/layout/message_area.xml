@@ -6,6 +6,15 @@
     android:gravity="bottom"
     android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/microphone_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:paddingStart="0dp"
+            android:paddingEnd="4dp"
+            android:src="@drawable/microphone" />
+
         <EditText
             android:id="@+id/messageArea"
             style="@style/my_edit_text2"

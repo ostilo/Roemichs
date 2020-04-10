@@ -1,5 +1,6 @@
 package com.elkanah.roemichs;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -62,11 +63,10 @@ public class MainActivity extends AppCompatActivity implements Callbacks {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == READ_PERMISSION || requestCode == WRITE_PERMISSION) {
             requestStoragePermission();
         }
     }
-
 }

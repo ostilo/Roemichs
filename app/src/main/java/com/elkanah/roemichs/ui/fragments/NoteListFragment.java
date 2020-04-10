@@ -111,7 +111,7 @@ public class NoteListFragment extends Fragment {
                 //Navigation.findNavController(v).navigate(R.id.action_noteFragment_to_addNoteFragment);
 
                 //TODO request permission before generate
-                generatePDF(recyclerView, context);
+                generatePDF(recyclerView, context, "test_assignment.pdf");
             }
         });
 

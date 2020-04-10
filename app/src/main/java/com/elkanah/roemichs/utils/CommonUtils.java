@@ -53,7 +53,6 @@ public class CommonUtils {
             return false;
     }
 
-
     public static String textOfEditText(EditText edt) {
         return edt.getText().toString().trim();
     }
@@ -134,6 +133,11 @@ public class CommonUtils {
     public static String getCurrentTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
         return " " + sdf.format(new Date());
+    }
+
+    public static String getCurrentFullDateTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyymmmddhhmmss", Locale.ENGLISH);
+        return sdf.format(new Date());
     }
 
     public static String getYesterdayDate() {
@@ -272,7 +276,7 @@ public class CommonUtils {
     }
 */
 
-    public static void generatePDF(RecyclerView view, Context context) {
+    public static void generatePDF(RecyclerView view, Context context, String nameOfFile) {
         RecyclerView.Adapter adapter = view.getAdapter();
         //for grid layout, add this
 //    mRecyclerView = findViewById(R.id.rvNumbers);
@@ -308,7 +312,7 @@ public class CommonUtils {
             bigCanvas.drawColor(Color.WHITE);
 
             com.itextpdf.text.Document document = new Document(PageSize.A4);
-            final File file = new File(Environment.getExternalStorageDirectory() + File.separator + "test_assignment.pdf");
+            final File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + nameOfFile);
             try {
                 PdfWriter.getInstance(document, new FileOutputStream(file));
             } catch (DocumentException | FileNotFoundException e) {
