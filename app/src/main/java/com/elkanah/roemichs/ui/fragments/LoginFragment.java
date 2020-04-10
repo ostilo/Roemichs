@@ -142,6 +142,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
          switch (v.getId()){
              case R.id.button:
                  if(edtStudentParentPass.getText() != null && edtStudentParentID != null){
+                     Bundle bundle = new Bundle();
                      try {
                          //to api
                         // btnLogin.setEnabled(false);
@@ -154,7 +155,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                              NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_parentDashboardFragment);
                          }else if(!TextUtils.isEmpty(userInput)&&userInput.equals("s")){
                              progressBar.setVisibility(View.VISIBLE);
-                             NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_parentFragment);
+                             bundle.putString("USER", "STUDENT");
+                             NavHostFragment.findNavController(getParentFragment()).navigate(R.id.action_loginFragment_to_parentFragment, bundle);
+                         }else if(!TextUtils.isEmpty(userInput)&&userInput.equals("t")){
+                             progressBar.setVisibility(View.VISIBLE);
+                             bundle.putString("USER", "TEACHER");
+                             NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_parentFragment, bundle);
                          }
                          else {
                              Snackbar.make(v,"PRIVILEGE NOT ASSIGNED YET, CONTACT ADMIN",Snackbar.LENGTH_SHORT).show();

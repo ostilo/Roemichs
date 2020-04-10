@@ -127,6 +127,9 @@
         <action
             android:id="@+id/action_student_Dashboard_to_studentAssignmentFragment"
             app:destination="@id/studentAssignmentFragment" />
+        <argument
+            android:name="USER"
+            app:argType="string" />
     </fragment>
 
     <fragment android:id="@+id/CreateAssignment"

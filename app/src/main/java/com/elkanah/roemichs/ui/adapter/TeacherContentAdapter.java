@@ -68,7 +68,7 @@ class ViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 if(modelList.get(getAdapterPosition()).text.equals("Test")){
-                    Navigation.findNavController(v).navigate(R.id.testFragment);
+                    Navigation.findNavController(v).navigate(R.id.create_test);
                 } else if(modelList.get(getAdapterPosition()).text.equals("Subject")){
                     Navigation.findNavController(v).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
                 }

@@ -65,7 +65,7 @@ class ViewHolder extends RecyclerView.ViewHolder {
                     Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
                 }
                 if(actionModelList.get(position).text.equals("Assignment")){
-                    Navigation.findNavController(itemView).navigate(R.id.action_student_Dashboard_to_subjectFragment2);
+                    Navigation.findNavController(itemView).navigate(R.id.action_studDashboard_toCreateAssignment);
                 }
             }
         });

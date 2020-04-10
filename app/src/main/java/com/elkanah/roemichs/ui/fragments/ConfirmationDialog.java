@@ -73,6 +73,7 @@ public class ConfirmationDialog extends DialogFragment implements View.OnClickLi
         if(v.getId() == R.id.btn_no){
             dismiss();
         }else if (v.getId() == R.id.btn_yes){
+//            TestPage.newInstance().countDownTimer.cancel();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("test_question", questions);
             bundle.putParcelableArrayList("answers", answers);

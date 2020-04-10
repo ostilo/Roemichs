@@ -83,7 +83,6 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
                 inflateRecycler("STUDENT");
             }
         }
-        inflateRecycler("STUDENT");
 
 
         noteCard.setOnTouchListener(new View.OnTouchListener() {
@@ -157,23 +156,39 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
         if(v.getId() == R.id.menu_select){
             PopupMenu popupMenu = new PopupMenu(getContext(), v);
             MenuInflater inflater = popupMenu.getMenuInflater();
+            String presentUser = "TEACHER";
+            if (presentUser.equals("TEACHER")){
             inflater.inflate(R.menu.dashboard_menu, popupMenu.getMenu());
             popupMenu.show();
-            popupMenu.setOnMenuItemClickListener(item -> {
-                if (item.getItemId() == R.id.menu_logout) {
-                    NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
-                    return true;
-                }
-                if (item.getItemId() == R.id.create_assignment) {
-                    NavHostFragment.findNavController(this).navigate(R.id.action_studDashboard_toCreateAssignment);
-                    return true;
-                }
-                if (item.getItemId() == R.id.create_test_menu) {
-                    NavHostFragment.findNavController(this).navigate(R.id.action_student_Dashboard_to_create_test);
-                    return true;
-                }
-                return false;
-            });
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    if (item.getItemId() == R.id.menu_logout) {
+                        NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
+                        return true;
+                    }
+                    if (item.getItemId() == R.id.change_pass) {
+                    // TODO: 4/9/20
+                        return true;
+                    }
+
+                    return false;
+                });
+            }else if (presentUser.equals("STUDENT")) {
+                inflater.inflate(R.menu.student_menu, popupMenu.getMenu());
+                popupMenu.show();
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    if (item.getItemId() == R.id.menu_logout) {
+                        NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
+                        return true;
+                    }
+                    if (item.getItemId() == R.id.change_pass) {
+                        // TODO: 4/9/20
+                        return true;
+                    }
+
+                    return false;
+                });
+            }
+
         }
     }
 }
