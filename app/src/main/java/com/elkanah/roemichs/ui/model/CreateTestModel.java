@@ -1,7 +1,7 @@
 package com.elkanah.roemichs.ui.model;
 
 public class CreateTestModel {
-    private String questionNo;
+    private int questionNo;
     private String questionText;
     private String questionImgUrl;
     private String answer1Text;
@@ -21,7 +21,7 @@ public class CreateTestModel {
 
     }
 
-    public CreateTestModel(String questionNo, String questionText, String questionImgUrl, String answer1Text, String answer1ImgUrl, String answer2Text, String answer2ImgUrl, String answer3Text, String answer3ImgUrl, String answer4Text, String answer4ImgUrl, String answer5Text, String answer5ImgUrl, String correctAnswer, int noOfAnswers) {
+    public CreateTestModel(int questionNo, String questionText, String questionImgUrl, String answer1Text, String answer1ImgUrl, String answer2Text, String answer2ImgUrl, String answer3Text, String answer3ImgUrl, String answer4Text, String answer4ImgUrl, String answer5Text, String answer5ImgUrl, String correctAnswer, int noOfAnswers) {
         this.questionNo = questionNo;
         this.questionText = questionText;
         this.questionImgUrl = questionImgUrl;
@@ -39,11 +39,11 @@ public class CreateTestModel {
         this.noOfAnswers = noOfAnswers;
     }
 
-    public String getQuestionNo() {
+    public int getQuestionNo() {
         return questionNo;
     }
 
-    public void setQuestionNo(String questionNo) {
+    public void setQuestionNo(int questionNo) {
         this.questionNo = questionNo;
     }
 

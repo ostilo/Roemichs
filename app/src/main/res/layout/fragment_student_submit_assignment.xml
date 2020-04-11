@@ -41,5 +41,7 @@
             <include layout="@layout/student_submit_assignment_card" />
 
         </ScrollView>
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

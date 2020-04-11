@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+      android:id="@+id/adminHomeFragment"
+      android:icon="@drawable/ic_home_black_24dp"
+      android:title="@string/title_home" />
+
+  <item
+      android:id="@+id/adminTeachersFragment"
+      android:icon="@drawable/teach_bottom_icon"
+      android:title="@string/title_teachers" />
+
+  <item
+      android:id="@+id/adminStudentsFragment"
+      android:icon="@drawable/student_bottom_icon"
+      android:title="@string/title_students" />
+
+</menu>

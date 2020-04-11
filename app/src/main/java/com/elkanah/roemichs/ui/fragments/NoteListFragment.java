@@ -1,5 +1,6 @@
 package com.elkanah.roemichs.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,8 +23,11 @@ import android.view.inputmethod.EditorInfo;
 
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.ui.adapters.NoteAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
+
+import static com.elkanah.roemichs.utils.CommonUtils.generatePDF;
 
 
 /**
@@ -32,6 +36,8 @@ import java.util.Objects;
 public class NoteListFragment extends Fragment {
     private SearchView searchView;
     private NoteAdapter adapter;
+    FloatingActionButton fabAddNote;
+    Context context;
 
     public NoteListFragment() {
         // Required empty public constructor
@@ -71,6 +77,8 @@ public class NoteListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_note, container, false);
+        context = getContext();
+
         Toolbar toolbar = v.findViewById(R.id.withdraw_toolbarr);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_arrow_back);
@@ -94,6 +102,20 @@ public class NoteListFragment extends Fragment {
         adapter = new NoteAdapter(getContext());
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        fabAddNote=v.findViewById(R.id.fabAddNoteList);
+        fabAddNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //if it is teacher
+                //Navigation.findNavController(v).navigate(R.id.action_noteFragment_to_addNoteFragment);
+
+                //TODO request permission before generate
+                generatePDF(recyclerView, context, "test_assignment.pdf");
+            }
+        });
+
+
         return v;
     }
 }
