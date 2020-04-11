@@ -24,7 +24,7 @@ public class ProgressFragment extends DialogFragment {
     }
 
     private CountDownTimer getCountDown(){
-        return new CountDownTimer(5000,1000) {
+        return new CountDownTimer(3000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
