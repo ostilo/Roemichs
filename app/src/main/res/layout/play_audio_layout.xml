@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/imgBtnPlay"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@null"
+        android:src="@drawable/play"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBarAudio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgBtnPlay"
+        app:layout_constraintEnd_toStartOf="@id/txt_audio_current_time"
+        app:layout_constraintStart_toEndOf="@+id/imgBtnPlay"
+        app:layout_constraintTop_toTopOf="@+id/imgBtnPlay" />
+
+        <TextView
+            android:id="@+id/txt_audio_current_time"
+            android:layout_width="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="6dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/txt_audio_end_time"
+            app:layout_constraintBottom_toBottomOf="@+id/seekBarAudio"
+            app:layout_constraintTop_toTopOf="@+id/seekBarAudio" />
+
+        <TextView
+            android:id="@+id/txt_audio_end_time"
+            android:layout_width="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="6dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/seekBarAudio"
+            app:layout_constraintTop_toTopOf="@+id/seekBarAudio" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

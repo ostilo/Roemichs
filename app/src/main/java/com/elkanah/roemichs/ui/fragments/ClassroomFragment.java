@@ -21,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -46,6 +48,7 @@ import android.widget.Toast;
 import com.elkanah.roemichs.R;
 import com.elkanah.roemichs.db.repository.ChatDetails;
 import com.elkanah.roemichs.db.repository.Constants;
+import com.elkanah.roemichs.ui.adapters.PlayAudioAdapter;
 import com.elkanah.roemichs.ui.viewmodels.ClassroomViewModel;
 import com.elkanah.roemichs.utils.CommonUtils;
 import com.firebase.client.ChildEventListener;
@@ -58,6 +61,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -98,10 +102,12 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
     private int intStudentCount = 0;
     private ProgressBar loading;
     private MediaRecorder mediaRecorder;
-    private MediaPlayer mediaPlayer;
     private String audioSavePathInDevice;
     LinearLayout teacherAudioLinearLayout;
     ImageView imgAudioRecord;
+    private RecyclerView recyclerViewAudio;
+    private PlayAudioAdapter adapter;
+    ArrayList<String> urlArrayList;
 
     //save chat to firebase with subject_date created
 
@@ -110,6 +116,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.classroom_fragment, container, false);
         context = getContext();
+        urlArrayList=new ArrayList<>();
         mViewModel = ViewModelProviders.of(this).get(ClassroomViewModel.class);
         JOIN_BEFORE = false;
         IS_FIRST_TEACHER_MESSAGE = true;
@@ -141,11 +148,15 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         loading = view.findViewById(R.id.loading_ClsRoom);
         teacherAudioLinearLayout = view.findViewById(R.id.linLayoutTeacherAudio);
         imgAudioRecord = view.findViewById(R.id.microphone_chat);
+        recyclerViewAudio = view.findViewById(R.id.recyclerPlayAudio);
     }
 
     private void setListeners() {
         sendButton.setOnClickListener(this);
         imgAudioRecord.setOnClickListener(this);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        recyclerViewAudio.setLayoutManager(layoutManager);
     }
 
     private void setBackPress(View view) {
@@ -333,45 +344,20 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
         return flag;
     }
 
-    private boolean playAudioRecorded() {
-        boolean flag = false;
-        mediaPlayer = new MediaPlayer();
-        try {
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mediaPlayer.setDataSource(audioSavePathInDevice);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-            addAudioView(audioSavePathInDevice, 1);
-            flag = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
-
-    private boolean stopAudioRecorded() {
-        boolean flag = false;
-        try {
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
-                flag = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
-
     public void addAudioView(String audioUrl, int type) {
-        SeekBar seekbar = new SeekBar(context);
-        seekbar.setClickable(false); // try change this
-        seekbar.setMax(mediaPlayer.getDuration());
-        seekbar.setProgress(mediaPlayer.getCurrentPosition());
+/*        SeekBar seekbar = new SeekBar(context);
+      //  seekbar.setClickable(true); // try change this
+       // seekbar.setMax(mediaPlayer.getDuration());
+      //  seekbar.addTouchables(view);
+        seekbar.setProgress(mediaPlayer.getCurrentPosition()/1000);
         seekbar.setLayoutParams(new LayoutParams(
                 LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT));
-        teacherAudioLinearLayout.addView(seekbar);
+        teacherAudioLinearLayout.addView(seekbar);*/
+urlArrayList.add(audioUrl);
+adapter = new PlayAudioAdapter(context, urlArrayList);
+adapter.notifyDataSetChanged();
+recyclerViewAudio.setAdapter(adapter);
     }
 
     @Override
@@ -529,7 +515,7 @@ public class ClassroomFragment extends Fragment implements View.OnClickListener 
                     mediaRecorder.release();
                     isRecording = false;
                     imgAudioRecord.setImageDrawable(getResources().getDrawable(R.drawable.microphone));
-                    playAudioRecorded();
+                    addAudioView(audioSavePathInDevice, 1);
                 }
                 break;
         }
