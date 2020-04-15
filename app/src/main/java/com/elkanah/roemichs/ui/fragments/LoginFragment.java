@@ -48,6 +48,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private ProgressBar progressBar;
     private TextInputEditText edtStudentParentPass;
     public static final String LOGINREQUESTCODE ="login_request";
+    public static  int dashboardD = 0;
 
     public LoginFragment() {
         //todo new
@@ -156,8 +157,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                              progressBar.setVisibility(View.VISIBLE);
                              NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_parentFragment);
                          }
+                         else if(!TextUtils.isEmpty(userInput)&&userInput.equals("a")){
+                             progressBar.setVisibility(View.VISIBLE);
+                             NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_adminDashboardFragment);
+                         }
+                         else if(!TextUtils.isEmpty(userInput)&&userInput.equals("t")){
+                             dashboardD = 1;
+                             progressBar.setVisibility(View.VISIBLE);
+                             NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_parentFragment);
+                         }
                          else {
                              Snackbar.make(v,"PRIVILEGE NOT ASSIGNED YET, CONTACT ADMIN",Snackbar.LENGTH_SHORT).show();
+                             progressBar.setVisibility(View.INVISIBLE);
                          }
                      }catch (Exception e){
                          e.printStackTrace();

@@ -99,6 +99,7 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
                 inflateRecycler("STUDENT");
             }
         }
+
         inflateRecycler("STUDENT");
 
 
@@ -177,7 +178,7 @@ public class Student_Dashboard extends Fragment implements View.OnClickListener 
             popupMenu.show();
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.menu_logout) {
-                    NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
+                   // NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
                     return true;
                 }
                 if (item.getItemId() == R.id.create_assignment) {
